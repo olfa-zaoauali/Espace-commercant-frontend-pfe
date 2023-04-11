@@ -1,0 +1,40 @@
+<div class="layout-topbar">
+    <a class="layout-topbar-logo" [routerLink]="['/dashboard']">
+        <img src="assets/layout/images/logo-no-background-jaune.png"   alt="logo" style="margin-left: 60px;">
+    </a>
+
+    <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+        <i class="pi pi-bars"></i>
+    </button>
+
+    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+        <i class="pi pi-ellipsis-v"></i>
+    </button>
+
+    <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+        <button class="p-link layout-topbar-button" [routerLink]="'/documentation'">
+            <i class="pi pi-comments"></i>
+            <span>Messages</span>
+        </button>
+        <button class="p-link layout-topbar-button">
+            <i class="pi pi-bell"></i>
+            <span>Notification</span>
+        </button>
+       <!-- <button class="p-link layout-topbar-button">
+            <span>Profile</span>
+        </button>-->
+        <li class="dropdown notification-list">
+            <a class="nav-link  nav-user arrow-none me-0" 
+            [routerLink]="['/dashboard']" role="button" aria-haspopup="false" aria-expanded="false">
+                <span class="account-user-avatar">
+                    <img [src]="'http://localhost:8098/api/v1/auth/files/' +  imageUrl" height="40px" width="40px" style="margin-left: 20px; " alt="user-image" class="rounded-circle">
+                </span>
+                
+                <span>
+                    <span style="margin-top:10px; color: #1b1f43;" class="account-user-name" style="margin-left: 10px; " >{{dataUser.sub}}</span>
+                </span>
+            </a>
+            
+        </li>
+    </div>
+</div>

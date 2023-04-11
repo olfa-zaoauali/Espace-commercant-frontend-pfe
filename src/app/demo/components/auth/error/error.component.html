@@ -1,0 +1,54 @@
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+        <div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+            <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+                <div class="text-center mb-5">
+                    <span class="account-user-avatar">
+                        <img src="assets/layout/images/User-Avatar-Profile-Free-PNG.png" height="100px" width="100px" style="margin-left: 20px; " alt="user-image" class="rounded-circle">
+                    </span>
+                    <div class="text-900 text-3xl font-medium mb-3">Welcome to WIND-ERP</div>
+                    <span class="text-600 font-medium">Inscrivez vous !</span>
+                </div>
+                <form >
+                
+                    <input id="firstname" type="text"     name="firstname" [(ngModel)]="admin.firstname" placeholder="Nom " pInputText class="w-full  md:w-30rem  mb-5" style="padding:1rem ; margin-right: 20px; ">
+
+                    <input id="lastname" type="text"  name="lastname" [(ngModel)]="admin.lastname"  placeholder="Prénom" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+                    <label for="email1" class="block text-900 text-xl font-medium mb-2"></label>
+
+
+                    <input id="email" type="text"   name="email" [(ngModel)]="admin.email"  placeholder="Email address" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
+                    <p-password id="password"   name="password" [(ngModel)]="admin.password"  placeholder="Mot de passe" [toggleMask]="true" styleClass="mb-5" class="w-full md:w-40rem mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+                    <label for="email1" class="block text-900 text-xl font-medium mb-2"></label>
+
+                    <input id="company" type="text"   name="company" [(ngModel)]="admin.company"  placeholder="Entreprise" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
+
+                    <input id="domain" type="text"   name="domain" [(ngModel)]="admin.domain"  placeholder="Secteur de l'entreprise" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+                    <label for="email1" class="block text-900 text-xl font-medium mb-2"></label>
+
+                    <input id="adresse" type="text"  name="adresse"  placeholder="Adresse" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
+
+                    <input id="ville" type="text"  name="ville"  placeholder="Ville" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+                    <label for="email1" class="block text-900 text-xl font-medium mb-2"></label>
+                    <input id="telephone" type="text"   name="telephone" [(ngModel)]="admin.telephone" placeholder="telephone" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
+                    <input id="matricule" type="text"  name="matricule" [(ngModel)]="admin.matricule"  placeholder="matricule" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+                    <label for="file" class="block text-900 text-xl font-medium mb-2"> Patente de l'entreprise
+                        <br>
+                        <input type="file" class="file-upload" pInputText name="batinda" [(ngModel)]="admin.batinda"   required  onchange="console.log(event.target.files)" (change)="onSelectedfile($event)" >
+
+                    </label>
+                    <label for="logo" class="block text-900 text-xl font-medium mb-2">Logo de l'entreprise 
+                        <br>
+                        <div class="olfa">
+                        <input class="logo" pInputText name="logo" [(ngModel)]="admin.logo" type="file" class="file-upload" required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
+                        </div>
+                        <!--  <p-fileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" [maxFileSize]="1000000" onchange="console.log(event.target.files)"></p-fileUpload>-->
+                    </label>
+                   
+                    <button pButton pRipple label="Envoyer" class="w-full p-3 text-xl" style="color: white; margin-top: 20px;" (click)="saveAdmin()" ></button>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+
