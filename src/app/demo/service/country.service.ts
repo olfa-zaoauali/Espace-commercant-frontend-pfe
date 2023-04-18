@@ -1,8 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Client } from 'src/app/models/client';
 
 @Injectable()
 export class CountryService {
+    apiurl='http://localhost:8098/api/v1/auth/'
 
     constructor(private http: HttpClient) { }
 
@@ -12,4 +15,71 @@ export class CountryService {
             .then(res => res.data as any[])
             .then(data => data);
     }
+    public getClientList(): Observable<Client[]> {
+        return this.http.get<Client[]>(`${this.apiurl}clients`)
+      }
+      public getClientListOfCommercant(id:String): Observable<Client[]> {
+        return this.http.get<Client[]>(`${this.apiurl}commercants/clients/${id}`)
+      }
+      updateenabledcomm(id : Number , enabled: boolean): Observable<Client>{
+        return this.http.put<Client>(`${this.apiurl}clients/enabled/${id}`,enabled);
+      }
+      updatenotenabled(id : Number , enabled: boolean): Observable<Client>{
+        return this.http.put<Client>(`${this.apiurl}clients/notenabled/${id}`,enabled);
+      }
+      //commercant
+      addclientcommercant(client : string, logo: File): Observable<any>{
+        const data: FormData = new FormData();
+        console.log('clientjson',client)
+        data.append('request', client);
+        data.append('logo', logo);
+        console.log('logo',data.get('logo'))
+        console.log('client',data.get('request'))
+    
+        return this.http.post<any>(this.apiurl+"clients/add" , data,{headers:new HttpHeaders().set('enctype', 'multipart/form-data')});
+      }
+      //sadmin
+      addclient(client : string, logo: File): Observable<any>{
+        const data: FormData = new FormData();
+        console.log('clientjson',client)
+        data.append('request', client);
+        data.append('logo', logo);
+        console.log('logo',data.get('logo'))
+        console.log('client',data.get('request'))
+    
+        return this.http.post<any>(this.apiurl+"clients/addclient" , data,{headers:new HttpHeaders().set('enctype', 'multipart/form-data')});
+      }
+     
+      //update commercant
+      public updateclient(client:string,logo:File,id:Number): Observable<any> {
+        const data: FormData = new FormData();
+        console.log('clientjson',client)
+        data.append('request', client);
+        data.append('logo', logo);
+        console.log('logo',data.get('logo'))
+        console.log('client',data.get('request'))
+    
+        return this.http.put<any>(`${this.apiurl}clients/updateCommercant/${id}` , data,{headers:new HttpHeaders().set('enctype', 'multipart/form-data')});
+      }
+       //update commercant
+       public update(client:string,logo:File,id:Number): Observable<any> {
+        const data: FormData = new FormData();
+        console.log('clientjson',client)
+        data.append('request', client);
+        data.append('logo', logo);
+        console.log('logo',data.get('logo'))
+        console.log('client',data.get('request'))
+    
+        return this.http.put<any>(`${this.apiurl}clients/update/${id}` , data,{headers:new HttpHeaders().set('enctype', 'multipart/form-data')});
+      }
+      
+     
+      delete(id: any): Observable<void> {
+        return this.http.delete<void>(`${this.apiurl}clients/delete/${id}`);
+      }
+      clientde(tenant_id:any): Observable<any> {
+        return this.http.get<any>(`${this.apiurl}user/${tenant_id}`);
+      }
+      
+      
 }

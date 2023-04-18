@@ -8,6 +8,10 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { FileUploadModule } from 'primeng/fileupload';
+import { AutoCompleteModule } from "primeng/autocomplete";
+import { MultiSelectModule } from "primeng/multiselect";
+
+
 
 
 
@@ -21,6 +25,8 @@ import { FileUploadModule } from 'primeng/fileupload';
         FormsModule,
         InputTextModule,
         FileUploadModule,
+        AutoCompleteModule,
+        MultiSelectModule
 
 
     ],

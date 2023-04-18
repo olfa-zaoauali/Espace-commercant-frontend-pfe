@@ -1,9 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
     templateUrl: './blocks.component.html'
 })
-export class BlocksComponent{
+export class BlocksComponent implements OnInit{
+    dataUser : any ;
+    imageUrl: any;
+    role: any;
+  
+      constructor(public layoutService: LayoutService) { }
+      ngOnInit(): void {
+          this.dataUser = this.layoutService.getDataFromToken();
+          this.role = this.dataUser.role;
+          this.imageUrl=this.dataUser.image;
+          console.log("user",this.dataUser);
+          console.log("image",this.imageUrl);
+          console.log("role",this.role);
+      }
 
     block1: string = `
 <div class="grid grid-nogutter surface-section text-800">

@@ -1,178 +1,199 @@
 <div class="grid">
     <div class="col-12">
-        <div class="card">
-            <h5>ProgressBar</h5>
-            <div class="grid">
-                <div class="col">
-                    <p-progressBar [value]="value" [showValue]="true"></p-progressBar>
-                </div>
-                <div class="col">
-                    <p-progressBar [value]="50" [showValue]="false"></p-progressBar>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 lg:col-6">
-        <div class="card">
-            <h4>Badge</h4>
-            <h5>Numbers</h5>
-            <div class="flex flex-wrap gap-2">
-                <p-badge value="2"></p-badge>
-                <p-badge value="8" severity="success"></p-badge>
-                <p-badge value="4" severity="info"></p-badge>
-                <p-badge value="12" severity="warning"></p-badge>
-                <p-badge value="3" severity="danger"></p-badge>
-            </div>
-
-            <h5>Positioned Badge</h5>
-            <div class="flex flex-wrap gap-2">
-                <i class="pi pi-bell mr-4 p-text-secondary" pBadge style="font-size: 2rem" value="2"></i>
-                <i class="pi pi-calendar mr-4 p-text-secondary" pBadge style="font-size: 2rem" [value]="'10+'" severity="danger"></i>
-                <i class="pi pi-envelope p-text-secondary" pBadge style="font-size: 2rem" severity="danger"></i>
-            </div>
-
-
-            <h5>Inline Button Badge</h5>
-            <div class="flex flex-wrap gap-2">
-                <p-button label="Emails" badge="8"></p-button>
-                <p-button label="Messages" icon="pi pi-users" styleClass="p-button-warning" badge="8" badgeClass="p-badge-danger"></p-button>
-            </div>
-
-
-            <h5>Sizes</h5>
-            <div class="flex flex-wrap gap-2 align-items-end">
-                <p-badge value="2"></p-badge>
-                <p-badge value="4" size="large" severity="warning"></p-badge>
-                <p-badge value="6" size="xlarge" severity="success"></p-badge>
-            </div>
-        </div>
-
-        <div class="card">
-            <h4>Avatar</h4>
-            <h5>Avatar Group</h5>
-            <p-avatarGroup styleClass="mb-3">
-                <p-avatar image="assets/demo/images/avatar/amyelsner.png" size="large" shape="circle"></p-avatar>
-                <p-avatar image="assets/demo/images/avatar/asiyajavayant.png" size="large" shape="circle"></p-avatar>
-                <p-avatar image="assets/demo/images/avatar/onyamalimba.png" size="large" shape="circle"></p-avatar>
-                <p-avatar image="assets/demo/images/avatar/ionibowcher.png" size="large" shape="circle"></p-avatar>
-                <p-avatar image="assets/demo/images/avatar/xuxuefeng.png" size="large"shape="circle"></p-avatar>
-                <p-avatar label="+2" shape="circle" size="large" [style]="{'background-color':'#9c27b0', 'color': '#ffffff'}"></p-avatar>
-            </p-avatarGroup>
-
-            <h5>Label - Circle</h5>
-            <div class="flex flex-wrap gap-2 align-items-end">
-                <p-avatar label="P" size="xlarge" shape="circle"></p-avatar>
-                <p-avatar label="V" size="large" [style]="{'background-color':'#2196F3', 'color': '#ffffff'}" shape="circle"></p-avatar>
-                <p-avatar label="U" [style]="{'background-color': '#9c27b0', 'color': '#ffffff'}" shape="circle"></p-avatar>
-            </div>
-
-            <h5>Icon - Badge</h5>
-            <p-avatar icon="pi pi-user" pBadge value="4" severity="success" size="xlarge"></p-avatar>
-        </div>
-
-        <div class="card">
-            <h4>ScrollTop</h4>
-            <p-scrollPanel [style]="{width: '250px', height: '200px'}">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Vitae et leo duis ut diam.
-                    Ultricies mi quis hendrerit dolor magna eget est lorem. Amet consectetur adipiscing elit ut.
-                    Nam libero justo laoreet sit amet. Pharetra massa massa ultricies mi quis hendrerit dolor magna.
-                    Est ultricies integer quis auctor elit sed vulputate. Consequat ac felis donec et. Tellus orci ac auctor augue mauris.
-                    Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus a. Tincidunt arcu non sodales neque sodales.
-                    Metus aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. Sodales ut etiam sit amet nisl purus.
-                    Cursus sit amet dictum sit amet. Tristique senectus et netus et malesuada fames ac turpis egestas.
-                    Et tortor consequat id porta nibh venenatis cras sed. Diam maecenas ultricies mi eget mauris.
-                    Eget egestas purus viverra accumsan in nisl nisi. Suscipit adipiscing bibendum est ultricies integer.
-                    Mattis aliquam faucibus purus in massa tempor nec.
-                </p>
-                <p-scrollTop target="parent" styleClass="custom-scrolltop" [threshold]="100" icon="pi pi-arrow-up"></p-scrollTop>
-            </p-scrollPanel>
-        </div>
-    </div>
-    <div class="col-12 lg:col-6">
-        <div class="card">
-            <h4>Tag</h4>
-            <h5>Tags</h5>
-            <div class="flex flex-wrap gap-2">
-                <p-tag value="Primary"></p-tag>
-                <p-tag severity="success" value="Success"></p-tag>
-                <p-tag severity="info" value="Info"></p-tag>
-                <p-tag severity="warning" value="Warning"></p-tag>
-                <p-tag severity="danger" value="Danger"></p-tag>
-            </div>
-
-            <h5>Pills</h5>
-            <div class="flex flex-wrap gap-2">
-                <p-tag value="Primary" [rounded]="true"></p-tag>
-                <p-tag severity="success" value="Success" [rounded]="true"></p-tag>
-                <p-tag severity="info" value="Info" [rounded]="true"></p-tag>
-                <p-tag severity="warning" value="Warning" [rounded]="true"></p-tag>
-                <p-tag severity="danger" value="Danger" [rounded]="true"></p-tag>
-            </div>
-
-            <h5>Icons</h5>
-            <div class="flex flex-wrap gap-2">
-                <p-tag icon="pi pi-user" value="Primary"></p-tag>
-                <p-tag icon="pi pi-check" severity="success" value="Success"></p-tag>
-                <p-tag icon="pi pi-info-circle" severity="info" value="Info"></p-tag>
-                <p-tag con="pi pi-exclamation-triangle" severity="warning" value="Warning"></p-tag>
-                <p-tag icon="pi pi-times" severity="danger" value="Danger"></p-tag>
-            </div>
-        </div>
-
-        <div class="card">
-            <h4>Chip</h4>
-            <h5>Basic</h5>
-            <div class="flex flex-wrap align-items-center">
-                <p-chip label="Action" styleClass="m-1"></p-chip>
-                <p-chip label="Comedy" styleClass="m-1"></p-chip>
-                <p-chip label="Mystery" styleClass="m-1"></p-chip>
-                <p-chip label="Thriller" styleClass="m-1" [removable]="true"></p-chip>
-            </div>
-
-            <h5>Icon</h5>
-            <div class="flex flex-wrap align-items-center">
-                <p-chip label="Apple" icon="pi pi-apple" styleClass="m-1"></p-chip>
-                <p-chip label="Facebook" icon="pi pi-facebook" styleClass="m-1"></p-chip>
-                <p-chip label="Google" icon="pi pi-google" styleClass="m-1"></p-chip>
-                <p-chip label="Microsoft" icon="pi pi-microsoft" styleClass="m-1" [removable]="true"></p-chip>
-            </div>
-
-            <h5>Image</h5>
-            <div class="flex flex-wrap align-items-center">
-                <p-chip label="Amy Elsner" image="assets/demo/images/avatar/amyelsner.png" styleClass="m-1"></p-chip>
-                <p-chip label="Asiya Javayant" image="assets/demo/images/avatar/asiyajavayant.png" styleClass="m-1"></p-chip>
-                <p-chip label="Onyama Limba" image="assets/demo/images/avatar/onyamalimba.png" styleClass="m-1"></p-chip>
-                <p-chip label="Xuxue Feng" image="assets/demo/images/avatar/xuxuefeng.png" styleClass="m-1" [removable]="true"></p-chip>
-            </div>
-
-            <h5>Styling</h5>
-            <div class="flex flex-wrap align-items-center">
-                <p-chip label="Action" styleClass="m-1 custom-chip"></p-chip>
-                <p-chip label="Comedy" styleClass="m-1 custom-chip"></p-chip>
-                <p-chip label="Onyama Limba" image="assets/demo/images/avatar/onyamalimba.png" styleClass="m-1 custom-chip"></p-chip>
-                <p-chip label="Xuxue Feng" image="assets/demo/images/avatar/xuxuefeng.png" [removable]="true" styleClass="m-1 custom-chip"></p-chip>
-            </div>
-        </div>
-
-        <div class="card">
-            <h4>Skeleton</h4>
-            <div class="border-round border-1 surface-border p-4">
-                <div class="flex mb-3">
-                    <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
-                    <div>
-                        <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
-                        <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
-                        <p-skeleton height=".5rem"></p-skeleton>
+        <div class="card px-6 py-6">
+            <p-toast></p-toast>
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
                     </div>
-                </div>
-                <p-skeleton width="100%" height="150px"></p-skeleton>
-                <div class="flex justify-content-between mt-3">
-                    <p-skeleton width="4rem" height="2rem"></p-skeleton>
-                    <p-skeleton width="4rem" height="2rem"></p-skeleton>
-                </div>
-            </div>
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt [value]="clients" [columns]="cols" responsiveLayout="scroll" [rows]="8" [globalFilterFields]="['firstname','lastname','email','company','domain',]" [rows]="4" [paginator]="true" [rowsPerPageOptions]="[4,8,12]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Liste des clients</h5>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                 
+                    <tr>
+                        <th>Logo</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Telephone</th>
+                        <th>Sociéte</th>
+                        <th>Domaine</th>
+                        <th>Employées</th>
+                        <th>Client de </th>
+                        <th>CompteA/D</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-client >
+                    <tr>
+                        <td><img class="fit-picture"
+                            [src]="'http://localhost:8098/api/v1/auth/files/' + client.logo" height="40px" width="40px"  alt="user-image" class="rounded-circle"   alt="image"></td>
+                        <td>{{ client.firstname}}</td>
+                        <td>{{ client.lastname}}</td>
+                        <td>{{ client.email}}</td>
+                        <td>{{ client.telephone}}</td>
+                        <td>{{ client.company}}</td>
+                        <td>{{ client.domain}}</td>
+                        <td>{{ client.nbEmployer}}</td>
+                        <td>{{client.emailCommercant}}</td>
+                        <td>
+                            <label  style="margin-top: 10px; margin-left: 10px;" class="switch" >
+                                <p-inputSwitch (click)="updateenabled(client.id)" *ngIf="!client.enabled ; else enabled" ></p-inputSwitch>
+                                <ng-template #enabled>
+                                  <p-inputSwitch (click)="updatenotenabled(client.id)"   [(ngModel)]="checked"></p-inputSwitch>
+                              </ng-template>
+                          </label>
+                        </td>
+                        <td>
+                            <button pButton style="margin-right: -20px;" pRipple  icon="pi pi-check" class="p-button-rounded p-button-success "></button>
+                        </td>
+                        <td><button pButton style="margin-right: -20px;" pRipple  icon="pi pi-pencil" class="p-button-rounded p-button-warning " (click)="editProduct(client)"></button>
+                        </td>
+                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded  p-button-danger" (click)="deleteProduct(client)"></button>
+                        </td>
+                    </tr>
+                    <p-dialog [(visible)]="deleteProductDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+                        <div class="flex align-items-center justify-content-center">
+                            <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                            <span *ngIf="product">Are you sure you want to delete <b>{{client.lastname}}</b>?</span>
+                        </div>
+                        <ng-template pTemplate="footer">
+                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>
+                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="onDeletclient(client.id)" ></button>
+                        </ng-template>
+                    </p-dialog>
+                    <p-dialog [(visible)]="deleteProductsDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+                        <div class="flex align-items-center justify-content-center">
+                            <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                            <span>Are you sure you want to delete selected commercant?</span>
+                        </div>
+                        <ng-template pTemplate="footer">
+                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductsDialog = false"></button>
+                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDeleteSelected()"></button>
+                        </ng-template>
+                    </p-dialog>
+                </ng-template>
+            </p-table>
         </div>
+        <!-- add-->
+        <p-dialog [(visible)]="DialogAdd" [style]="{width: '600px'}" header="Add Commercant" [modal]="true" class="p-fluid">
+            <ng-template pTemplate="content">
+                <div class="field">
+                    <label for="firstname">Nom</label>
+                    <input type="text" pInputText id="firstname" name="firstname" [(ngModel)]="client.firstname" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.firstname}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.firstname">firstname is required.</small>
+                </div>
+                <div class="field">
+                    <label for="lastname">Prénom</label>
+                    <input type="text" pInputText id="lastname"  name="lastname" [(ngModel)]="client.lastname" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.lastname}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.lastname">lastname is required.</small>
+                </div>
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="text" pInputText id="email" name="email" [(ngModel)]="client.email"  required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.email}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.email">email is required.</small>
+                </div>
+                <div class="field">
+                    <label for="telephone">Télephone</label>
+                    <input type="text" pInputText id="telephone" name="telephone" [(ngModel)]="client.telephone" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.telephone}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.telephone">telephone is required.</small>
+                </div> <div class="field">
+                    <label for="company">Sociéte</label>
+                    <input type="text" pInputText id="company" name="company" [(ngModel)]="client.company" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.company}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.company">company is adresse.</small>
+                </div> <div class="field">
+                    <label for="domain">Domaine</label>
+                    <input type="text" pInputText id="domain" name="domain" [(ngModel)]="client.domain" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.domain}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.domain">domain is required.</small>
+                </div> 
+                <div class="field">
+                    <label for="nbEmployer">Employées</label>
+                    <input type="number" pInputText id="nbEmployer" name="nbEmployer" [(ngModel)]="client.nbEmployer" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.nbEmployer}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.nbEmployer">nbEmployer is required.</small>
+                </div>   
+            <div class="field">
+                <label for="image">Logo</label>
+                <input class="image" pInputText name="logo" [(ngModel)]="client.logo" type="file" class="file-upload" required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.logo">image is required.</small>
+            </div> 
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button *ngIf="isCommercant(); else Sadmin " pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveClientCommercant($event)" ></button>
+                <ng-template #Sadmin>
+                    <button pButton pRipple label="Savesadmin" icon="pi pi-check" class="p-button-text" (click)="saveClient($event)"></button>
+                    </ng-template>
+            </ng-template>
+        </p-dialog>
+
+<!--update-->
+
+        <p-dialog [(visible)]="productDialog" [style]="{width: '600px'}" header="Changer Commercant" [modal]="true" class="p-fluid">
+            <ng-template pTemplate="content">
+                <img [src]="'http://localhost:8098/api/v1/auth/files/' + client.logo" [alt]="client.logo" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="client.logo">
+                <div class="field">
+                    <label for="firstname">Nom</label>
+                    <input type="text" pInputText id="firstname" name="firstname" [(ngModel)]="client.firstname" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.firstname}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.firstname">firstname is required.</small>
+                </div>
+                <div class="field">
+                    <label for="lastname">Prénom</label>
+                    <input type="text" pInputText id="lastname"  name="lastname" [(ngModel)]="client.lastname" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.lastname}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.lastname">lastname is required.</small>
+                </div>
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="text" pInputText id="email" name="email" [(ngModel)]="client.email"  required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.email}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.email">email is required.</small>
+                </div>
+                <div class="field">
+                    <label for="telephone">Télephone</label>
+                    <input type="text" pInputText id="telephone" name="telephone" [(ngModel)]="client.telephone" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.telephone}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.telephone">telephone is required.</small>
+                </div> <div class="field">
+                    <label for="adresse">Sociéte</label>
+                    <input type="text" pInputText id="company" name="company" [(ngModel)]="client.company" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.company}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.company">adresse is adresse.</small>
+                </div> <div class="field">
+                    <label for="ville">Domaine</label>
+                    <input type="text" pInputText id="domain" name="domain" [(ngModel)]="client.domain" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.domain}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.domain">ville is required.</small>
+                </div> 
+                <div class="field">
+                    <label for="ville">Employées</label>
+                    <input type="text" pInputText id="nbEmployer" name="nbEmployer" [(ngModel)]="client.nbEmployer" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.nbEmployer}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.nbEmployer">ville is required.</small>
+                </div> 
+                 
+            <div class="field">
+                <label for="image">Logo</label>
+                <input class="image" pInputText name="logo" [(ngModel)]="client.logo" type="file" class="file-upload" required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.logo">image is required.</small>
+            </div> 
+               
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button *ngIf="isCommercant(); else Sadmin " pButton pRipple label="edit" icon="pi pi-check" class="p-button-text" (click)="update($event)"  ></button>
+                <ng-template #Sadmin>
+                    <button pButton pRipple label="editsadmin" icon="pi pi-check" class="p-button-text" (click)="updateSadmin($event)" ></button>
+                    </ng-template>
+            </ng-template>
+        </p-dialog>
     </div>
 </div>

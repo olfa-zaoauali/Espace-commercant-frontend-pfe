@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItem } from 'primeng/api';
+import { Router } from '@angular/router';
+import { MessageService, SelectItem } from 'primeng/api';
+import { Observable } from 'rxjs';
 import { CountryService } from 'src/app/demo/service/country.service';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { Admin2 } from 'src/app/models/admin2';
 
 @Component({
-    templateUrl: './inputdemo.component.html'
+    templateUrl: './inputdemo.component.html',
+    providers: [MessageService]
+
 })
 export class InputDemoComponent implements OnInit {
     
@@ -40,10 +46,21 @@ export class InputDemoComponent implements OnInit {
     valSelect1: string = "";
 
     valSelect2: string = "";
+    fileInfos?: Observable<any>;
+    users:any ;
+    admin :  Admin2= new Admin2(1,"","","","","","","","","","",false);
+    file : any;
+    logo:any;
+    userFile : any;
+    logoFile:any;
+    imageURL : any;
+    logoURL : any;
 
     valueKnob = 20;
+    uploadedFiles: any[] = [];
 
-    constructor(private countryService: CountryService) { }
+
+    constructor(private router: Router,public layoutService: LayoutService, private countryService: CountryService, private messageService: MessageService) { }
 
     ngOnInit() {
         this.countryService.getCountries().then(countries => {
@@ -64,6 +81,17 @@ export class InputDemoComponent implements OnInit {
             { name: 'Option 3', value: 3 }
         ];
     }
+    onUpload(event: any) {
+        for (const file of event.files) {
+            this.uploadedFiles.push(file);
+        }
+
+        this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
+    }
+
+    onBasicUpload() {
+        this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+    }
 
     filterCountry(event: any) {
         const filtered: any[] = [];
@@ -77,4 +105,33 @@ export class InputDemoComponent implements OnInit {
 
         this.filteredCountries = filtered;
     }
+    saveAdmin(){
+        var Dataadmin = JSON.stringify(this.admin);
+        this.layoutService.addAdmin(Dataadmin, this.file, this.logo ).subscribe(res=>{console.log(res);
+          alert('Votre demande est bien reçu, Vérifier votre email');
+          this.router.navigate(['/dashboard'])
+            
+          // this.toastr.success("event Added Succesfully"); this.clearForm();this.refresh()
+        });
+      }
+      onSelectedfile(e: any){
+        this.userFile = e.target.files[0];
+        // @ts-ignore
+        this.file = document.querySelector('input[type=file]').files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(this.file);
+        reader.onload = (res=>{this.imageURL = reader.result})
+        console.log(this.userFile);
+      }
+    
+      onSelectedImage(e: any){
+        this.logoFile = e.target.files[0];
+        // @ts-ignore
+        this.logo = document.querySelector("div.olfa input[type=file]").files[0];
+        var readerlogo = new FileReader();
+        readerlogo.readAsDataURL(this.logo);
+        readerlogo.onload = (res=>{this.logoURL= readerlogo.result})
+        console.log(this.logoFile); 
+       }
+  
 }

@@ -11,41 +11,35 @@
                 </div>
                 <form >
                 
-                    <input id="firstname" type="text"     name="firstname" [(ngModel)]="admin.firstname" placeholder="Nom " pInputText class="w-full  md:w-30rem  mb-5" style="padding:1rem ; margin-right: 20px; ">
+                    <input type="text"  id="firstname" name="firstname" [(ngModel)]="client.firstname" required placeholder="Nom " pInputText class="w-full  md:w-30rem  mb-5" style="padding:1rem ; margin-right: 20px; ">
 
-                    <input id="lastname" type="text"  name="lastname" [(ngModel)]="admin.lastname"  placeholder="Prénom" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+                    <input type="text" id="lastname"  name="lastname" [(ngModel)]="client.lastname"  placeholder="Prénom" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
                     <label for="email1" class="block text-900 text-xl font-medium mb-2"></label>
 
 
-                    <input id="email" type="text"   name="email" [(ngModel)]="admin.email"  placeholder="Email address" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
-                    <p-password id="password"   name="password" [(ngModel)]="admin.password"  placeholder="Mot de passe" [toggleMask]="true" styleClass="mb-5" class="w-full md:w-40rem mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+                    <input type="text"  id="email" name="email" [(ngModel)]="client.email"  placeholder="Email address" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
+                    <input type="text"  id="telephone" name="telephone" [(ngModel)]="client.telephone" placeholder="telephone" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
                     <label for="email1" class="block text-900 text-xl font-medium mb-2"></label>
 
-                    <input id="company" type="text"   name="company" [(ngModel)]="admin.company"  placeholder="Entreprise" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
+                    <input type="text"  id="company" name="company" [(ngModel)]="client.company"  placeholder="Entreprise" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
 
-                    <input id="domain" type="text"   name="domain" [(ngModel)]="admin.domain"  placeholder="Secteur de l'entreprise" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+                    <input  type="text"  id="domain" name="domain" [(ngModel)]="client.domain"  placeholder="Secteur de l'entreprise" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
                     <label for="email1" class="block text-900 text-xl font-medium mb-2"></label>
 
                     <input id="adresse" type="text"  name="adresse"  placeholder="Adresse" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
 
                     <input id="ville" type="text"  name="ville"  placeholder="Ville" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
                     <label for="email1" class="block text-900 text-xl font-medium mb-2"></label>
-                    <input id="telephone" type="text"   name="telephone" [(ngModel)]="admin.telephone" placeholder="telephone" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
-                    <input id="matricule" type="text"  name="matricule" [(ngModel)]="admin.matricule"  placeholder="matricule" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
-                    <label for="file" class="block text-900 text-xl font-medium mb-2"> Patente de l'entreprise
-                        <br>
-                        <input type="file" class="file-upload" pInputText name="batinda" [(ngModel)]="admin.batinda"   required  onchange="console.log(event.target.files)" (change)="onSelectedfile($event)" >
+                    <input id="Pays" type="text"  name="Pays"  placeholder="Pays" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
+                    <input type="text"  id="nbEmployer" name="nbEmployer" [(ngModel)]="client.nbEmployer"  placeholder="Nombre des employées" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
 
-                    </label>
                     <label for="logo" class="block text-900 text-xl font-medium mb-2">Logo de l'entreprise 
                         <br>
-                        <div class="olfa">
-                        <input class="logo" pInputText name="logo" [(ngModel)]="admin.logo" type="file" class="file-upload" required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
-                        </div>
+                        <input class="image" pInputText name="logo" [(ngModel)]="client.logo" type="file" class="file-upload" required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
                         <!--  <p-fileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" [maxFileSize]="1000000" onchange="console.log(event.target.files)"></p-fileUpload>-->
                     </label>
                    
-                    <button pButton pRipple label="Envoyer" class="w-full p-3 text-xl" style="color: white; margin-top: 20px;" (click)="saveAdmin()" ></button>
+                    <button pButton pRipple label="Envoyer" class="w-full p-3 text-xl" style="color: white; margin-top: 20px;" (click)="saveClient($event)" ></button>
             </form>
             </div>
         </div>

@@ -44,14 +44,13 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th>id</th>
+                        <th>Image</th>
                         <th>Nom</th>
                         <th>Prénom</th>
                         <th>Email</th>
                         <th>Telephone</th>
                         <th>Adresse</th>
                         <th>Ville</th>
-                        <th>Image</th>
                         <th>CompteA/D</th>
                         <th></th>
             
@@ -97,15 +96,15 @@
                         <td>
                             <p-tableCheckbox [value]="commercant"></p-tableCheckbox>
                         </td>
-                        <td>{{ commercant.id}}</td>
+                        <td><img class="fit-picture"
+                            [src]="'http://localhost:8098/api/v1/auth/files/' + commercant.image" height="40px" width="40px"  alt="user-image" class="rounded-circle"   alt="image"></td>
                         <td>{{ commercant.firstname}}</td>
                         <td>{{ commercant.lastname}}</td>
                         <td>{{ commercant.email}}</td>
                         <td>{{ commercant.telephone}}</td>
                         <td>{{ commercant.adresse}}</td>
                         <td>{{ commercant.ville}}</td>
-                        <td><img class="fit-picture"
-                            [src]="'http://localhost:8098/api/v1/auth/files/' + commercant.image" style="height: 40px; width: 40px;"   alt="image"></td>
+                        
                        
                         <td>
                             <label  style="margin-top: 10px; margin-left: 10px;" class="switch" >
@@ -182,7 +181,10 @@
             </ng-template>
             <ng-template pTemplate="footer">
                 <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCommercant($event)"></button>
+                <button *ngIf="isAdmin(); else Sadmin " pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCommercant($event)"></button>
+                <ng-template #Sadmin>
+                <button pButton pRipple label="Savesadmin" icon="pi pi-check" class="p-button-text" (click)="saveCommercantsadmin($event)"></button>
+                </ng-template>
             </ng-template>
         </p-dialog>
 
@@ -275,7 +277,11 @@
 
             <ng-template pTemplate="footer">
                 <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-                <button pButton pRipple label="edit" icon="pi pi-check" class="p-button-text" (click)="update($event)" ></button>
+                <button *ngIf="isAdmin(); else Sadmin " pButton pRipple label="edit" icon="pi pi-check" class="p-button-text" (click)="update($event)" ></button>
+                <ng-template #Sadmin>
+
+                <button pButton pRipple label="editsadmin" icon="pi pi-check" class="p-button-text" (click)="updatesadmin($event)" ></button>
+                </ng-template>
 
             </ng-template>
         </p-dialog>

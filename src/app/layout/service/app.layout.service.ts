@@ -126,7 +126,7 @@ export class LayoutService {
       }
       logOut(){
         localStorage.removeItem('token');
-        this.router.navigate(['/']);
+        this.router.navigate(['/auth/login']);
       }
       //registre sans file 
   Procedeedregister(user:any){
@@ -145,8 +145,11 @@ export class LayoutService {
 
     return this.http.post<any>(this.apiurl+"registeradmin" , data,{headers:new HttpHeaders().set('enctype', 'multipart/form-data')});
   }
-  public chercherCommercants(id:number): Observable<Commercant[]> {
-    return this.http.get<Commercant[]>(`${this.apiurl}admins/commercants/${id}`)
+  public chercherCommercantadmin(tenantId: String): Observable<Commercant[]> {
+    return this.http.get<Commercant[]>(`${this.apiurl}admins/commercants/${tenantId}`)
+  }
+  public chercherCommercantsadmin(tenantId: String): Observable<Commercant[]> {
+    return this.http.get<Commercant[]>(`${this.apiurl}sadmins/commercants/${tenantId}`)
   }
 
 }

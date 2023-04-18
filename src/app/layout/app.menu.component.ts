@@ -15,6 +15,7 @@ export class AppMenuComponent implements OnInit {
     Admin:Boolean=true; 
     SAdmin:Boolean=true; 
     Commercant:Boolean=true; 
+    client:Boolean=true;
 
   
     constructor(public layoutService: LayoutService) { }
@@ -36,12 +37,8 @@ export class AppMenuComponent implements OnInit {
                 label: 'Gestion des Clients',
                 items: [
                    
-                    { label: 'Admins', icon: 'pi pi-fw pi-users', routerLink: ['/dashboard/uikit/table'] },
-                    {
-                        label: 'Commercants',
-                        icon: 'pi pi-fw pi-user-plus',
-                        routerLink: ['/dashboard/pages/crud']
-                    },
+                    { label: 'Clients', icon: 'pi pi-fw pi-user-plus', routerLink: ['/dashboard/uikit/misc'] }
+
                   
                 ]
             },
@@ -89,6 +86,66 @@ export class AppMenuComponent implements OnInit {
             }
          
         ];}
+        if(this.isClient()){
+            this.model = [
+                {   
+                    label: 'Home',
+                    items: [
+                       // { label: 'Abonnement', icon: 'pi pi-fw pi-share-alt', routerLink: ['/dashboard/uikit/tree'] }
+                       { label: 'Abonnement', icon: 'pi pi-fw pi-check-square', routerLink: ['/dashboard/uikit/input'] }
+                    ]
+                },
+                {
+                    label: 'Les Modules',
+                    items: [
+                       
+                        { label: 'CRM', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
+                        { label: 'Espace Commerçant', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
+                        { label: 'Immobilisation', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
+                        { label: 'Gestion RH', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
+                        { label: 'Espace Commerçant', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
+                        { label: 'Décisionnel / B.I', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] }
+
+                      
+                    ]
+                },
+              
+                {
+                    label: 'Autre',
+                    icon: 'pi pi-fw pi-briefcase',
+                    items: [
+                        {
+                            label: 'WIND-ERP',
+                            icon: 'pi pi-fw pi-globe',
+                            routerLink: ['']
+                        },
+                        {
+                            label: 'Compte',
+                            icon: 'pi pi-fw pi-user',
+                            items: [
+                             
+                                { label: 'Profile', icon: 'pi pi-fw pi-user-edit', routerLink: ['/dashboard/blocks'], badge: 'NEW' },
+                                {
+                                    label: 'Logout',
+                                    icon: 'pi pi-fw pi-sign-out',
+                                    routerLink: ['/auth/login']
+                                },
+                           
+                            ]
+                        },
+                        
+                    ]
+                },
+                {
+                    label: 'Aide',
+                    items: [
+                        { label: 'Guide de utilisation', icon: 'pi pi-fw pi-desktop', routerLink: ['/dashboard/uikit/media'] },
+    
+                        { label: 'Contact', icon: 'pi pi-fw pi-comment', routerLink: ['/dashboard/uikit/message'] },
+                    ]
+                }
+             
+            ];}
         if(this.isAdmin()){
         this.model = [
             {   
@@ -105,6 +162,7 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-user-plus',
                         routerLink: ['/dashboard/pages/crud']
                     },
+
                 ]
             },
             {
@@ -160,12 +218,13 @@ export class AppMenuComponent implements OnInit {
                    // { label: 'Float Label', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/floatlabel'] },
                   //  { label: 'Invalid State', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate'] },
                    /* { label: 'Button', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },*/
-                    { label: 'Admins', icon: 'pi pi-fw pi-users', routerLink: ['/dashboard/uikit/table'] },
+                    { label: 'Demandes des Admins', icon: 'pi pi-fw pi-users', routerLink: ['/dashboard/uikit/table'] },
                     {
                         label: 'Commercants',
                         icon: 'pi pi-fw pi-user-plus',
                         routerLink: ['/dashboard/pages/crud']
                     },
+                    { label: 'Clients', icon: 'pi pi-fw pi-user-plus', routerLink: ['/dashboard/uikit/misc'] }
                    // { label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/list'] },
                    /* { label: 'Tree', icon: 'pi pi-fw pi-share-alt', routerLink: ['/uikit/tree'] },*/
                     //{ label: 'Panel', icon: 'pi pi-fw pi-tablet', routerLink: ['/uikit/panel'] },
@@ -329,6 +388,14 @@ export class AppMenuComponent implements OnInit {
         }
         else{
           return this.Commercant=false;
+        }
+      }
+      isClient():any{
+        if(this.dataUser.role=="CLIENT"){
+          return this.client=true;
+        }
+        else{
+          return this.client=false;
         }
       }
 }

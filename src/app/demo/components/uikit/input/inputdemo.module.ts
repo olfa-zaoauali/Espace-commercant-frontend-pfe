@@ -25,6 +25,9 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { SliderModule } from 'primeng/slider';
+import { FileUploadModule } from 'primeng/fileupload';
+import {PasswordModule} from 'primeng/password';
+
 
 
 @NgModule({
@@ -54,6 +57,8 @@ import { SliderModule } from 'primeng/slider';
 		SelectButtonModule,
 		CheckboxModule,
 		ButtonModule,
+		FileUploadModule,
+		PasswordModule
 		
 	],
 	declarations: [InputDemoComponent]

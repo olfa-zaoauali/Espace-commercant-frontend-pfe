@@ -20,6 +20,10 @@
             <i class="pi pi-bell"></i>
             <span>Notification</span>
         </button>
+        <button (click)="logOut()" class="p-link layout-topbar-button">
+            <i class="pi pi-sign-out"></i>
+            <span>LogOut</span>
+        </button>
        <!-- <button class="p-link layout-topbar-button">
             <span>Profile</span>
         </button>-->
@@ -30,7 +34,7 @@
                     <img [src]="'http://localhost:8098/api/v1/auth/files/' +  imageUrl" height="40px" width="40px" style="margin-left: 20px; " alt="user-image" class="rounded-circle">
                 </span>
                 
-                <span>hh 
+                <span>
                     <span style="margin-top:10px; color: #1b1f43;" class="account-user-name" style="margin-left: 10px; " >{{dataUser.sub}}</span>
                 </span>
             </a>

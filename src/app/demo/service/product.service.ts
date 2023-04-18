@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../api/product';
 import { Commercant } from 'src/app/models/commercant';
 import { Observable } from 'rxjs';
+import { Client } from 'src/app/models/client';
 
 @Injectable()
 export class ProductService {
@@ -10,11 +11,9 @@ export class ProductService {
     private modals: any[] = [];
     selectedCommerceId!: number;
     selectedCommerce: any;
-
-  
-
     constructor(private http: HttpClient) { }
-
+    
+    
     getProductsSmall() {
         return this.http.get<any>('assets/demo/data/products-small.json')
             .toPromise()
@@ -47,6 +46,7 @@ export class ProductService {
     public getCommercantList(): Observable<Commercant[]> {
         return this.http.get<Commercant[]>(`${this.apiurl}commercants`)
       }
+     
       updateenabledcomm(id : Number , enabled: boolean): Observable<Commercant>{
         return this.http.put<Commercant>(`${this.apiurl}commercants/enabled/${id}`,enabled);
       }
@@ -63,6 +63,16 @@ export class ProductService {
     
         return this.http.post<any>(this.apiurl+"registercommercant" , data,{headers:new HttpHeaders().set('enctype', 'multipart/form-data')});
       }
+      addcommercantsadmin(commercant : string, image: File): Observable<any>{
+        const data: FormData = new FormData();
+        console.log('commercantjson',commercant)
+        data.append('request', commercant);
+        data.append('image', image);
+        console.log('image',data.get('image'))
+        console.log('commercant',data.get('request'))
+    
+        return this.http.post<any>(this.apiurl+"registercommercantadmin" , data,{headers:new HttpHeaders().set('enctype', 'multipart/form-data')});
+      }
       //update avec file
       public updatecommercant(commercant:string,image:File,id:Number): Observable<any> {
         const data: FormData = new FormData();
@@ -73,6 +83,17 @@ export class ProductService {
         console.log('commercant',data.get('request'))
     
         return this.http.put<any>(`${this.apiurl}commercants/updatecomercant/${id}` , data,{headers:new HttpHeaders().set('enctype', 'multipart/form-data')});
+      }
+      //sadmin
+      public updatecommercantsadmin(commercant:string,image:File,id:Number): Observable<any> {
+        const data: FormData = new FormData();
+        console.log('commercantjson',commercant)
+        data.append('request', commercant);
+        data.append('image', image);
+        console.log('image',data.get('image'))
+        console.log('commercant',data.get('request'))
+    
+        return this.http.put<any>(`${this.apiurl}commercants/updatecomercantsadmin/${id}` , data,{headers:new HttpHeaders().set('enctype', 'multipart/form-data')});
       }
       Getcommercantbyid(id: any){
         return this.http.get(`${this.apiurl}commercants/id/${id}`);

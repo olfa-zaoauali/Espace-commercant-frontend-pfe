@@ -41,7 +41,7 @@ export class CrudComponent implements OnInit {
 
     rowsPerPageOptions = [5, 10, 20];
     commercants: Commercant[]=[];
-    commercant: Commercant= new Commercant(0,"","","","","","","",0,false,2);
+    commercant: Commercant= new Commercant(0,"","","","","","","",0,false,"","");
     comm:any
     image:any
     imageFile:any
@@ -61,9 +61,9 @@ export class CrudComponent implements OnInit {
         this.imageUrl=this.dataUser.image;
         this.tenant_id=this.dataUser.tenant_id;
         console.log("id",this.tenant_id);
-        if(this.isAdmin()){        this.listCommercants();
+        if(this.isAdmin()){        this.listCommercantadmin();
         }
-        if(this.isSadmin()){        this.listCommercant();
+        if(this.isSadmin()){        this.listCommercantsadmin();
         }
 
 
@@ -122,8 +122,15 @@ export class CrudComponent implements OnInit {
           }
         )
       }
-      listCommercants(){
-        this.layoutService.chercherCommercants(this.dataUser.tenant_id).subscribe(
+      listCommercantadmin(){
+        this.layoutService.chercherCommercantadmin(this.dataUser.tenant_id).subscribe(
+          data=> {
+            this.commercants=data;
+          }
+        )
+      }
+      listCommercantsadmin(){
+        this.layoutService.chercherCommercantsadmin(this.dataUser.tenant_id).subscribe(
           data=> {
             this.commercants=data;
           }
@@ -145,6 +152,21 @@ export class CrudComponent implements OnInit {
           this.ngOnInit();
           this.hideDialogadd();
           location.reload();
+          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Commercant ajouté avec succé', life: 3000 });
+
+         });
+      }
+       //addcomsadmin
+       saveCommercantsadmin(response:any){
+        this.commercant.sadminId=this.dataUser.tenant_id;
+        console.log("test",this.dataUser.tenant_id)
+        var Datacommercant = JSON.stringify(this.commercant);
+        this.productService.addcommercantsadmin(Datacommercant , this.image ).subscribe(res=>{console.log(res);
+          this.ngOnInit();
+          this.hideDialogadd();
+          location.reload();
+          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Commercant ajouté avec succé', life: 3000 });
+
          });
       }
       //update
@@ -157,6 +179,21 @@ export class CrudComponent implements OnInit {
           this.ngOnInit();
           this.hideDialog();
           location.reload();
+          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Commercant modifiée avec succé', life: 3000 });
+         });
+      }
+       //updatesadmin
+       updatesadmin(response:any){
+        this.commercant.sadminId=this.dataUser.tenant_id;
+        var Datacommercant = JSON.stringify(this.commercant);
+        const commerceId = this.commercant.id;
+        this.productService.updatecommercantsadmin(Datacommercant , this.image, commerceId ).subscribe(res=>{console.log(res);
+          //this.close.emit();
+          this.ngOnInit();
+          this.hideDialog();
+          location.reload();
+          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Commercant modifiée avec succé', life: 3000 });
+
          });
       }
       //enbaled et notenabled
@@ -228,14 +265,14 @@ export class CrudComponent implements OnInit {
     confirmDeleteSelected() {
         this.deleteProductsDialog = false;
         this.products = this.products.filter(val => !this.selectedProducts.includes(val));
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Commerçants Deleted', life: 3000 });
         this.selectedProducts = [];
     }
 
     confirmDelete() {
         this.deleteProductDialog = false;
         this.products = this.products.filter(val => val.id !== this.product.id);
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Commerçant Deleted', life: 3000 });
         this.product = {};
     }
   //delete
@@ -244,7 +281,7 @@ export class CrudComponent implements OnInit {
     this.productService.delete(id).subscribe(
       (response: void) => {
         console.log(response);
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Commerçant Deleted', life: 3000 });
         this.ngOnInit();
         this.hideDialog();
       },

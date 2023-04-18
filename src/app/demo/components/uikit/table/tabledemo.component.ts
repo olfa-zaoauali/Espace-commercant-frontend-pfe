@@ -156,8 +156,10 @@ export class TableDemoComponent implements OnInit {
       public validationcompte(id:Number):void{
         this.customerService.validation(id).subscribe(
           (response: void) => {
+            location.reload();
             console.log(response);
             this.listAdmin();
+
           },
           (error: HttpErrorResponse) => {
             alert(error.message);

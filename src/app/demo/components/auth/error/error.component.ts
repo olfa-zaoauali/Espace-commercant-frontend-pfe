@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
+import { CountryService } from 'src/app/demo/service/country.service';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Admin2 } from 'src/app/models/admin2';
+import { Client } from 'src/app/models/client';
 
 
 @Component({
     selector: 'app-error',
     templateUrl: './error.component.html',
+    providers: [MessageService],
+
     styles: [`
     :host ::ng-deep .pi-eye,
     :host ::ng-deep .pi-eye-slash {
@@ -19,11 +24,15 @@ import { Admin2 } from 'src/app/models/admin2';
 `]
 })
 export class ErrorComponent { 
+    image:any
     selectedFiles?: FileList;
     currentFile?: File;
     progress = 0;
     message = '';
-  
+    dataUser : any ;
+    imageUrl: any;
+    role: any;
+    tenant_id:any;
     fileInfos?: Observable<any>;
     users:any ;
     admin :  Admin2= new Admin2(1,"","","","","","","","","","",false);
@@ -33,50 +42,45 @@ export class ErrorComponent {
     logoFile:any;
     imageURL : any;
     logoURL : any;
-    constructor(public layoutService: LayoutService, private builder: FormBuilder, private router: Router){}
+    imageFile:any
+    clients: Client[]=[];
+    client: Client= new Client(1,"","","","","","","","",0,false,"","");
+    selectedCountryAdvanced: any[] = [];
     
-      registerform=this.builder.group({
-        firstname:this.builder.control('', Validators.required),
-        lastname:this.builder.control('',Validators.required),
-        password:this.builder.control('',Validators.compose([Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')])),
-        email:this.builder.control('',Validators.compose([Validators.required,Validators.email])),
-        telephone:this.builder.control('', Validators.required),
-        company:this.builder.control('', Validators.required),
-        domain:this.builder.control('', Validators.required),
-        matricule:this.builder.control(''),
-        batinda:this.builder.control(''),
-        logo:this.builder.control(''),
-        role:this.builder.control(''),
-        isactive:this.builder.control(false)
-      });
-    
-      //add sans files 
-      proceedregisteration(){
-        if (this.registerform.valid) {
-          this.layoutService.Procedeedregister(this.registerform.value).subscribe( 
-            (response: Admin2) => {
-            console.log(response);
-            //this.listofusers();
-            this.router.navigate(['login'])
-          });
-        } else {
-            console.log("erreur");
-        }
+
+    constructor(private clientservice: CountryService ,private messageService: MessageService, public layoutService: LayoutService, private builder: FormBuilder, private router: Router){}
+    //client
+    saveClient(response:any){
+      this.client.emailCommercant="olfaammari1@gmail.com";
+      var Datacommercant = JSON.stringify(this.client);
+      this.clientservice.addclient(Datacommercant , this.image ).subscribe(res=>{console.log(res);
+        alert('Votre demande est bien reçu, Vérifier votre email');
+        this.router.navigate(['/auth/login'])
+        
+       });
       }
-      selectFile(event: any): void {
-        this.selectedFiles = event.target.files;
-      }
+      onSelectedImage(e: any){
+        this.imageFile = e.target.files[0];
+        // @ts-ignore
+        this.image = document.querySelector("input[type=file]").files[0];
+        var readerimage = new FileReader();
+        readerimage.readAsDataURL(this.image);
+        readerimage.onload = (res=>{this.imageURL= readerimage.result})
+        console.log(this.imageFile); 
+       }
+     //Admin
       //add avec files
     
       saveAdmin(){
         var Dataadmin = JSON.stringify(this.admin);
         this.layoutService.addAdmin(Dataadmin, this.file, this.logo ).subscribe(res=>{console.log(res);
           alert('Votre demande est bien reçu, Vérifier votre email');
-          this.router.navigate(['login'])
+          this.router.navigate(['/auth/login'])
             
           // this.toastr.success("event Added Succesfully"); this.clearForm();this.refresh()
         });
       }
+      
       onSelectedfile(e: any){
         this.userFile = e.target.files[0];
         // @ts-ignore
@@ -87,7 +91,7 @@ export class ErrorComponent {
         console.log(this.userFile);
       }
     
-      onSelectedImage(e: any){
+      onSelectedImagee(e: any){
         this.logoFile = e.target.files[0];
         // @ts-ignore
         this.logo = document.querySelector("div.olfa input[type=file]").files[0];

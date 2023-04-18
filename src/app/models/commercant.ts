@@ -9,7 +9,8 @@ export class Commercant {
         public image: string,
         public pay : number,
         public enabled: boolean,
-        public admin: number
+        public admin: String,
+        public sadminId:String
         ){
             
         }
