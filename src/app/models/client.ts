@@ -11,7 +11,8 @@ export class Client {
         public nbEmployer: number,
         public enabled: boolean,
         public emailCommercant: string,
-        public commercantId:String
+        public commercantId:String,
+        public sadminId:String
         ){
             
         }

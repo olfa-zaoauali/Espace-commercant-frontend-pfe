@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CountryService } from 'src/app/demo/service/country.service';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Admin2 } from 'src/app/models/admin2';
+import { Modules } from 'src/app/models/modules';
 
 @Component({
     templateUrl: './inputdemo.component.html',
@@ -48,21 +49,26 @@ export class InputDemoComponent implements OnInit {
     valSelect2: string = "";
     fileInfos?: Observable<any>;
     users:any ;
-    admin :  Admin2= new Admin2(1,"","","","","","","","","","",false);
+    admin :  Admin2= new Admin2(1,"","","","","","","","","","",[],false);
     file : any;
     logo:any;
     userFile : any;
     logoFile:any;
     imageURL : any;
     logoURL : any;
+    modules: Modules[]=[];
+
 
     valueKnob = 20;
     uploadedFiles: any[] = [];
+    selectedModuleIds: number[] = [];
+
 
 
     constructor(private router: Router,public layoutService: LayoutService, private countryService: CountryService, private messageService: MessageService) { }
 
     ngOnInit() {
+        this.listModuless();
         this.countryService.getCountries().then(countries => {
             this.countries = countries;
         });
@@ -81,6 +87,23 @@ export class InputDemoComponent implements OnInit {
             { name: 'Option 3', value: 3 }
         ];
     }
+    updateSelectedModules(moduleId: number) {
+        const index = this.selectedModuleIds.indexOf(moduleId);
+        if (index !== -1) {
+          this.selectedModuleIds.splice(index, 1); // Supprimer l'ID du module de la liste
+        } else {
+          this.selectedModuleIds.push(moduleId); // Ajouter l'ID du module à la liste
+        }
+      }
+    listModuless(){
+        this.countryService.getModulesList().subscribe(
+            data=> {
+              this.modules=data;
+             
+            }
+          );
+      }
+      
     onUpload(event: any) {
         for (const file of event.files) {
             this.uploadedFiles.push(file);
@@ -106,6 +129,8 @@ export class InputDemoComponent implements OnInit {
         this.filteredCountries = filtered;
     }
     saveAdmin(){
+        this.admin.moduleId=this.selectedModuleIds;
+        console.log(this.selectedModuleIds);
         var Dataadmin = JSON.stringify(this.admin);
         this.layoutService.addAdmin(Dataadmin, this.file, this.logo ).subscribe(res=>{console.log(res);
           alert('Votre demande est bien reçu, Vérifier votre email');

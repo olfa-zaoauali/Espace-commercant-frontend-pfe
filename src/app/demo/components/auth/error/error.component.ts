@@ -35,7 +35,7 @@ export class ErrorComponent {
     tenant_id:any;
     fileInfos?: Observable<any>;
     users:any ;
-    admin :  Admin2= new Admin2(1,"","","","","","","","","","",false);
+    admin :  Admin2= new Admin2(1,"","","","","","","","","","",[],false);
     file : any;
     logo:any;
     userFile : any;
@@ -44,7 +44,7 @@ export class ErrorComponent {
     logoURL : any;
     imageFile:any
     clients: Client[]=[];
-    client: Client= new Client(1,"","","","","","","","",0,false,"","");
+    client: Client= new Client(1,"","","","","","","","",0,false,"","","");
     selectedCountryAdvanced: any[] = [];
     
 

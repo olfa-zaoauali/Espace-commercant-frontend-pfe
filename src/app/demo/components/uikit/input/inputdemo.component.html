@@ -121,14 +121,14 @@
 			</div>-->	
 
 			<h5>Modules WIND-ERP</h5>
-			<div class="grid formgrid">
+			<div class="grid formgrid" *ngFor="let tempuser of modules">
 				<div class="col-12 md:col-5">
-					<div class="field-checkbox">
-						<p-checkbox name="group1" value="CRM" [(ngModel)]="valCheck" id="ny"></p-checkbox>
-						<label for="ny">CRM</label>
+					<div class="field-checkbox" >
+						<p-checkbox [(ngModel)]="valCheck" [value]="tempuser.id" checkboxMode="multiple" (onChange)="updateSelectedModules(tempuser.id)" id="ny"></p-checkbox>
+						<label for="ny">{{tempuser.nom}}</label>
 					</div>
 				</div>
-				<div class="col-12 md:col-5">
+			<!--	<div class="col-12 md:col-5">
 					<div class="field-checkbox">
 						<p-checkbox name="group1" value="Gestion de stock" [(ngModel)]="valCheck" id="sf"></p-checkbox>
 						<label for="sf">Gestion de stock</label>
@@ -157,7 +157,7 @@
 						<p-checkbox name="group3" value="Décisionnel / B.I" [(ngModel)]="valCheck" id="la"></p-checkbox>
 						<label for="la">Décisionnel / B.I</label>
 					</div>
-				</div>
+				</div>-->
 			</div>
 
 			

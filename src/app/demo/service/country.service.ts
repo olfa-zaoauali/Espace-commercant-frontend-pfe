@@ -2,11 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Client } from 'src/app/models/client';
+import { Modules } from 'src/app/models/modules';
 
 @Injectable()
 export class CountryService {
     apiurl='http://localhost:8098/api/v1/auth/'
 
+    valCheck:any
     constructor(private http: HttpClient) { }
 
     getCountries() {
@@ -15,11 +17,22 @@ export class CountryService {
             .then(res => res.data as any[])
             .then(data => data);
     }
+   
+   
     public getClientList(): Observable<Client[]> {
         return this.http.get<Client[]>(`${this.apiurl}clients`)
       }
+      public getClientListOfSadmin(id:String): Observable<Client[]> {
+        return this.http.get<Client[]>(`${this.apiurl}sadmins/get/${id}`)
+      }
       public getClientListOfCommercant(id:String): Observable<Client[]> {
         return this.http.get<Client[]>(`${this.apiurl}commercants/clients/${id}`)
+      }
+      public getClientListOfAdmin(id:String): Observable<Client[]> {
+        return this.http.get<Client[]>(`${this.apiurl}admins/clients/${id}`)
+      }
+      public getModulesList(): Observable<Modules[]> {
+        return this.http.get<Modules[]>(`${this.apiurl}modules`)
       }
       updateenabledcomm(id : Number , enabled: boolean): Observable<Client>{
         return this.http.put<Client>(`${this.apiurl}clients/enabled/${id}`,enabled);
@@ -79,6 +92,9 @@ export class CountryService {
       }
       clientde(tenant_id:any): Observable<any> {
         return this.http.get<any>(`${this.apiurl}user/${tenant_id}`);
+      }
+      validation(id : Number): Observable<void>{
+        return this.http.get<void>(`${this.apiurl}clients/validation/${id}`);
       }
       
       

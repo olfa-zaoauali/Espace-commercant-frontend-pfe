@@ -13,7 +13,7 @@ export class ProductService {
     selectedCommerce: any;
     constructor(private http: HttpClient) { }
     
-    
+   
     getProductsSmall() {
         return this.http.get<any>('assets/demo/data/products-small.json')
             .toPromise()

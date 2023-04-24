@@ -2,13 +2,32 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { PhotoService } from 'src/app/demo/service/photo.service';
 import { Product } from 'src/app/demo/api/product';
+import { Modules } from 'src/app/models/modules';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 @Component({
-    templateUrl: './mediademo.component.html'
+    templateUrl: './mediademo.component.html',
+    providers: [MessageService]
+
 })
 export class MediaDemoComponent implements OnInit {
 
     products!: Product[];
+    modules:Modules[]=[];
+    module:Modules=new Modules(0,"","");
+    DialogAdd:boolean=false;
+    productDialog: boolean = false;
+    submitted: boolean = false;
+    deleteDialog: boolean = false;
+    deleteProductsDialog: boolean = false;
+    SelectedModule:Modules[]=[];
+
+
+    product: Product = {};
+
+
+
 
     images!: any[];
 
@@ -49,9 +68,12 @@ export class MediaDemoComponent implements OnInit {
         }
     ];
 
-    constructor(private productService: ProductService, private photoService: PhotoService) { }
-
+    constructor(private messageService: MessageService,private productService: ProductService, private photoService: PhotoService) { }
+    deleteProduct(product: Modules) {
+      this.deleteDialog = true;
+  }
     ngOnInit() {
+        this.listmodules();
         this.productService.getProductsSmall().then(products => {
             this.products = products;
         });
@@ -60,5 +82,74 @@ export class MediaDemoComponent implements OnInit {
             this.images = images;
         });
     }
+    update(response:any){
+      
+      const commerceId = this.module.id;
+      this.photoService.update(this.module, commerceId ).subscribe(res=>{console.log(res);
+        //this.close.emit();
+        this.ngOnInit();
+        this.hideDialog();
+        location.reload();
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Module modifiée avec succé', life: 3000 });
+       });
+    }
+  
+
+    confirmDeleteSelected() {
+        this.deleteProductsDialog = false;
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Commerçants Deleted', life: 3000 });
+        this.SelectedModule = [];
+    }
+    editProduct(module: Modules) {
+      this.module = { ...module };
+      this.productDialog = true;
+  }
+
+  
+    public onDelet(id:number): void {
+        this.deleteDialog = false;
+        this.photoService.delete(id).subscribe(
+          (response: void) => {
+            console.log(response);
+            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Module Deleted', life: 3000 });
+            this.ngOnInit();
+            this.hideDialog();
+          },
+          (error: HttpErrorResponse) => {
+            alert(error.message);
+          }
+        );
+      }
+    listmodules(){
+        this.photoService.getModules().subscribe(
+          data=> {
+            this.modules=data;
+          }
+        )
+      }
+      AddModules(response:any){
+        this.photoService.AddModules(this.module).subscribe(
+          data=> {
+            this.module=data;
+          }
+
+        )
+        this.ngOnInit();
+        this.hideDialogadd();
+        location.reload();
+      }
+      openNew() {
+        // this.product = {};
+        this.submitted = false;
+         this.DialogAdd = true;
+     }
+     hideDialog() {
+        this.productDialog = false;
+        this.submitted = false;
+    }
+    hideDialogadd() {
+      this.DialogAdd = false;
+      this.submitted = false;
+  }
     
 }

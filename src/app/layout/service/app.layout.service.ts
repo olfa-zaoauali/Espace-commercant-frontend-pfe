@@ -132,6 +132,8 @@ export class LayoutService {
   Procedeedregister(user:any){
     return this.http.post<Admin2>(`${this.apiurl}registeradmin`,user);
   }
+ 
+  
   //registre avec files
   addAdmin(admin : string,  file: File, logo: File): Observable<any>{
     const data: FormData = new FormData();

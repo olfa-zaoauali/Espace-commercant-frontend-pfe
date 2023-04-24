@@ -1,3 +1,5 @@
+import { Modules } from "./modules";
+
 export class Admin2 {
     constructor( public id:number,
         public firstname: String,
@@ -10,6 +12,7 @@ export class Admin2 {
         public matricule: string,
         public batinda: string,
         public logo: string,
+        public moduleId: number[],
         public enabled: boolean
         ){
             

@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
@@ -48,7 +47,7 @@ export class MiscDemoComponent implements OnInit, OnDestroy {
 
     rowsPerPageOptions = [5, 10, 20];
     clients: Client[]=[];
-    client: Client= new Client(1,"","","","","","","","",0,false,"","");
+    client: Client= new Client(1,"","","","","","","","",0,false,"","","");
     comm:any
     image:any
     imageFile:any
@@ -77,16 +76,34 @@ export class MiscDemoComponent implements OnInit, OnDestroy {
         this.tenant_id=this.dataUser.tenant_id;
         console.log("id",this.tenant_id);
         console.log("sub",this.email);
-        if(this.isSadmin()){                this.listClients();
+        if(this.isSadmin()){                this.listClientsOfSAdmin();
 
         }
         if(this.isCommercant()){        this.listClientsOfCommercant();
+        }
+        if(this.isAdmin()){        this.listClientsOfAdmin();
         }
         
        
     }
     listClients(){
         this.clientservice.getClientList().subscribe(
+            data=> {
+              this.clients=data;
+             
+            }
+          );
+      }
+      listClientsOfSAdmin(){
+        this.clientservice.getClientListOfSadmin(this.dataUser.tenant_id).subscribe(
+            data=> {
+              this.clients=data;
+             
+            }
+          );
+      }
+      listClientsOfAdmin(){
+        this.clientservice.getClientListOfAdmin(this.dataUser.tenant_id).subscribe(
             data=> {
               this.clients=data;
              
@@ -223,6 +240,7 @@ public onDeletclient(id:number): void {
   //Sadmin
   saveClient(response:any){
     this.client.emailCommercant=this.dataUser.sub;
+    this.client.sadminId=this.dataUser.tenant_id;
     console.log("test",this.dataUser.tenant_id)
     var Datacommercant = JSON.stringify(this.client);
     this.clientservice.addclient(Datacommercant , this.image ).subscribe(res=>{console.log(res);
@@ -265,9 +283,10 @@ public onDeletclient(id:number): void {
   //update
   updateSadmin(response:any){
     this.client.emailCommercant=this.dataUser.sub;
+    this.client.sadminId=this.dataUser.tenant_id;
     var Datacommercant = JSON.stringify(this.client);
     const commerceId = this.client.id;
-    this.clientservice.update(Datacommercant , this.image, commerceId ).subscribe(res=>{console.log(res);
+    this.clientservice.update(Datacommercant , this.image,commerceId).subscribe(res=>{console.log(res);
       //this.close.emit();
       this.ngOnInit();
       this.hideDialog();
@@ -284,6 +303,17 @@ public onDeletclient(id:number): void {
         }
 
       );
+  }
+  public validationcompte(id:Number):void{
+    this.clientservice.validation(id).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.listClients();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
     
 }

@@ -53,7 +53,7 @@ export class TableDemoComponent implements OnInit {
     @ViewChild('filter') filter!: ElementRef;
     admins:Admin2[]=[];
     admin1:Admin[]=[]
-    admin: Admin2=new Admin2(0,"","","","","","","","","","",false);;
+    admin: Admin2=new Admin2(0,"","","","","","","","","","",[],false);;
 
     constructor(private customerService: CustomerService, private productService: ProductService) { }
 
@@ -156,7 +156,6 @@ export class TableDemoComponent implements OnInit {
       public validationcompte(id:Number):void{
         this.customerService.validation(id).subscribe(
           (response: void) => {
-            location.reload();
             console.log(response);
             this.listAdmin();
 

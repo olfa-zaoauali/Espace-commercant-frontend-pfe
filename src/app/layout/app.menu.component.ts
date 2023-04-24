@@ -162,6 +162,8 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-user-plus',
                         routerLink: ['/dashboard/pages/crud']
                     },
+                    { label: 'Clients', icon: 'pi pi-fw pi-user-plus', routerLink: ['/dashboard/uikit/misc'] }
+
 
                 ]
             },
@@ -253,6 +255,8 @@ export class AppMenuComponent implements OnInit {
                 label: 'Autre',
                 icon: 'pi pi-fw pi-briefcase',
                 items: [
+                    { label: 'Modules WIND-ERP', icon: 'pi pi-fw pi-shopping-cart', routerLink: ['/dashboard/uikit/media'] },
+
                     {
                         label: 'WIND-ERP',
                         icon: 'pi pi-fw pi-globe',
