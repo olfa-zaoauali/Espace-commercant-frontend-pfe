@@ -8,25 +8,25 @@
 				<div class="col-12 mb-2 lg:col-4 lg:mb-0">
 					<span class="p-input-icon-left">
 						<i class="pi pi-user"></i>
-						<input type="text" name="firstname" [(ngModel)]="admin.firstname" pInputText placeholder="Nom"/>
+						<input type="text" name="firstname" [(ngModel)]="client.firstname" pInputText placeholder="Nom"/>
 					</span>
 				</div>
 				<div class="col-12 mb-2 lg:col-4 lg:mb-0">
 					<span class="p-input-icon-left">
 						<i class="pi pi-user"></i>
-						<input type="text" name="lastname" [(ngModel)]="admin.lastname" pInputText placeholder="Prénom"/>
+						<input type="text" name="lastname" [(ngModel)]="client.lastname" pInputText placeholder="Prénom"/>
 					</span>
 				</div>
 				<div class="col-12 mb-2 lg:col-4 lg:mb-0">
 					<span class="p-input-icon-left">
 						<i class="pi pi-phone"></i>
-						<input id="telephone" type="text"   name="telephone" [(ngModel)]="admin.telephone"  pInputText placeholder="Téléphone"/>
+						<input id="telephone" type="text"   name="telephone" [(ngModel)]="client.telephone"  pInputText placeholder="Téléphone"/>
 					</span>
 				</div>
 			</div>
 			<h5>Email</h5>
 			<span class="p-float-label">
-				<input name="email" [(ngModel)]="admin.email" id="email" type="text" pInputText>
+				<input name="email" [(ngModel)]="client.email" id="email" type="text" pInputText>
 				<label for="float-input"></label>
 			</span>
 			<h5>Mot de passe </h5>
@@ -37,12 +37,12 @@
 			</span>
 			<h5>Société</h5>
 			<span class="p-float-label">
-				<input name="company" [(ngModel)]="admin.company" id="company" type="text" pInputText>
+				<input name="company" [(ngModel)]="client.company" id="company" type="text" pInputText>
 				<label for="float-input"></label>
 			</span>
 			<h5>Domaine</h5>
 			<span class="p-float-label">
-				<input name="domain" [(ngModel)]="admin.domain" id="domain" type="text" pInputText>
+				<input name="domain" [(ngModel)]="client.domain" id="domain" type="text" pInputText>
 				<label for="float-input"></label>
 			</span>
 			<h5>Adresse</h5>
@@ -63,7 +63,7 @@
 			<p-calendar [showIcon]="true" inputId="icon"></p-calendar>-->
 
 			<h5>Nombre des employées</h5>
-			<p-inputNumber mode="decimal" [showButtons]="true" [min]="0" [max]="100">
+			<p-inputNumber [(ngModel)]="client.nbEmployer" mode="decimal" [showButtons]="true" [min]="0" [max]="100">
 			</p-inputNumber>
 			<h5>Matricule fiscale</h5>
 			<span class="p-float-label">
@@ -159,25 +159,7 @@
 					</div>
 				</div>-->
 			</div>
-
-			
 		</div>
-		<div class="card">
-			<div class="grid">
-                <div class="col-12 md:col-6">
-				<h5>Numéro de carte</h5>
-			    <span class="p-float-label">
-				<input id="float-input" type="text" pInputText>
-				<label for="float-input"></label>
-			</span>
-                </div>
-                
-            </div>
-			<br>
-		
-			
-		</div>
-
 		<div class="card">
 			<div class="grid">
                

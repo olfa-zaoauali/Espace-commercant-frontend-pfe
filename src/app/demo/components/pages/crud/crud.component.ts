@@ -41,7 +41,7 @@ export class CrudComponent implements OnInit {
 
     rowsPerPageOptions = [5, 10, 20];
     commercants: Commercant[]=[];
-    commercant: Commercant= new Commercant(0,"","","","","","","",0,false,"","");
+    commercant: Commercant= new Commercant(0,"","","","","","","",0,0,0,0,false,"","");
     comm:any
     image:any
     imageFile:any

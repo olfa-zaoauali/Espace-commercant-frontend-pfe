@@ -41,9 +41,10 @@
                         <th>Sociéte</th>
                         <th>Domaine</th>
                         <th>Employées</th>
-                        <th>Client de </th>
-                        <th>CompteA/D</th>
-                        <th></th>
+                        <th *ngIf="isSadmin()">Client de </th>
+                        <th *ngIf="isAdmin()">Client de </th>
+                        <th *ngIf="isSadmin()">CompteA/D</th>
+                        <th *ngIf="isSadmin()"></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -59,8 +60,9 @@
                         <td>{{ client.company}}</td>
                         <td>{{ client.domain}}</td>
                         <td>{{ client.nbEmployer}}</td>
-                        <td>{{client.emailCommercant}}</td>
-                        <td>
+                        <td *ngIf="isSadmin()">{{client.emailCommercant}}</td>
+                        <td *ngIf="isAdmin()">{{client.emailCommercant}}</td>
+                        <td *ngIf="isSadmin()">
                             <label  style="margin-top: 10px; margin-left: 10px;" class="switch" >
                                 <p-inputSwitch (click)="updateenabled(client.id)" *ngIf="!client.enabled ; else enabled" ></p-inputSwitch>
                                 <ng-template #enabled>
@@ -68,10 +70,10 @@
                               </ng-template>
                           </label>
                         </td>
-                        <td>
-                            <button pButton style="margin-right: -20px;" pRipple  icon="pi pi-check" class="p-button-rounded p-button-success " (click)="validationcompte(client.id)"></button>
+                        <td *ngIf="isSadmin()">
+                            <button  pButton style="margin-right: -25px;" pRipple  icon="pi pi-check" class="p-button-rounded p-button-success " (click)="validationcompte(client.id)"></button>
                         </td>
-                        <td><button pButton style="margin-right: -20px;" pRipple  icon="pi pi-pencil" class="p-button-rounded p-button-warning " (click)="editProduct(client)"></button>
+                        <td><button pButton style="margin-right: -25px;" pRipple  icon="pi pi-pencil" class="p-button-rounded p-button-warning " (click)="editProduct(client)"></button>
                         </td>
                         <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded  p-button-danger" (click)="deleteProduct(client)"></button>
                         </td>

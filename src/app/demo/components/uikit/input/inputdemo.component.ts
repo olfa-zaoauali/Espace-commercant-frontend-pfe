@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CountryService } from 'src/app/demo/service/country.service';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Admin2 } from 'src/app/models/admin2';
+import { Client } from 'src/app/models/client';
 import { Modules } from 'src/app/models/modules';
 
 @Component({
@@ -49,7 +50,7 @@ export class InputDemoComponent implements OnInit {
     valSelect2: string = "";
     fileInfos?: Observable<any>;
     users:any ;
-    admin :  Admin2= new Admin2(1,"","","","","","","","","","",[],false);
+    admin: Admin2=new Admin2(0,"","","","","","","","","","",[],0,0,0,0,false);;
     file : any;
     logo:any;
     userFile : any;
@@ -57,7 +58,10 @@ export class InputDemoComponent implements OnInit {
     imageURL : any;
     logoURL : any;
     modules: Modules[]=[];
-
+    client: Client= new Client(1,"","","","","","","","",0,false,"","","");
+    dataUser : any ;
+    imageUrl: any;
+    role: any;
 
     valueKnob = 20;
     uploadedFiles: any[] = [];
@@ -69,6 +73,8 @@ export class InputDemoComponent implements OnInit {
 
     ngOnInit() {
         this.listModuless();
+        this.dataUser = this.layoutService.getDataFromToken()
+        this.getClientByEmail();
         this.countryService.getCountries().then(countries => {
             this.countries = countries;
         });
@@ -103,7 +109,14 @@ export class InputDemoComponent implements OnInit {
             }
           );
       }
-      
+      getClientByEmail(){
+        this.countryService.getClientByemail(this.dataUser.sub).subscribe(
+            data=> {
+              this.client=data;
+              console.log("client",data)
+            }
+          );
+      }
     onUpload(event: any) {
         for (const file of event.files) {
             this.uploadedFiles.push(file);
@@ -131,8 +144,9 @@ export class InputDemoComponent implements OnInit {
     saveAdmin(){
         this.admin.moduleId=this.selectedModuleIds;
         console.log(this.selectedModuleIds);
+        console.log(this.client.id);
         var Dataadmin = JSON.stringify(this.admin);
-        this.layoutService.addAdmin(Dataadmin, this.file, this.logo ).subscribe(res=>{console.log(res);
+        this.layoutService.addAdmin(Dataadmin, this.file, this.logo,this.client.id ).subscribe(res=>{console.log(res);
           alert('Votre demande est bien reçu, Vérifier votre email');
           this.router.navigate(['/dashboard'])
             

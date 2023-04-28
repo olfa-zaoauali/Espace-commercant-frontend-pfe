@@ -1,70 +1,123 @@
-    <div class="grid">
-        <div class="col-12 lg:col-6 xl:col-3">
+    <div  class="grid">
+        <div  class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3">Orders</span>
-                        <div class="text-900 font-medium text-xl">152</div>
+                    <div *ngIf="isCommercant()" >
+                        <span class="block text-500 font-medium mb-3">Clients</span>
+                        <div class="text-900 font-medium text-xl">{{commercant.clients}} Clients</div>
+                    </div>
+                    <div *ngIf="isSadmin()" >
+                        <span class="block text-500 font-medium mb-3">Clients</span>
+                        <div class="text-900 font-medium text-xl">{{sadmin.nbClients}} Sociétés </div>
+                    </div>
+                    <div *ngIf="isAdmin()" >
+                        <span class="block text-500 font-medium mb-3">Clients</span>
+                        <div class="text-900 font-medium text-xl">{{admin.nbClients}} Sociétés </div>
+                    </div>
+                    <div class="flex align-items-center justify-content-center bg-purple-100  border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-users text-purple-500  text-xl"></i>
+                    </div>
+                  
+                </div>
+                <span class="text-green-500 font-medium">520  </span>
+                <span class="text-500">newly registered</span>
+            </div>
+        </div>
+        <div *ngIf="isCommercant()" class="col-12 lg:col-6 xl:col-3">
+            <div class="card mb-0">
+                <div class="flex justify-content-between mb-3">
+                    <div >
+                        <span class="block text-500 font-medium mb-3">Demande d'abonnement</span>
+                        <div class="text-900 font-medium text-xl">{{commercant.admins}} Sociétés</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
                         <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
                     </div>
                 </div>
-                <span class="text-green-500 font-medium">24 new </span>
+                <span  class="text-green-500 font-medium">24 new </span>
                 <span class="text-500">since last visit</span>
             </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-3">
+        <div *ngIf="isAdmin()" class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
                     <div>
-                        <span class="block text-500 font-medium mb-3">Revenue</span>
-                        <div class="text-900 font-medium text-xl">$2.100</div>
+                        <span class="block text-500 font-medium mb-3">
+                          Montant à payer</span>
+                        <div class="text-900 font-medium text-xl">{{admin.apayer}} DT</div>
+                    </div>
+                    <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
+                    </div>
+                </div>
+                <span  class="text-green-500 font-medium">par mois </span>
+                <span class="text-500">27/05/2023</span>
+            </div>
+        </div>
+        <div *ngIf="isSadmin()" class="col-12 lg:col-6 xl:col-3">
+            <div class="card mb-0">
+                <div class="flex justify-content-between mb-3">
+                    <div>
+                        <span class="block text-500 font-medium mb-3">Demande d'abonnement</span>
+                        <div class="text-900 font-medium text-xl">{{sadmin.nbAdmins}} Partenaires</div>
+                    </div>
+                    <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
+                    </div>
+                </div>
+                <span  class="text-green-500 font-medium">24 new </span>
+                <span class="text-500">since last visit</span>
+            </div>
+        </div>
+        <div  class="col-12 lg:col-6 xl:col-3">
+            <div class="card mb-0">
+                <div class="flex justify-content-between mb-3">
+                    <div  *ngIf="isCommercant()" >
+                        <span class="block text-500 font-medium mb-3">Chiffre d'affaire</span>
+                        <div class="text-900 font-medium text-xl">{{commercant.revenu}} DT</div>
+                    </div>
+                    <div  *ngIf="isSadmin()" >
+                        <span class="block text-500 font-medium mb-3">Chiffre d'affaire</span>
+                        <div class="text-900 font-medium text-xl">{{sadmin.revenu}} DT</div>
+                    </div>
+                    <div  *ngIf="isAdmin()" >
+                        <span class="block text-500 font-medium mb-3">Chiffre d'affaire</span>
+                        <div class="text-900 font-medium text-xl">{{admin.revenuTotal}} DT</div>
+                    </div>
+                    <div class="flex align-items-center justify-content-center bg-green-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-dollar text-green-500 text-xl"></i>
+                    </div>
+                </div>
+                <span class="text-green-500 font-medium">%52+  </span>
+                <span class="text-500">since last week</span>
+            </div>
+        </div>
+        <div  class="col-12 lg:col-6 xl:col-3">
+            <div class="card mb-0">
+                <div class="flex justify-content-between mb-3">
+                    <div *ngIf="isCommercant()">
+                        <span class="block text-500 font-medium mb-3">Commission</span>
+                        <div class="text-900 font-medium text-xl">{{commercant.pay}} DT</div>
+                    </div>
+                    <div *ngIf="isSadmin()">
+                        <span class="block text-500 font-medium mb-3">Revenu Net</span>
+                        <div class="text-900 font-medium text-xl">{{sadmin.revenuNet}} DT</div>
+                    </div>
+                    <div *ngIf="isAdmin()">
+                        <span class="block text-500 font-medium mb-3">Revenu Net</span>
+                        <div class="text-900 font-medium text-xl">{{admin.revenuNet}} DT</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-orange-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                        <i class="pi pi-map-marker text-orange-500 text-xl"></i>
+                        <i class="pi pi-calculator text-orange-500 text-xl"></i>
                     </div>
                 </div>
                 <span class="text-green-500 font-medium">%52+ </span>
                 <span class="text-500">since last week</span>
             </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-3">
-            <div class="card mb-0">
-                <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3">Customers</span>
-                        <div class="text-900 font-medium text-xl">28441</div>
-                    </div>
-                    <div class="flex align-items-center justify-content-center bg-cyan-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                        <i class="pi pi-inbox text-cyan-500 text-xl"></i>
-                    </div>
-                </div>
-                <span class="text-green-500 font-medium">520  </span>
-                <span class="text-500">newly registered</span>
-            </div>
-        </div>
-        <div class="col-12 lg:col-6 xl:col-3">
-            <div class="card mb-0">
-                <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3">Comments</span>
-                        <div class="text-900 font-medium text-xl">152 Unread</div>
-                    </div>
-                    <div class="flex align-items-center justify-content-center bg-purple-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                        <i class="pi pi-comment text-purple-500 text-xl"></i>
-                    </div>
-                </div>
-                <span class="text-green-500 font-medium">85 </span>
-                <span class="text-500">responded</span>
-            </div>
-        </div>
-
-     
-
-        <div class="col-12 xl:col-6">
+        <div class="col-8 xl:col-12">
             <div class="card">
-                <h5>Sales Overview</h5>
+                <h5>Chiffre d'affaire</h5>
                 <p-chart type="line" [data]="chartData" [options]="chartOptions"></p-chart>
             </div>
 

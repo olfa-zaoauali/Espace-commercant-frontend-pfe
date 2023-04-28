@@ -35,7 +35,7 @@ export class ErrorComponent {
     tenant_id:any;
     fileInfos?: Observable<any>;
     users:any ;
-    admin :  Admin2= new Admin2(1,"","","","","","","","","","",[],false);
+    admin: Admin2=new Admin2(0,"","","","","","","","","","",[],0,0,0,0,false);;
     file : any;
     logo:any;
     userFile : any;
@@ -73,7 +73,7 @@ export class ErrorComponent {
     
       saveAdmin(){
         var Dataadmin = JSON.stringify(this.admin);
-        this.layoutService.addAdmin(Dataadmin, this.file, this.logo ).subscribe(res=>{console.log(res);
+        this.layoutService.addAdmin(Dataadmin, this.file, this.logo,0 ).subscribe(res=>{console.log(res);
           alert('Votre demande est bien reçu, Vérifier votre email');
           this.router.navigate(['/auth/login'])
             
