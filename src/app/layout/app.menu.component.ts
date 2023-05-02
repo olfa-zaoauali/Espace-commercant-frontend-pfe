@@ -37,7 +37,9 @@ export class AppMenuComponent implements OnInit {
                 label: 'Gestion des Clients',
                 items: [
                    
-                    { label: 'Clients', icon: 'pi pi-fw pi-user-plus', routerLink: ['/dashboard/uikit/misc'] }
+                    { label: 'Clients', icon: 'pi pi-fw pi-user-plus', routerLink: ['/dashboard/uikit/misc'] },
+                    { label: 'Overlay', icon: 'pi pi-fw pi-clone', routerLink: ['/dashboard/uikit/overlay'] }
+
 
                   
                 ]

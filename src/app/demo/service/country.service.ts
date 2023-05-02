@@ -17,7 +17,9 @@ export class CountryService {
             .then(res => res.data as any[])
             .then(data => data);
     }
-   
+    public getClientByemail(email : String): Observable<Client> {
+      return this.http.get<Client>(`${this.apiurl}clients/${email}`);
+    }
    
     public getClientList(): Observable<Client[]> {
         return this.http.get<Client[]>(`${this.apiurl}clients`)

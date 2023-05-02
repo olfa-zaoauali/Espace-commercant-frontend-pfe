@@ -41,7 +41,7 @@ export class CrudComponent implements OnInit {
 
     rowsPerPageOptions = [5, 10, 20];
     commercants: Commercant[]=[];
-    commercant: Commercant= new Commercant(0,"","","","","","","",0,0,0,0,false,"","");
+    commercant: Commercant= new Commercant(0,"","","","","","","",0,0,0,0,0,false,"","");
     comm:any
     image:any
     imageFile:any
@@ -202,7 +202,11 @@ export class CrudComponent implements OnInit {
         this.productService.updateenabledcomm(id,this.commercant.enabled).subscribe(
           (response: Commercant) => {
             console.log('response',response);
-            this.listCommercant();
+            if(this.isAdmin()){        this.listCommercantadmin();
+            }
+            if(this.isSadmin()){        this.listCommercantsadmin();
+            }
+    
           },
           (error: HttpErrorResponse) => {
             alert(error.message);
@@ -215,7 +219,11 @@ export class CrudComponent implements OnInit {
         this.productService.updatenotenabledcomm(id,this.commercant.enabled).subscribe(
           (response: Commercant) => {
             console.log('response',response);
-            this.listCommercant();
+            if(this.isAdmin()){        this.listCommercantadmin();
+            }
+            if(this.isSadmin()){        this.listCommercantsadmin();
+            }
+    
           },
           (error: HttpErrorResponse) => {
             alert(error.message);

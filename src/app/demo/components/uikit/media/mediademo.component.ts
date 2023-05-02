@@ -15,7 +15,7 @@ export class MediaDemoComponent implements OnInit {
 
     products!: Product[];
     modules:Modules[]=[];
-    module:Modules=new Modules(0,"","");
+    module:Modules=new Modules(0,"","","");
     DialogAdd:boolean=false;
     productDialog: boolean = false;
     submitted: boolean = false;

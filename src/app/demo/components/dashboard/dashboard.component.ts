@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     imageUrl: any;
     role: any;
     tenant_id:any;
-    commercant: Commercant= new Commercant(0,"","","","","","","",0,0,0,0,false,"","");
+    commercant: Commercant= new Commercant(0,"","","","","","","",0,0,0,0,0,false,"","");
     commission:any ;
     revenu:any;
     nbadmins:any;
@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     nbclientwind:any;
     nbadminwind:any; 
     revenuNet:any;
-    admin: Admin2=new Admin2(0,"","","","","","","","","","",[],0,0,0,0,false);;
+    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","",[],0,0,0,0,"",false);
     revenuNetadmin:any;
     revenutotaladmin:any;
     nbclientadmin:any;

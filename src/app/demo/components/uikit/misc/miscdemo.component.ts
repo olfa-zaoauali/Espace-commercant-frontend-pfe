@@ -47,7 +47,7 @@ export class MiscDemoComponent implements OnInit, OnDestroy {
 
     rowsPerPageOptions = [5, 10, 20];
     clients: Client[]=[];
-    client: Client= new Client(1,"","","","","","","","",0,false,"","","");
+    client: Client= new Client(1,"","","","","","","","",0,"","","",false,"","","");
     comm:any
     image:any
     imageFile:any
@@ -201,7 +201,13 @@ openNew() {
     this.clientservice.updateenabledcomm(id,this.client.enabled).subscribe(
       (response: Client) => {
         console.log('response',response);
-       this.listClients();
+        if(this.isSadmin()){                this.listClientsOfSAdmin();
+
+        }
+        if(this.isCommercant()){        this.listClientsOfCommercant();
+        }
+        if(this.isAdmin()){        this.listClientsOfAdmin();
+        }
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -214,7 +220,13 @@ openNew() {
     this.clientservice.updatenotenabled(id,this.client.enabled).subscribe(
       (response: Client) => {
         console.log('response',response);
-        this.listClients();
+        if(this.isSadmin()){                this.listClientsOfSAdmin();
+
+        }
+        if(this.isCommercant()){        this.listClientsOfCommercant();
+        }
+        if(this.isAdmin()){        this.listClientsOfAdmin();
+        }
     },
       (error: HttpErrorResponse) => {
         alert(error.message);

@@ -99,6 +99,7 @@
 						<th style="min-width: 6rem">
 							Valider
 						</th>
+					
 					</tr>
 				</ng-template>
 				<ng-template pTemplate="body" let-admin>
@@ -125,7 +126,7 @@
 						</td>
 						<td>
 						  <div class="example-button-container">
-							<button *ngIf="!admin.enabled ; else disabled" pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-success mr-2" (click)="validationcompte(admin.id)" ></button>
+							<button *ngIf="!admin.enabled ; else disabled" pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-success mr-2" (click)="validationcompte(admin.id,admin.tenantId)" ></button>
 							<ng-template #disabled>
 							<button pButton pRipple disabled="true" icon="pi pi-check" class="p-button-rounded p-button-success mr-2"  ></button>
 						</ng-template>

@@ -1,4 +1,3 @@
-import { Modules } from "./modules";
 
 export class Admin2 {
     constructor( public id:number,
@@ -9,10 +8,19 @@ export class Admin2 {
         public telephone: string,
         public company: string,
         public domain: string,
+        public nbEmployer: number,
+        public adresse: string,
+        public ville: string,
+        public pays: string,
         public matricule: string,
         public batinda: string,
         public logo: string,
         public moduleId: number[],
+        public revenuNet:number,
+        public revenuTotal:number,
+        public apayer:number,
+        public nbClients:number,
+        public tenatId:String,
         public enabled: boolean
         ){
             

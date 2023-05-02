@@ -47,16 +47,16 @@
 			</span>
 			<h5>Adresse</h5>
 			<span class="p-float-label">
-				<input id="adresse" type="text"  name="adresse"  placeholder="Adresse"  pInputText>
+				<input id="adresse" type="text"  name="adresse" [(ngModel)]="client.adresse" placeholder="Adresse"  pInputText>
 				<label for="float-input"></label>
 			</span>
 			<h5>Ville</h5>
 			<span class="p-float-label">
-				<input id="ville" type="text"  name="ville"  placeholder="Ville" pInputText>
+				<input id="ville" type="text"  name="ville" [(ngModel)]="client.ville" placeholder="Ville" pInputText>
 				<label for="float-input"></label>
 			</span>
 			<h5>Pays</h5>
-			<p-autoComplete [(ngModel)]="selectedCountryAdvanced" [suggestions]="filteredCountries" (completeMethod)="filterCountry($event)" field="name" [dropdown]="true">
+			<p-autoComplete [(ngModel)]="client.pays" [(ngModel)]="selectedCountryAdvanced" [suggestions]="filteredCountries" (completeMethod)="filterCountry($event)" field="name" [dropdown]="true">
 			</p-autoComplete>
 			
 		<!--	<h5>Calendar</h5>

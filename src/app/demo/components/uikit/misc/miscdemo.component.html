@@ -40,6 +40,8 @@
                         <th>Telephone</th>
                         <th>Sociéte</th>
                         <th>Domaine</th>
+                        <th>Adresse</th>
+                        <th>Ville</th>
                         <th>Employées</th>
                         <th *ngIf="isSadmin()">Client de </th>
                         <th *ngIf="isAdmin()">Client de </th>
@@ -59,6 +61,8 @@
                         <td>{{ client.telephone}}</td>
                         <td>{{ client.company}}</td>
                         <td>{{ client.domain}}</td>
+                        <td>{{ client.adresse}}</td>
+                        <td>{{ client.ville}}</td>
                         <td>{{ client.nbEmployer}}</td>
                         <td *ngIf="isSadmin()">{{client.emailCommercant}}</td>
                         <td *ngIf="isAdmin()">{{client.emailCommercant}}</td>
@@ -133,6 +137,22 @@
                     <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.domain">domain is required.</small>
                 </div> 
                 <div class="field">
+                    <label for="adrees">Adresse</label>
+                    <input type="text" pInputText id="adresse" name="adresse" [(ngModel)]="client.adresse" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.adresse}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.adresse">adresse is required.</small>
+                </div>
+                 <div class="field">
+                    <label for="ville">Ville</label>
+                    <input type="text" pInputText id="ville" name="ville" [(ngModel)]="client.ville" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.ville}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.ville">domain is required.</small>
+                </div> 
+                <div class="field">
+                    <label for="pays">Pays</label>
+                    <input type="text" pInputText id="pays" name="pays" [(ngModel)]="client.pays" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.pays}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.domain">pays is required.</small>
+                </div> 
+                
+                <div class="field">
                     <label for="nbEmployer">Employées</label>
                     <input type="number" pInputText id="nbEmployer" name="nbEmployer" [(ngModel)]="client.nbEmployer" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.nbEmployer}"/>
                     <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.nbEmployer">nbEmployer is required.</small>
@@ -184,6 +204,21 @@
                     <label for="ville">Domaine</label>
                     <input type="text" pInputText id="domain" name="domain" [(ngModel)]="client.domain" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.domain}"/>
                     <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.domain">ville is required.</small>
+                </div> 
+                <div class="field">
+                    <label for="adrees">Adresse</label>
+                    <input type="text" pInputText id="adresse" name="adresse" [(ngModel)]="client.adresse" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.adresse}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.adresse">adresse is required.</small>
+                </div>
+                 <div class="field">
+                    <label for="ville">Ville</label>
+                    <input type="text" pInputText id="ville" name="ville" [(ngModel)]="client.ville" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.ville}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.ville">domain is required.</small>
+                </div> 
+                <div class="field">
+                    <label for="pays">Pays</label>
+                    <input type="text" pInputText id="pays" name="pays" [(ngModel)]="client.pays" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.pays}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.domain">pays is required.</small>
                 </div> 
                 <div class="field">
                     <label for="ville">Employées</label>

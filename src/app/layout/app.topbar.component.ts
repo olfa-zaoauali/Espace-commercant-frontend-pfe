@@ -27,7 +27,6 @@ export class AppTopBarComponent implements OnInit {
         this.imageUrl=this.dataUser.image;
         console.log("user",this.dataUser);
         console.log("image",this.imageUrl);
-        console.log("role",this.role);
     }
     logOut(){
         this.layoutService.logOut();

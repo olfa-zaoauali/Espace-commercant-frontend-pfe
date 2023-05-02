@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
@@ -135,7 +135,7 @@ export class LayoutService {
  
   
   //registre avec files
-  addAdmin(admin : string,  file: File, logo: File): Observable<any>{
+  addAdmin(admin : string,  file: File, logo: File,id:number): Observable<any>{
     const data: FormData = new FormData();
     console.log('adminjson',admin)
     data.append('request', admin);
@@ -145,7 +145,7 @@ export class LayoutService {
     console.log('file',data.get('file'))
     console.log('admin',data.get('request'))
 
-    return this.http.post<any>(this.apiurl+"registeradmin" , data,{headers:new HttpHeaders().set('enctype', 'multipart/form-data')});
+    return this.http.put<Commercant[]>(`${this.apiurl}clients/Admin/${id}`,data);
   }
   public chercherCommercantadmin(tenantId: String): Observable<Commercant[]> {
     return this.http.get<Commercant[]>(`${this.apiurl}admins/commercants/${tenantId}`)

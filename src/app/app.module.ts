@@ -14,20 +14,21 @@ import { PhotoService } from './demo/service/photo.service';
 import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 import {AvatarModule} from 'primeng/avatar';
 import { ChipModule } from 'primeng/chip';
-
-
+import { FactureComponent } from './demo/components/facture/facture.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
     declarations: [
-        AppComponent, NotfoundComponent
+        AppComponent, NotfoundComponent, FactureComponent
     ],
     imports: [
         AppRoutingModule,
         AppLayoutModule,
         AccordionModule ,
         AvatarModule ,
-        ChipModule   
+        ChipModule,
+        CommonModule  
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

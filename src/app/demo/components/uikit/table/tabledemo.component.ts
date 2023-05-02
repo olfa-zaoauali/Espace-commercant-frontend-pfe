@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Customer, Representative } from 'src/app/demo/api/customer';
 import { CustomerService } from 'src/app/demo/service/customer.service';
-import { Product } from 'src/app/demo/api/product';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { Table } from 'primeng/table';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Admin } from 'src/app/models/Admin';
 import { Admin2 } from 'src/app/models/admin2';
+import { StatistiqueService } from 'src/app/demo/service/statistique.service';
+import { Facture } from 'src/app/models/facture';
 
 interface expandedRows {
     [key: string]: boolean;
@@ -48,14 +48,13 @@ export class TableDemoComponent implements OnInit {
     loading: boolean = true;
     valSwitch: boolean = false;
     checked:boolean=true
-
-
+    facture: Facture= new Facture("",0,0,0,"","","");
     @ViewChild('filter') filter!: ElementRef;
     admins:Admin2[]=[];
     admin1:Admin[]=[]
-    admin: Admin2=new Admin2(0,"","","","","","","","","","",[],0,0,0,0,false);;
+    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","",[],0,0,0,0,"",false);
 
-    constructor(private customerService: CustomerService, private productService: ProductService) { }
+    constructor(private customerService: CustomerService, private productService: ProductService,private statistiqueService:StatistiqueService) { }
 
     ngOnInit() {
         this.listAdmin(); 
@@ -150,10 +149,12 @@ export class TableDemoComponent implements OnInit {
         this.customerService.getAdminList().subscribe(
           data=> {
             this.admins=data;
+            console.log("admins",this.admins);
           }
         )
       }
-      public validationcompte(id:Number):void{
+      public validationcompte(id:Number,tenantId:string):void{
+        this.saveFacture(tenantId);
         this.customerService.validation(id).subscribe(
           (response: void) => {
             console.log(response);
@@ -201,6 +202,18 @@ export class TableDemoComponent implements OnInit {
       }
       handleChange(e : any) {
         let isChecked = e.checked;
+    }
+    saveFacture(tenantId: string){
+      console.log("id", tenantId)
+      this.facture.adminId=tenantId;
+      console.log("tenaniid", this.facture.adminId)
+        this.statistiqueService.AddFacture(tenantId,this.facture).subscribe(
+          data=> {
+            this.facture=data;
+            console.log("facture",this.facture);
+          }
+        )
+      
     }
     
 }
