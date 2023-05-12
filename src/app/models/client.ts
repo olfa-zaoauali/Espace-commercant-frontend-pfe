@@ -13,6 +13,7 @@ export class Client {
         public ville: string,
         public pays: string,
         public enabled: boolean,
+        public verified:boolean,
         public emailCommercant: string,
         public commercantId:String,
         public sadminId:String

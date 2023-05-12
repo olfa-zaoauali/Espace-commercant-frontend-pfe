@@ -38,10 +38,9 @@ export class AppMenuComponent implements OnInit {
                 items: [
                    
                     { label: 'Clients', icon: 'pi pi-fw pi-user-plus', routerLink: ['/dashboard/uikit/misc'] },
-                    { label: 'Overlay', icon: 'pi pi-fw pi-clone', routerLink: ['/dashboard/uikit/overlay'] }
+                   // { label: 'Overlay', icon: 'pi pi-fw pi-clone', routerLink: ['/dashboard/uikit/overlay'] }
+                    { label: 'Factures Clients', icon: 'pi pi-fw pi-file-export', routerLink: ['/dashboard/uikit/floatlabel'] },
 
-
-                  
                 ]
             },
           
@@ -55,6 +54,7 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['']
                     },
                     
+                    { label: 'Cashout', icon: 'pi pi-fw pi-money-bill', routerLink: ['/dashboard/uikit/invalidstate'] },
 
                     {
                         label: 'Contrat',
@@ -81,7 +81,7 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Aide',
                 items: [
-                    { label: 'Guide de utilisation', icon: 'pi pi-fw pi-desktop', routerLink: ['/dashboard/uikit/media'] },
+                    { label: 'Guide utilisation', icon: 'pi pi-fw pi-info-circle', routerLink: ['/dashboard/uikit/button'] },
 
                     { label: 'Contact', icon: 'pi pi-fw pi-comment', routerLink: ['/dashboard/uikit/message'] },
                 ]
@@ -141,7 +141,7 @@ export class AppMenuComponent implements OnInit {
                 {
                     label: 'Aide',
                     items: [
-                        { label: 'Guide de utilisation', icon: 'pi pi-fw pi-desktop', routerLink: ['/dashboard/uikit/media'] },
+                        { label: 'Guide utilisation', icon: 'pi pi-fw pi-info-circle', routerLink: ['/dashboard/uikit/button'] },
     
                         { label: 'Contact', icon: 'pi pi-fw pi-comment', routerLink: ['/dashboard/uikit/message'] },
                     ]
@@ -199,7 +199,7 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Aide',
                 items: [
-                    { label: 'Guide de utilisation', icon: 'pi pi-fw pi-desktop', routerLink: ['/dashboard/uikit/media'] },
+                    { label: 'Guide utilisation', icon: 'pi pi-fw pi-info-circle', routerLink: ['/dashboard/uikit/button'] },
 
                     { label: 'Contact', icon: 'pi pi-fw pi-comment', routerLink: ['/dashboard/uikit/message'] },
                 ]
@@ -218,10 +218,10 @@ export class AppMenuComponent implements OnInit {
                 label: 'Gestion des utilisateurs',
                 items: [
                    // { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout'] },
-                    //{ label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input'] },
+                    //{ label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input'] utilisé},
                    // { label: 'Float Label', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/floatlabel'] },
-                  //  { label: 'Invalid State', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate'] },
-                   /* { label: 'Button', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },*/
+                  //  { label: 'Invalid State', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate'] utilisé },
+                   /* { label: 'Button', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] }, utilisé*/
                     { label: 'Demandes des Admins', icon: 'pi pi-fw pi-users', routerLink: ['/dashboard/uikit/table'] },
                     {
                         label: 'Commercants',

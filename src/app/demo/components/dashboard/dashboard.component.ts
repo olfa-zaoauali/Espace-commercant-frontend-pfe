@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     imageUrl: any;
     role: any;
     tenant_id:any;
-    commercant: Commercant= new Commercant(0,"","","","","","","",0,0,0,0,0,false,"","");
+    commercant: Commercant= new Commercant(0,"","","","","","","",0,0,0,0,0,0,false,"","");
     commission:any ;
     revenu:any;
     nbadmins:any;
@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             
               }
         if(this.isCommercant()){
-            this.commissionCommercant();
+            this.getCommercant();
             this.revenuSociete();
             this.nbAdmins();
             this.nbClients();
@@ -86,11 +86,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.statistiqueService.calculcommission(this.dataUser.tenant_id).subscribe(
           data=> {
             this.commission=data;
-            this.commercant.pay=this.commission
-            console.log("commissionpay",this.commercant.pay)
+            this.commercant.commission=this.commission;
+            console.log("commissionpay",this.commercant.commission)
+
           }
         )
       }
+      getCommercant(){
+        this.statistiqueService.getCommercant(this.dataUser.tenant_id).subscribe(
+          data=> {
+            this.commercant=data;
+            this.pay=this.commercant.pay;
+            console.log("Commercant",this.commercant);
+            console.log("object",this.commercant.pay);
+
+          }
+        )
+      }
+      
       revenuSociete(){
         this.statistiqueService.calculchiffraffaire(this.dataUser.tenant_id).subscribe(
           data=> {

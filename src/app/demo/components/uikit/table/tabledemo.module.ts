@@ -15,6 +15,10 @@ import { ToastModule } from 'primeng/toast';
 import { SliderModule } from 'primeng/slider';
 import { RatingModule } from 'primeng/rating';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import { DialogModule } from 'primeng/dialog';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+
+
 
 
 @NgModule({
@@ -33,7 +37,9 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 		DropdownModule,
 		ProgressBarModule,
 		ToastModule,
-		InputSwitchModule
+		InputSwitchModule,
+		DialogModule,
+		OverlayPanelModule
 	],
 	declarations: [TableDemoComponent]
 })

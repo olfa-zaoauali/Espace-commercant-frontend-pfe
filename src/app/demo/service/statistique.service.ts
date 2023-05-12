@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Admin2 } from 'src/app/models/admin2';
+import { Cashout } from 'src/app/models/cashout';
+import { Commercant } from 'src/app/models/commercant';
 import { Facture } from 'src/app/models/facture';
 import { Modules } from 'src/app/models/modules';
 
@@ -14,53 +16,87 @@ export class StatistiqueService {
 
   constructor(private http:HttpClient,  private router : Router) { }
   
-  public calculcommission(tenantId: String): Observable<number> {
+  public calculcommission(tenantId: string): Observable<number> {
     return this.http.get<number>(`${this.apiurl}commercants/commission/${tenantId}`)
   }
-  public calculchiffraffaire(tenantId: String): Observable<number> {
+  public calculchiffraffaire(tenantId: string): Observable<number> {
     return this.http.get<number>(`${this.apiurl}commercants/revenu/${tenantId}`)
   }
-  public calculNbAdmins(tenantId: String): Observable<number> {
+  public calculNbAdmins(tenantId: string): Observable<number> {
     return this.http.get<number>(`${this.apiurl}commercants/nbadmin/${tenantId}`)
   }
-   public calculNbClients(tenantId: String): Observable<number> {
+   public calculNbClients(tenantId: string): Observable<number> {
     return this.http.get<number>(`${this.apiurl}commercants/nbclients/${tenantId}`)
   }
-  public calculRevenuWind(tenantId: String): Observable<number> {
+  public calculRevenuWind(tenantId: string): Observable<number> {
     return this.http.get<number>(`${this.apiurl}sadmins/revenu/${tenantId}`)
   }
-  public clientsWind(tenantId: String): Observable<number> {
+  public clientsWind(tenantId: string): Observable<number> {
     return this.http.get<number>(`${this.apiurl}sadmins/nb/${tenantId}`)
   }
   public adminWind(): Observable<number> {
     return this.http.get<number>(`${this.apiurl}admins/nb`)
   }
-  public RevenuNetWind(tenantId: String): Observable<number> {
+  public RevenuNetWind(tenantId: string): Observable<number> {
     return this.http.get<number>(`${this.apiurl}sadmins/Revenunet/${tenantId}`)
   }
-  public prixparmois(tenantId: String): Observable<number> {
+  public prixparmois(tenantId: string): Observable<number> {
     return this.http.get<number>(`${this.apiurl}admins/prix/${tenantId}`)
   }
-  public RevenuTotalAdmin(tenantId: String): Observable<number> {
+  public RevenuTotalAdmin(tenantId: string): Observable<number> {
     return this.http.get<number>(`${this.apiurl}admins/revenu/${tenantId}`)
   }
-  public RevenuNetAdmin(tenantId: String): Observable<number> {
+  public RevenuNetAdmin(tenantId: string): Observable<number> {
     return this.http.get<number>(`${this.apiurl}admins/revenuNet/${tenantId}`)
   }
-  public nbClientadmin(tenantId: String): Observable<number> {
+  public nbClientadmin(tenantId: string): Observable<number> {
     return this.http.get<number>(`${this.apiurl}admins/nbClients/${tenantId}`)
   }
   //facture 
-  public getAdmin(tenantId: String): Observable<Admin2> {
+  public getAdmin(tenantId: string): Observable<Admin2> {
     return this.http.get<Admin2>(`${this.apiurl}admins/tenantId/${tenantId}`)
   }
-  public getmodules(tenantId: String): Observable<Modules[]> {
+  public getmodules(tenantId: string): Observable<Modules[]> {
     return this.http.get<Modules[]>(`${this.apiurl}admins/modules/${tenantId}`)
   }
-  public getFacture(tenantId: String): Observable<Facture> {
+  public getFacture(tenantId: string): Observable<Facture> {
     return this.http.get<Facture>(`${this.apiurl}factures/admin/${tenantId}`)
   }
-  public AddFacture(tenantId: String,facture: Facture ): Observable<Facture> {
+  public getFactureById(id:number): Observable<Facture> {
+    return this.http.get<Facture>(`${this.apiurl}factures/number/${id}`)
+  }
+  public AddFacture(tenantId: string,facture: Facture ): Observable<Facture> {
     return this.http.post<Facture>(`${this.apiurl}factures/add/${tenantId}`,facture)
   }
+  //cashout
+  public getCashouts(tenantId: string): Observable<Cashout[]> {
+    return this.http.get<Cashout[]>(`${this.apiurl}commercants/cashouts/${tenantId}`)
+  } 
+  public AddCashout(tenantId: string,cashout:Cashout): Observable<Cashout> {
+    return this.http.post<Cashout>(`${this.apiurl}cashouts/add/${tenantId}`,cashout)
+  }
+  public getCommercant(tenantId: string): Observable<Commercant> {
+    return this.http.get<Commercant>(`${this.apiurl}commercants/tenantId/${tenantId}`)
+  } 
+  public AddFactureToCommercant(tenantId: string,facture: Facture ): Observable<Facture> {
+    return this.http.post<Facture>(`${this.apiurl}factures/addfacture/${tenantId}`,facture)
+  }
+  public getFactureCommeracnt(Id: number): Observable<Facture> {
+    return this.http.get<Facture>(`${this.apiurl}factures/commercant/${Id}`)
+  }
+  //modules 
+  public getModulesByAdmin(tenantId: string): Observable<Modules[]> {
+    return this.http.get<Modules[]>(`${this.apiurl}admins/modules/${tenantId}`)
+  } 
+  //facture commercant
+  public getFactureClientsOfCommercant(tenantId: string): Observable<Facture[]> {
+    return this.http.get<Facture[]>(`${this.apiurl}commercants/facturesClients/${tenantId}`)
+  }
+  public getAdminOfFacture(id:number): Observable<Admin2> {
+    return this.http.get<Admin2>(`${this.apiurl}factures/adminInfo/${id}`)
+  }
+  public getAdminOfCommercant(tenantId :string): Observable<Admin2[]> {
+    return this.http.get<Admin2[]>(`${this.apiurl}commercants/admins/${tenantId}`)
+  }
+
 }

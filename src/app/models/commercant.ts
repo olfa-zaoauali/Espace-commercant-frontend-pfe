@@ -8,6 +8,7 @@ export class Commercant {
         public ville: string,
         public image: string,
         public pay : number,
+        public commission:number,
         public pourcentage:number,
         public revenu:number,
         public admins:number,

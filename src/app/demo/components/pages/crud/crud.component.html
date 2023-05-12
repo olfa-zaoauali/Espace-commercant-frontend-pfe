@@ -4,10 +4,9 @@
             <p-toast>                        
             </p-toast>
             <p-toolbar styleClass="mb-4">
+                <h1 class="m-10" style="margin-right: 550px;" >Liste des commerçants</h1>
                 <ng-template pTemplate="left">
-                    <h1 class="m-10" style="margin-right: 550px;" >Liste des commerçants</h1>
                     <div class="my-2">
-
                         <button pButton pRipple label="Ajouter" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
                     <!--    <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>-->
                     </div>
@@ -55,8 +54,9 @@
                         <th>Ville</th>
                         <th>Commission</th>
                         <th>CompteA/D</th>
+                        <th *ngIf="isSadmin()"></th>
                         <th></th>
-            
+                        <th></th>            
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-commercant>
@@ -116,19 +116,38 @@
                               </ng-template>
                           </label>
                         </td>
-                        <td>
-                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2" (click)="editProduct(commercant)"></button>
-                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded  p-button-danger" (click)="deleteProduct(commercant)"></button>
+                       
+                        <td *ngIf="isSadmin()">
+                            <div class="example-button-container">
+                                <button  *ngIf="!commercant.enabled ; else disabled"  pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-success mr-2" style="margin-left: 10px;" (click)="openvalidation(commercant)"  ></button>
+                                <ng-template #disabled>
+                                <button  pButton pRipple disabled="true" icon="pi pi-check"  class="p-button-rounded p-button-success mr-2" style="margin-left: 10px;" ></button>
+                                </ng-template>
+                            </div>    
+                        </td>
+                        <td><button pButton style="margin-left: -25px;" pRipple  icon="pi pi-pencil" class="p-button-rounded p-button-warning " (click)="editProduct(commercant)"></button>
+                        </td>
+                        <td><button pButton style="margin-left: -20px;" pRipple icon="pi pi-trash" class="p-button-rounded  p-button-danger" (click)="deleteProduct(commercant)"></button>
                         </td>
                     </tr>
+                    <p-dialog [(visible)]="Dialog" header="Confirmer" [modal]="true" [style]="{width:'450px'}">
+                        <div class="flex align-items-center justify-content-center">
+                            <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                            <span *ngIf="commercant">Etes-vous sûr que vous voulez valider le compte de  <b>{{name}}</b>?</span>
+                        </div>
+                        <ng-template pTemplate="footer">
+                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="Non" (click)="Dialog = false"></button>
+                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Oui" (click)="validationcompte(id)"></button>
+                        </ng-template>
+                    </p-dialog>
                     <p-dialog [(visible)]="deleteProductDialog" header="Confirmer" [modal]="true" [style]="{width:'450px'}">
                         <div class="flex align-items-center justify-content-center">
                             <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                            <span *ngIf="product">Etes-vous sûr que vous voulez supprimer <b>{{commercant.lastname}}</b>?</span>
+                            <span *ngIf="product">Etes-vous sûr que vous voulez supprimer <b>{{name}}</b>?</span>
                         </div>
                         <ng-template pTemplate="footer">
-                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>
-                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="onDeletcommercant(commercant.id)"></button>
+                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="Non" (click)="deleteProductDialog = false"></button>
+                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Oui" (click)="onDeletcommercant(id)"></button>
                         </ng-template>
                     </p-dialog>
                     <p-dialog [(visible)]="deleteProductsDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
@@ -137,8 +156,8 @@
                             <span>Are you sure you want to delete selected commercant?</span>
                         </div>
                         <ng-template pTemplate="footer">
-                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductsDialog = false"></button>
-                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDeleteSelected()"></button>
+                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="Non" (click)="deleteProductsDialog = false"></button>
+                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Oui" (click)="confirmDeleteSelected()"></button>
                         </ng-template>
                     </p-dialog>
                 </ng-template>
@@ -182,15 +201,15 @@
             </div> 
             <div class="field">
                 <label for="image">Image</label>
-                <input class="image" pInputText name="image" [(ngModel)]="commercant.image" type="file" class="file-upload" required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
+                <input class="form-control" id="formFileSm" pInputText name="image" [(ngModel)]="commercant.image" type="file" required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
                 <small class="ng-dirty ng-invalid" *ngIf="submitted && !commercant.image">image is required.</small>
             </div> 
             </ng-template>
             <ng-template pTemplate="footer">
-                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-                <button *ngIf="isAdmin(); else Sadmin " pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCommercant($event)"></button>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button *ngIf="isAdmin(); else Sadmin " pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-text" (click)="saveCommercant($event)"></button>
                 <ng-template #Sadmin>
-                <button pButton pRipple label="Savesadmin" icon="pi pi-check" class="p-button-text" (click)="saveCommercantsadmin($event)"></button>
+                <button pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-text" (click)="saveCommercantsadmin($event)"></button>
                 </ng-template>
             </ng-template>
         </p-dialog>
@@ -234,7 +253,7 @@
                 </div> 
             <div class="field">
                 <label for="image">Image</label>
-                <input class="image" pInputText name="image" [(ngModel)]="commercant.image" type="file" class="file-upload" required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
+                <input class="form-control" id="formFileSm" [(ngModel)]="commercant.image" type="file"  required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
                 <small class="ng-dirty ng-invalid" *ngIf="submitted && !commercant.image">image is required.</small>
             </div> 
                 <!--<div class="field">
@@ -288,11 +307,11 @@
             </ng-template>
 
             <ng-template pTemplate="footer">
-                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-                <button *ngIf="isAdmin(); else Sadmin " pButton pRipple label="edit" icon="pi pi-check" class="p-button-text" (click)="update($event)" ></button>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button *ngIf="isAdmin(); else Sadmin " pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text" (click)="update($event)" ></button>
                 <ng-template #Sadmin>
 
-                <button pButton pRipple label="editsadmin" icon="pi pi-check" class="p-button-text" (click)="updatesadmin($event)" ></button>
+                <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text" (click)="updatesadmin($event)" ></button>
                 </ng-template>
 
             </ng-template>

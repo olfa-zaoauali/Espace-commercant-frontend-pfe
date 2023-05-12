@@ -58,7 +58,7 @@ export class InputDemoComponent implements OnInit {
     imageURL : any;
     logoURL : any;
     modules: Modules[]=[];
-    client: Client= new Client(1,"","","","","","","","",0,"","","",false,"","","");
+    client: Client= new Client(1,"","","","","","","","",0,"","","",false,false,"","","");
     dataUser : any ;
     imageUrl: any;
     role: any;

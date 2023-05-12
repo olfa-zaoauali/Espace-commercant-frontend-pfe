@@ -14,6 +14,11 @@ import { MultiSelectModule } from "primeng/multiselect";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { InputTextModule } from "primeng/inputtext";
 import { PasswordModule } from "primeng/password";
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ToastModule } from 'primeng/toast';
+import { TableModule } from 'primeng/table';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+
 
 @NgModule({
 	imports: [
@@ -30,7 +35,12 @@ import { PasswordModule } from "primeng/password";
 		MultiSelectModule,
 		PasswordModule,
 		InputTextareaModule,
-		InputTextModule
+		InputTextModule,
+		ConfirmPopupModule,
+		ToastModule,
+		TableModule,
+		ToggleButtonModule
+		
 	],
 	declarations: [InvalidStateDemoComponent]
 })

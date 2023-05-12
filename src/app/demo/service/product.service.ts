@@ -13,7 +13,9 @@ export class ProductService {
     selectedCommerce: any;
     constructor(private http: HttpClient) { }
     
-   
+    validation(id : Number): Observable<void>{
+      return this.http.get<void>(`${this.apiurl}commercants/validation/${id}`);
+    }
     getProductsSmall() {
         return this.http.get<any>('assets/demo/data/products-small.json')
             .toPromise()

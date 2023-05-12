@@ -2,25 +2,27 @@
     <div class="col-12">
         <div class="card px-6 py-6">
             <p-toast></p-toast>
-            <p-toolbar styleClass="mb-4" *ngIf="isSadmin() ">
+            <p-toolbar *ngIf="isSadmin()" styleClass="mb-4">
+                <h1 class="m-10">Liste des clients</h1>
                 <ng-template pTemplate="left">
-                    <h1 class="m-10" style="margin-right: 660px;" >Liste des clients</h1>
                     <div class="my-2">
-
                         <button pButton pRipple label="Ajouter" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
                     <!--    <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>-->
                     </div>
                 </ng-template>
             </p-toolbar>
-            <p-toolbar styleClass="mb-4" *ngIf="isCommercant() ">
+            <p-toolbar *ngIf="isCommercant()" styleClass="mb-4">
+                <h1 class="m-10">Liste des clients</h1>
                 <ng-template pTemplate="left">
-                    <h1 class="m-10" style="margin-right: 660px;" >Liste des clients</h1>
-                    <div class="my-2" >
+                    <div class="my-2">
                         <button pButton pRipple label="Ajouter" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+                    <!--    <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>-->
                     </div>
                 </ng-template>
             </p-toolbar>
-
+            <p-toolbar *ngIf="isAdmin()" styleClass="mb-4">
+                <h1 class="m-10">Liste des clients</h1>
+            </p-toolbar>
             <p-table #dt [value]="clients" [columns]="cols" responsiveLayout="scroll" [rows]="8" [globalFilterFields]="['firstname','lastname','email','company','domain',]" [rows]="4" [paginator]="true" [rowsPerPageOptions]="[4,8,12]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
@@ -40,11 +42,13 @@
                         <th>Telephone</th>
                         <th>Sociéte</th>
                         <th>Domaine</th>
-                        <th>Adresse</th>
+                        <th >Adresse</th>
                         <th>Ville</th>
                         <th>Employées</th>
                         <th *ngIf="isSadmin()">Client de </th>
                         <th *ngIf="isAdmin()">Client de </th>
+                        <th>Vérifié</th>
+
                         <th *ngIf="isSadmin()">CompteA/D</th>
                         <th *ngIf="isSadmin()"></th>
                         <th></th>
@@ -64,8 +68,12 @@
                         <td>{{ client.adresse}}</td>
                         <td>{{ client.ville}}</td>
                         <td>{{ client.nbEmployer}}</td>
+                
                         <td *ngIf="isSadmin()">{{client.emailCommercant}}</td>
                         <td *ngIf="isAdmin()">{{client.emailCommercant}}</td>
+                        <td class="text-center" >
+							<i class="pi" style="margin-right: 10px;" [ngClass]="{'true-icon pi-check-circle text-green-500': client.verified, 'false-icon pi-times-circle text-pink-500': !client.verified}"></i>
+						</td>
                         <td *ngIf="isSadmin()">
                             <label  style="margin-top: 10px; margin-left: 10px;" class="switch" >
                                 <p-inputSwitch (click)="updateenabled(client.id)" *ngIf="!client.enabled ; else enabled" ></p-inputSwitch>
@@ -75,21 +83,36 @@
                           </label>
                         </td>
                         <td *ngIf="isSadmin()">
-                            <button  pButton style="margin-right: -25px;" pRipple  icon="pi pi-check" class="p-button-rounded p-button-success " (click)="validationcompte(client.id)"></button>
+                            <div class="example-button-container">
+                                <button  *ngIf="!client.enabled ; else disabled"  pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-success mr-2"  (click)="openvalidation(client)"  ></button>
+                                <ng-template #disabled>
+                                <button  pButton pRipple disabled="true" icon="pi pi-check"  class="p-button-rounded p-button-success mr-2"  ></button>
+                                </ng-template>
+                            </div>    
                         </td>
-                        <td><button pButton style="margin-right: -25px;" pRipple  icon="pi pi-pencil" class="p-button-rounded p-button-warning " (click)="editProduct(client)"></button>
+                        <td><button pButton style="margin-left: -25px;" pRipple  icon="pi pi-pencil" class="p-button-rounded p-button-warning " (click)="editProduct(client)"></button>
                         </td>
-                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded  p-button-danger" (click)="deleteProduct(client)"></button>
+                        <td><button pButton style="margin-left: -20px;" pRipple icon="pi pi-trash" class="p-button-rounded  p-button-danger" (click)="deleteProduct(client)"></button>
                         </td>
                     </tr>
+                    <p-dialog [(visible)]="Dialog" header="Confirmer" [modal]="true" [style]="{width:'450px'}">
+                        <div class="flex align-items-center justify-content-center">
+                            <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                            <span *ngIf="client">Etes-vous sûr que vous voulez valider le compte de  <b>{{name}}</b>?</span>
+                        </div>
+                        <ng-template pTemplate="footer">
+                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="Non" (click)="Dialog = false"></button>
+                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Oui" (click)="validationcompte(id)"></button>
+                        </ng-template>
+                    </p-dialog>
                     <p-dialog [(visible)]="deleteProductDialog" header="Confirmer" [modal]="true" [style]="{width:'450px'}">
                         <div class="flex align-items-center justify-content-center">
                             <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                            <span *ngIf="product">Etes-vous sûr que vous voulez supprimer <b>{{client.lastname}}</b>?</span>
+                            <span *ngIf="product">Etes-vous sûr que vous voulez supprimer <b>{{name}}</b>?</span>
                         </div>
                         <ng-template pTemplate="footer">
-                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>
-                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="onDeletclient(client.id)" ></button>
+                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="Non" (click)="deleteProductDialog = false"></button>
+                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Oui" (click)="onDeletclient(id)" ></button>
                         </ng-template>
                     </p-dialog>
                     <p-dialog [(visible)]="deleteProductsDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
@@ -98,8 +121,8 @@
                             <span>Are you sure you want to delete selected commercant?</span>
                         </div>
                         <ng-template pTemplate="footer">
-                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductsDialog = false"></button>
-                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDeleteSelected()"></button>
+                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="Non" (click)="deleteProductsDialog = false"></button>
+                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Oui" (click)="confirmDeleteSelected()"></button>
                         </ng-template>
                     </p-dialog>
                 </ng-template>
@@ -159,15 +182,15 @@
                 </div>   
             <div class="field">
                 <label for="image">Logo</label>
-                <input class="image" pInputText name="logo" [(ngModel)]="client.logo" type="file" class="file-upload" required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
+                <input class="form-control" id="formFileSm" pInputText name="logo" [(ngModel)]="client.logo" type="file"  required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
                 <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.logo">image is required.</small>
             </div> 
             </ng-template>
             <ng-template pTemplate="footer">
-                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-                <button *ngIf="isCommercant(); else Sadmin " pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveClientCommercant($event)" ></button>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button *ngIf="isCommercant(); else Sadmin " pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-text" (click)="saveClientCommercant($event)" ></button>
                 <ng-template #Sadmin>
-                    <button pButton pRipple label="Savesadmin" icon="pi pi-check" class="p-button-text" (click)="saveClient($event)"></button>
+                    <button pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-text" (click)="saveClient($event)"></button>
                     </ng-template>
             </ng-template>
         </p-dialog>
@@ -228,17 +251,17 @@
                  
             <div class="field">
                 <label for="image">Logo</label>
-                <input class="image" pInputText name="logo" [(ngModel)]="client.logo" type="file" class="file-upload" required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
+                <input class="form-control" id="formFileSm" pInputText name="logo" [(ngModel)]="client.logo" type="file" required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
                 <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.logo">image is required.</small>
             </div> 
                
             </ng-template>
 
             <ng-template pTemplate="footer">
-                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-                <button *ngIf="isCommercant(); else Sadmin " pButton pRipple label="edit" icon="pi pi-check" class="p-button-text" (click)="update($event)"  ></button>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button *ngIf="isCommercant(); else Sadmin " pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text" (click)="update($event)"  ></button>
                 <ng-template #Sadmin>
-                    <button pButton pRipple label="editsadmin" icon="pi pi-check" class="p-button-text" (click)="updateSadmin($event)" ></button>
+                    <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text" (click)="updateSadmin($event)" ></button>
                     </ng-template>
             </ng-template>
         </p-dialog>

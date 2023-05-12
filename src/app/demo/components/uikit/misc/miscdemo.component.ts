@@ -47,7 +47,7 @@ export class MiscDemoComponent implements OnInit, OnDestroy {
 
     rowsPerPageOptions = [5, 10, 20];
     clients: Client[]=[];
-    client: Client= new Client(1,"","","","","","","","",0,"","","",false,"","","");
+    client: Client= new Client(1,"","","","","","","","",0,"","","",false,false,"","","");
     comm:any
     image:any
     imageFile:any
@@ -59,9 +59,9 @@ export class MiscDemoComponent implements OnInit, OnDestroy {
     emails:any[]=[];
     email:any
     Commercant:Boolean=true; 
-
-    
-
+    Dialog: boolean = false;
+    name:any
+    id:any
 
     constructor(public layoutService: LayoutService, private clientservice: CountryService , private productService: ProductService, private messageService: MessageService,private router: Router) { }
     ngOnDestroy(): void {
@@ -176,15 +176,24 @@ editProduct(client: Client) {
     this.productDialog = true;
 }
 
-deleteProduct(product: Product) {
+deleteProduct(client:Client) {
     this.deleteProductDialog = true;
-    this.product = { ...product };
+    this.client = { ...client };
+    this.name=client.firstname +' '+ client.lastname;
+    this.id=client.id;
+
 }
 openNew() {
     // this.product = {};
     // this.submitted = false;
      this.DialogAdd = true;
  }
+ openvalidation(client:Client){
+  this.Dialog=true;
+  this.name=client.firstname +' '+ client.lastname;
+  this.id=client.id;
+ }
+
  //client service
  onSelectedImage(e: any){
     this.imageFile = e.target.files[0];
@@ -258,7 +267,6 @@ public onDeletclient(id:number): void {
     this.clientservice.addclient(Datacommercant , this.image ).subscribe(res=>{console.log(res);
       this.ngOnInit();
       this.hideDialogadd();
-      location.reload();
       this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'client ajouté avec succé', life: 3000 });
 
      });
@@ -273,7 +281,6 @@ public onDeletclient(id:number): void {
     this.clientservice.addclientcommercant(Datacommercant , this.image ).subscribe(res=>{console.log(res);
       this.ngOnInit();
       this.hideDialogadd();
-      location.reload();
       this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'client ajouté avec succé', life: 3000 });
 
      });
@@ -288,7 +295,6 @@ public onDeletclient(id:number): void {
       //this.close.emit();
       this.ngOnInit();
       this.hideDialog();
-      location.reload();
       this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Commercant modifiée avec succé', life: 3000 });
      });
   }
@@ -302,7 +308,6 @@ public onDeletclient(id:number): void {
       //this.close.emit();
       this.ngOnInit();
       this.hideDialog();
-      location.reload();
       this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Commercant modifiée avec succé', life: 3000 });
      });
   }
@@ -317,6 +322,7 @@ public onDeletclient(id:number): void {
       );
   }
   public validationcompte(id:Number):void{
+    this.Dialog=false;
     this.clientservice.validation(id).subscribe(
       (response: void) => {
         console.log(response);

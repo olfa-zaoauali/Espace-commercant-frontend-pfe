@@ -1,53 +1,81 @@
 <div class="card">
-    <h5>Invalid State</h5>
+    <div  class="col-15 lg:col-10 xl:col-5">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div  >
+                    <span class="block text-500 font-medium mb-3">Montant limite</span>
+                    <div class="text-900 font-medium text-xl">100DT</div>
+                </div>
+                <div  >
+                    <span class="block text-500 font-medium mb-3">Chiffre d'affaire</span>
+                    <div class="text-900 font-medium text-xl">{{commercant.pay}}DT</div>
+                </div>
+                
+                
+                <div class="flex align-items-center justify-content-center bg-green-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-dollar text-green-500 text-xl"></i>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6">
+        <p-toast></p-toast>
+        <button *ngIf="cashoutValid ; else disabled" style="color: white;" (click)="confirm2($event)" pButton icon="pi pi-check" label="Cashout"></button>
+        <ng-template #disabled>
+            <button  disabled style="color: white;" (click)="confirm2($event)" pButton icon="pi pi-check" label="Cashout"></button>
+        </ng-template>
+        <p-confirmPopup key="confirm2"></p-confirmPopup>
+</div>
+    
+    <div class="col-12">
+		<div class="card">
+			<h5>Historique de transaction</h5>
+
+			<p-table [value]="cashouts"  [scrollable]="true" scrollHeight="400px" styleClass="mt-3" responsiveLayout="scroll">
+				
+				<ng-template pTemplate="header">
+					<tr>
+                        <th style="width:200px">Id</th>
+						<th style="width:200px">Date de création</th>
+						<th style="width:200px">Temp de création</th>
+						<th style="width:200px">Montant</th>
+						<th style="width:200px">Facture</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-cashout>
+					<tr >
+                        <td>{{ cashout.id}}</td>
+						<td>{{ cashout.dateDeCreation[2]}}/{{ cashout.dateDeCreation[1]}}/{{ cashout.dateDeCreation[0]}}</td>
+						<td>{{ cashout.temp[0]}}:{{ cashout.temp[1]}}:{{ cashout.temp[2]}}</td>
+						<td>{{ cashout.cashout}}DT</td>
+						<td>
+                            <button  pButton icon="pi pi-download" pRipple type="button" label="Facture" class="p-button-secondary" (click)="getFacture(cashout.id)"></button>
+                        </td>
+						
+					</tr>				</ng-template>
+			</p-table>
+		</div>
+	</div>
+
+   <!-- <h5>Invalid State</h5>
     <p>All form components have an invalid state style to display the validation errors when ng-invalid ng-dirty combination is applied by Angular.</p>
     <div class="grid p-fluid">
         <div class="col-12 md:col-6">
-            <div class="field mt-3">
-                <label for="inputtext">InputText</label>
-                <input type="text" id="inputtext" pInputText class="ng-invalid ng-dirty">
-            </div>
-            <div class="field">
-                <label for="autocomplete">AutoComplete</label>
-                <p-autoComplete inputId="autocomplete" [(ngModel)]="value1" [suggestions]="filteredCountries" (completeMethod)="searchCountry($event)" field="name" class="ng-invalid ng-dirty"></p-autoComplete>
-
-            </div>
-            <div class="field">
-                <label for="calendar">Calendar</label>
-                <p-calendar inputId="calendar" [(ngModel)]="value2" class="ng-invalid ng-dirty" [showIcon]="true"></p-calendar>
-            </div>
-            <div class="field">
-                <label for="chips">Chips</label>
-                <p-chips inputId="chips" [(ngModel)]="value3" class="ng-invalid ng-dirty"></p-chips>
-            </div>
+            
             <div class="field">
                 <label for="password">Password</label>
                 <p-password [(ngModel)]="value8" class="ng-invalid ng-dirty"></p-password>
             </div>
         </div>
         
-        <div class="col-12 md:col-6">                    
+      <div class="col-12 md:col-6">                    
             <div class="field mt-3">
                 <label for="inputmask">InputMask</label>
                 <p-inputMask inputId="inputmask" mask="99/99/9999" [(ngModel)]="value5" class="ng-invalid ng-dirty"></p-inputMask>
             </div>
-            <div class="field">
-                <label for="inputnumber">InputNumber</label>
-                <p-inputNumber inputId="inputnumber" [(ngModel)]="value6" class="ng-invalid ng-dirty"></p-inputNumber>
-            </div>
-            <div class="field">
-                <label for="dropdown">Dropdown</label>
-                <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="cities" [(ngModel)]="value9" optionLabel="name" class="ng-invalid ng-dirty"></p-dropdown>
-            </div>
-            <div class="field">
-                <label for="multiselect">MultiSelect</label>
-                <p-multiSelect inputId="multiselect" [options]="cities" [(ngModel)]="value10" optionLabel="name" [filter]="false" class="ng-invalid ng-dirty"></p-multiSelect>
-            </div>
-            <div class="field">
-                <label for="textarea">Textarea</label>
-                <textarea inputId="textarea" rows="3" cols="30" [(ngModel)]="value4" pInputTextarea class="ng-invalid ng-dirty"></textarea>
-            </div>
+            
         </div>
-    </div>
+    </div>-->
 </div>
 

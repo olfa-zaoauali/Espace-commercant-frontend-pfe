@@ -1,7 +1,7 @@
 
 export class Admin2 {
     constructor( public id:number,
-        public firstname: String,
+        public firstname: string,
         public lastname: string,
         public email:string,
         public password:string,
@@ -20,7 +20,7 @@ export class Admin2 {
         public revenuTotal:number,
         public apayer:number,
         public nbClients:number,
-        public tenatId:String,
+        public tenantId:string,
         public enabled: boolean
         ){
             

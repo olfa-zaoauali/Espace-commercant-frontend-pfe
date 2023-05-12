@@ -41,7 +41,7 @@ export class CrudComponent implements OnInit {
 
     rowsPerPageOptions = [5, 10, 20];
     commercants: Commercant[]=[];
-    commercant: Commercant= new Commercant(0,"","","","","","","",0,0,0,0,0,false,"","");
+    commercant: Commercant= new Commercant(0,"","","","","","","",0,0,0,0,0,0,false,"","");
     comm:any
     image:any
     imageFile:any
@@ -50,6 +50,10 @@ export class CrudComponent implements OnInit {
     checked:boolean=true;
     Admin:Boolean=true; 
     SAdmin:Boolean=true; 
+    Dialog: boolean = false;
+    name:any
+    id:any
+
 
    
 
@@ -99,21 +103,25 @@ export class CrudComponent implements OnInit {
         return this.SAdmin=false;
       }
     }
-   
-    //commercant
-    registerform=this.builder.group({
-        firstname:this.builder.control('', Validators.required),
-        lastname:this.builder.control('',Validators.required),
-        email:this.builder.control('',Validators.compose([Validators.required,Validators.email])),
-        telephone:this.builder.control('', Validators.required),
-        adresse:this.builder.control('', Validators.required),
-        ville:this.builder.control('', Validators.required),
-        image:this.builder.control(''),
-        role:this.builder.control(''),
-        isactive:this.builder.control(false)
-    
-      });
-      
+    public validationcompte(id:Number):void{
+      this.Dialog=false;
+      this.productService.validation(id).subscribe(
+        (response: void) => {
+          console.log(response);
+          if(this.isAdmin()){        this.listCommercantadmin();
+            this.Dialog=false;
+
+          }
+          if(this.isSadmin()){        this.listCommercantsadmin();
+            this.Dialog=false;
+
+          }
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+    }
 
     listCommercant(){
         this.productService.getCommercantList().subscribe(
@@ -265,9 +273,12 @@ export class CrudComponent implements OnInit {
         this.productDialog = true;
     }
 
-    deleteProduct(product: Product) {
+    deleteProduct(commercant: Commercant) {
         this.deleteProductDialog = true;
-        this.product = { ...product };
+        this.commercant = { ...commercant };
+        this.name=commercant.firstname +' '+ commercant.lastname;
+        this.id=commercant.id;
+
     }
 
     confirmDeleteSelected() {
@@ -307,6 +318,11 @@ export class CrudComponent implements OnInit {
       this.DialogAdd = false;
       this.submitted = false;
   }
+  openvalidation(commercant:Commercant){
+    this.Dialog=true;
+    this.name=commercant.firstname +' '+ commercant.lastname;
+    this.id=commercant.id;
+   }
     
  /*   saveProduct() {
         this.submitted = true;

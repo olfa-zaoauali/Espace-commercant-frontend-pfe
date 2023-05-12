@@ -6,7 +6,7 @@
                     <span class="account-user-avatar">
                         <img src="assets/layout/images/User-Avatar-Profile-Free-PNG.png" height="100px" width="100px" style="margin-left: 20px; " alt="user-image" class="rounded-circle">
                     </span>
-                    <div class="text-900 text-3xl font-medium mb-3">Welcome to WIND-ERP</div>
+                    <div class="text-900 text-3xl font-medium mb-3">Bienvenue sur WIND-ERP</div>
                     <span class="text-600 font-medium">Inscrivez vous !</span>
                 </div>
                 <form >
@@ -26,16 +26,18 @@
                     <input  type="text"  id="domain" name="domain" [(ngModel)]="client.domain"  placeholder="Secteur de l'entreprise" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
                     <label for="email1" class="block text-900 text-xl font-medium mb-2"></label>
 
-                    <input id="adresse" type="text"  name="adresse"  placeholder="Adresse" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
+                    <input id="adresse" type="text"  name="adresse" [(ngModel)]="client.adresse" placeholder="Adresse" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
 
-                    <input id="ville" type="text"  name="ville"  placeholder="Ville" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+                    <input id="ville" type="text"  name="ville" [(ngModel)]="client.ville"  placeholder="Ville" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
                     <label for="email1" class="block text-900 text-xl font-medium mb-2"></label>
-                    <input id="Pays" type="text"  name="Pays"  placeholder="Pays" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
+                    <input id="Pays" type="text"  name="Pays" [(ngModel)]="client.pays"  placeholder="Pays" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem ; margin-right: 20px;">
                     <input type="text"  id="nbEmployer" name="nbEmployer" [(ngModel)]="client.nbEmployer"  placeholder="Nombre des employées" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
 
                     <label for="logo" class="block text-900 text-xl font-medium mb-2">Logo de l'entreprise 
                         <br>
-                        <input class="image" pInputText name="logo" [(ngModel)]="client.logo" type="file" class="file-upload" required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
+                        <br>
+                        <input class="form-control" id="formFileSm" pInputText name="logo" [(ngModel)]="client.logo" type="file"  required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
+                        <br>
                         <!--  <p-fileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" [maxFileSize]="1000000" onchange="console.log(event.target.files)"></p-fileUpload>-->
                     </label>
                    

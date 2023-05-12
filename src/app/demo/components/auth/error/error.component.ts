@@ -44,21 +44,21 @@ export class ErrorComponent {
     logoURL : any;
     imageFile:any
     clients: Client[]=[];
-    client: Client= new Client(1,"","","","","","","","",0,"","","",false,"","","");
+    client: Client= new Client(1,"","","","","","","","",0,"","","",false,false,"","","");
     selectedCountryAdvanced: any[] = [];
     
 
     constructor(private clientservice: CountryService ,private messageService: MessageService, public layoutService: LayoutService, private builder: FormBuilder, private router: Router){}
     //client
     saveClient(response:any){
-      this.client.emailCommercant="olfaammari1@gmail.com";
+      this.client.emailCommercant="Wind";
+      this.client.sadminId="54c4aa42-9914-4b5a-a7fa-8f97c56d1d84";
       var Datacommercant = JSON.stringify(this.client);
       this.clientservice.addclient(Datacommercant , this.image ).subscribe(res=>{console.log(res);
         alert('Votre demande est bien reçu, Vérifier votre email');
-        this.router.navigate(['/auth/login'])
-        
-       });
-      }
+        this.router.navigate(['/auth/login'])    
+         });
+    }
       onSelectedImage(e: any){
         this.imageFile = e.target.files[0];
         // @ts-ignore

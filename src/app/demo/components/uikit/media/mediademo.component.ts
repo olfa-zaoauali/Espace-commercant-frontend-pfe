@@ -5,6 +5,7 @@ import { Product } from 'src/app/demo/api/product';
 import { Modules } from 'src/app/models/modules';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+import { Client } from 'src/app/models/client';
 
 @Component({
     templateUrl: './mediademo.component.html',
@@ -19,16 +20,13 @@ export class MediaDemoComponent implements OnInit {
     DialogAdd:boolean=false;
     productDialog: boolean = false;
     submitted: boolean = false;
-    deleteDialog: boolean = false;
     deleteProductsDialog: boolean = false;
     SelectedModule:Modules[]=[];
-
-
+    Dialog:boolean=false;
+    name:any
+    id:any
     product: Product = {};
-
-
-
-
+    deleteProductDialog:boolean=false;
     images!: any[];
 
     galleriaResponsiveOptions: any[] = [
@@ -69,9 +67,7 @@ export class MediaDemoComponent implements OnInit {
     ];
 
     constructor(private messageService: MessageService,private productService: ProductService, private photoService: PhotoService) { }
-    deleteProduct(product: Modules) {
-      this.deleteDialog = true;
-  }
+    
     ngOnInit() {
         this.listmodules();
         this.productService.getProductsSmall().then(products => {
@@ -93,7 +89,13 @@ export class MediaDemoComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Module modifiée avec succé', life: 3000 });
        });
     }
-  
+    deleteopen(modulee:Modules) {
+      this.deleteProductDialog = true;
+      this.module = { ...modulee };
+      this.name=modulee.nom;
+      this.id=modulee.id;
+
+  }
 
     confirmDeleteSelected() {
         this.deleteProductsDialog = false;
@@ -107,7 +109,7 @@ export class MediaDemoComponent implements OnInit {
 
   
     public onDelet(id:number): void {
-        this.deleteDialog = false;
+      this.deleteProductDialog = false;
         this.photoService.delete(id).subscribe(
           (response: void) => {
             console.log(response);

@@ -81,11 +81,11 @@
 		<div class="card">
 			
 				<h5>Patente</h5>
-				<input type="file" class="file-upload" pInputText name="batinda" [(ngModel)]="admin.batinda"   required  onchange="console.log(event.target.files)" (change)="onSelectedfile($event)" >
+				<input type="file" class="form-control" id="formFileSm" pInputText name="batinda" [(ngModel)]="admin.batinda"   required  onchange="console.log(event.target.files)" (change)="onSelectedfile($event)" >
 
 				<h5>Logo</h5>
 				<div class="olfa">
-					<input class="logo" pInputText name="logo" [(ngModel)]="admin.logo" type="file" class="file-upload" required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
+					<input class="form-control" id="formFileSm" pInputText name="logo" [(ngModel)]="admin.logo" type="file"  required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
 			<!--<h5>ToggleButton</h5>
 			<p-toggleButton [(ngModel)]="valToggle" onLabel="Yes" offLabel="No" [style]="{'width': '10em'}"></p-toggleButton>
 
@@ -95,6 +95,7 @@
 			<h5>SelectManyButton</h5>
 			<p-selectButton [options]="paymentOptions" [(ngModel)]="valSelect2" [multiple]="true" optionLabel="name"></p-selectButton>
 			-->
+			<br><br>
 		</div>
 		<div class="card">
 	<!--	<h5>RadioButton</h5>
