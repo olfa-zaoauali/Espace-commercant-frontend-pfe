@@ -20,7 +20,7 @@ export class InvalidStateDemoComponent implements OnInit {
     countries: any[] = [];
     cashout: Cashout=new Cashout(0,"","",0,0,"");
     cashouts:Cashout[]=[];
-    commercant: Commercant= new Commercant(0,"","","","","","","",0,0,0,0,0,0,false,"","");
+    commercant: Commercant= new Commercant(0,"","","","","","","","",0,0,0,0,0,0,false,"","");
     commission:any ;
     pay:any;
     dataUser : any ;

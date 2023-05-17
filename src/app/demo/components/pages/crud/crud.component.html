@@ -52,6 +52,7 @@
                         <th>Telephone</th>
                         <th>Adresse</th>
                         <th>Ville</th>
+                        <th>Pays</th>
                         <th>Commission</th>
                         <th>CompteA/D</th>
                         <th *ngIf="isSadmin()"></th>
@@ -107,6 +108,7 @@
                         <td>{{ commercant.telephone}}</td>
                         <td>{{ commercant.adresse}}</td>
                         <td>{{ commercant.ville}}</td>
+                        <td>{{ commercant.pays}}</td>
                         <td>{{ commercant.pourcentage}} %</td>
                         <td>
                             <label  style="margin-top: 10px; margin-left: 10px;" class="switch" >
@@ -125,7 +127,7 @@
                                 </ng-template>
                             </div>    
                         </td>
-                        <td><button pButton style="margin-left: -25px;" pRipple  icon="pi pi-pencil" class="p-button-rounded p-button-warning " (click)="editProduct(commercant)"></button>
+                        <td><button pButton style="margin-left: -38px;" pRipple  icon="pi pi-pencil" class="p-button-rounded p-button-warning " (click)="editProduct(commercant)"></button>
                         </td>
                         <td><button pButton style="margin-left: -20px;" pRipple icon="pi pi-trash" class="p-button-rounded  p-button-danger" (click)="deleteProduct(commercant)"></button>
                         </td>
@@ -194,6 +196,11 @@
                     <input type="text" pInputText id="ville" name="ville" [(ngModel)]="commercant.ville" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !commercant.ville}"/>
                     <small class="ng-dirty ng-invalid" *ngIf="submitted && !commercant.ville">ville is required.</small>
                 </div> 
+                <div class="field">
+                    <label for="pays">Pays</label>
+                    <input type="text" pInputText id="pays" name="pays" [(ngModel)]="commercant.pays" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !commercant.pays}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !commercant.pays">pays is required.</small>
+                </div> 
             <div class="field">
                 <label for="pourcentage">Commisssion(%)</label>
                 <input type="number" pInputText id="pourcentage" name="pourcentage" [(ngModel)]="commercant.pourcentage" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !commercant.pourcentage}"/>
@@ -247,9 +254,14 @@
                     <small class="ng-dirty ng-invalid" *ngIf="submitted && !commercant.ville">ville is required.</small>
                 </div> 
                 <div class="field">
+                    <label for="pays">Pays</label>
+                    <input type="text" pInputText id="pays" name="pays" [(ngModel)]="commercant.pays"required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !commercant.pays}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !commercant.pays">pays is required.</small>
+                </div> 
+                <div class="field">
                     <label for="pourcentage">Commisssion(%)</label>
                     <input type="number" pInputText id="pourcentage" name="pourcentage" [(ngModel)]="commercant.pourcentage" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !commercant.pourcentage}"/>
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !commercant.pourcentage">ville is required.</small>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !commercant.pourcentage">pourcentage is required.</small>
                 </div> 
             <div class="field">
                 <label for="image">Image</label>

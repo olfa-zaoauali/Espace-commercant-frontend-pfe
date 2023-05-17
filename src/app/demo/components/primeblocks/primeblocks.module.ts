@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { TooltipModule } from 'primeng/tooltip';
+import { FileUploadModule } from 'primeng/fileupload';
+
 
 @NgModule({
     imports: [
@@ -23,7 +25,8 @@ import { TooltipModule } from 'primeng/tooltip';
         InputTextModule,
         PasswordModule,
         TooltipModule,
-        PrimeBlocksRoutingModule
+        PrimeBlocksRoutingModule,
+        FileUploadModule
     ],
     declarations: [BlocksComponent, BlockViewerComponent]
 })

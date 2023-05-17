@@ -6,14 +6,69 @@
         </div>
     </div>
 </div>-->
+<div id="content">
 <div class="grid">
     <div class="col-12">
         <div class="card">
-            <h1 style="margin-top: 50px; margin-left: 500px;">CONTRAT DE TRAVAIL</h1>
-            <p-toolbar>
-              
-
-               
-            </p-toolbar>
+            <h1 style="margin-top: 50px; text-align: center; ">CONTRAT DE TRAVAIL</h1>
+            <br><br>
+                <p style="line-height: 200%;font-size:large; " ><strong> Wind Consulting</strong>, sise à Mahdia Rue Chaanbi, Rondpoint Ibn El Jazzar Immeuble Ben Nahia, Mahdia 5100, immatriculée au registre Tunis sous le numéro :
+                    <strong> B1612212017 </strong> ayant pour identifiant fiscal le <strong> n°1493899B</strong> et représentée par son gérant<strong> Mr Karim Khouja</strong>.<br>
+                    Ci-après dénommée <strong> « Le Commerçant » </strong>, D’une part Et
+                    Mr/Mme <strong> {{commercant.firstname}} {{commercant.lastname}}</strong>.
+                    Demeurant à {{commercant.adresse}}. – {{commercant.ville}}.  Ci-après dénommée 
+                    « Le commerçant » d’autre part.<br>
+                    Elle a été arrêté et convenu ce qui suit :
+                </p>
         </div>
     </div>
+   
+</div>
+
+<div class="card">
+    <p-fieldset legend="Article 1" [toggleable]="true" class="line-height-3 m-0">
+     <p   style="font-size:large;">   Mr/Mme <strong> {{commercant.firstname}} {{commercant.lastname}}</strong> est engagé(e) par <strong> Wind Consulting</strong> pour exercer les fonctions d’un <strong>Commerçant</strong>, 
+        à ce titre, il/elle s’engage pendant toute la durée du présent contrat à :<br>
+     a)	Observer en tout lieu et tout temps la plus grande discrétion tant sur ses activités que sur celles de la société. 
+    Cet engagement est valable pendant toute la durée du contrat et subsiste après cessation des activités auprès de <strong> Wind Consulting</strong>.<br>
+     b)	Veiller à la bonne conservation des choses qui lui sont remises dans le 
+     cadre de son travail et ne rien faire qui puisse entraîner leur détérioration. <br>
+     c)	Conserver en tout lieu et temps le secret professionnel de toutes les informations ou connaissances 
+   acquises par l’employée pendant ou à l'occasion des travaux effectués, 
+     l’observation du secret professionnel demeure valable même après fin du contrat. <br></p>
+
+    </p-fieldset>
+    <p-fieldset legend="Article 2" [toggleable]="true" class="line-height-3 m-0" style="font-size: large; ">
+        <p  style="font-size:large;"> Le présent contrat est conclu pour une durée indéterminée,
+             débutant le <strong> 10/05/2023 </strong> avec une période d’essai d’un seul mois..</p>
+
+    </p-fieldset>
+    <p-fieldset legend="Article 3" [toggleable]="true" class="line-height-3 m-0" style="font-size: large; ">
+        <p   style="font-size:large;">  Mr/Mme <strong> {{commercant.firstname}} {{commercant.lastname}}</strong> recevra en contre partie de ses fonctions
+             une commission sous forme de pourcentage, calculé sur le chiffre d’affaires généré par 
+             la mise en relation entre <strong> Wind Consulting</strong> et le client démarché. </p>
+
+    </p-fieldset>
+    <p-fieldset legend="Article 4" [toggleable]="true" class="line-height-3 m-0" style="font-size: large; ">
+        <p  style="font-size:large;"> Mr/Mme <strong> {{commercant.firstname}} {{commercant.lastname}}</strong> reste libre d'effectuer pour son propre compte ou pour le compte d'autrui des opérations commerciales si ses derniéres
+             ne concurencent pas diréctement ou indirectement les produits ou les prestations du services de notre sosciété <strong> Wind Consulting</strong>.</p>
+
+    </p-fieldset>
+    <p-fieldset legend="Article 5" [toggleable]="true" class="line-height-3 m-0" style="font-size: large; ">
+        <p  style="font-size:large;"> Pour l’exécution du présent contrat de travail, les parties font chacune élection de domicile en leur demeure respective telle qu’indiquées ci-dessus.
+        <br>
+         Fait en trois exemplaires.</p>
+
+    </p-fieldset>
+    <div style="text-align:end;">
+    <img src="assets/layout/images/windlogo.jpg" style=" width: min-content; height: min-content;  " alt="image">
+    <br>
+</div>
+</div>
+</div>
+<br>
+<button style="margin-bottom: 20px;" pButton icon="pi pi-download" pRipple type="button" label="télécharger contrat" class="p-button-secondary" (click)="generarPDF()" ></button>
+
+
+   
+

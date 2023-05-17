@@ -16,6 +16,7 @@ import {AvatarModule} from 'primeng/avatar';
 import { ChipModule } from 'primeng/chip';
 import { FactureComponent } from './demo/components/facture/facture.component';
 import { CommonModule } from '@angular/common';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 @NgModule({
@@ -28,7 +29,9 @@ import { CommonModule } from '@angular/common';
         AccordionModule ,
         AvatarModule ,
         ChipModule,
-        CommonModule  
+        CommonModule,
+        FileUploadModule
+
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

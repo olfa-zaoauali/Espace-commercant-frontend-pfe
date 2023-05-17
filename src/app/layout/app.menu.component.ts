@@ -78,14 +78,14 @@ export class AppMenuComponent implements OnInit {
                     
                 ]
             },
-            {
+         /*   {
                 label: 'Aide',
                 items: [
                     { label: 'Guide utilisation', icon: 'pi pi-fw pi-info-circle', routerLink: ['/dashboard/uikit/button'] },
 
                     { label: 'Contact', icon: 'pi pi-fw pi-comment', routerLink: ['/dashboard/uikit/message'] },
                 ]
-            }
+            }*/
          
         ];}
         if(this.isClient()){
@@ -138,14 +138,14 @@ export class AppMenuComponent implements OnInit {
                         
                     ]
                 },
-                {
+             /*   {
                     label: 'Aide',
                     items: [
                         { label: 'Guide utilisation', icon: 'pi pi-fw pi-info-circle', routerLink: ['/dashboard/uikit/button'] },
     
                         { label: 'Contact', icon: 'pi pi-fw pi-comment', routerLink: ['/dashboard/uikit/message'] },
                     ]
-                }
+                }*/
              
             ];}
         if(this.isAdmin()){
@@ -196,14 +196,14 @@ export class AppMenuComponent implements OnInit {
                     
                 ]
             },
-            {
+         /*   {
                 label: 'Aide',
                 items: [
                     { label: 'Guide utilisation', icon: 'pi pi-fw pi-info-circle', routerLink: ['/dashboard/uikit/button'] },
 
                     { label: 'Contact', icon: 'pi pi-fw pi-comment', routerLink: ['/dashboard/uikit/message'] },
                 ]
-            }
+            }*/
         ];}
         
         if(this.isSadmin()){

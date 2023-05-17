@@ -16,13 +16,8 @@
 
               <img [src]="'http://localhost:8098/api/v1/auth/files/' +  imageUrl" height="100px" width="100px" height="150px" width="150px" alt="Profile" class="rounded-circle">
               <h2>{{dataUser.sub}}</h2>
-              <h3>{{dataUser.role}}</h3>
-              <div class="social-links mt-2">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div>
+              <h3 style="font-weight: bolder;">{{dataUser.role}}</h3>
+              
             </div>
           </div>
 
@@ -36,17 +31,14 @@
               <ul class="nav nav-tabs nav-tabs-bordered">
 
                 <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                  <button style="font-weight: bolder;" class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Aperçu</button>
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                  <button class="nav-link" style="font-weight: bolder;" data-bs-toggle="tab" data-bs-target="#profile-edit">Changer profile</button>
                 </li>
-
-               
-
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+                  <button style="font-weight: bolder;" class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Changer mot de passe</button>
                 </li>
 
               </ul>
@@ -55,40 +47,105 @@
 
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   
-                  <h5 class="card-title">Profile Details</h5>
+                  <h5 class="card-title" style="font-weight: bolder; font-size: x-large;">Détails de Profile</h5>
                   <br>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Nom</div>
-                    <div class="col-lg-9 col-md-8"></div>
+                    <div class="col-lg-3 col-md-4 label " style="font-weight: bolder;">Nom</div>
+                    <div *ngIf="isCommercant()" class="col-lg-9 col-md-8" >{{commercant.lastname}}</div>
+                    <div *ngIf="isSadmin()" class="col-lg-9 col-md-8" >{{sadmin.lastname}}</div>
+                    <div *ngIf="isClient()" class="col-lg-9 col-md-8" >{{client.lastname}}</div>
+                    <div *ngIf="isAdmin()" class="col-lg-9 col-md-8" >{{admin.lastname}}</div>
+
+
                   </div>
                   <br>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Prénom</div>
-                    <div class="col-lg-9 col-md-8"></div>
+                    <div class="col-lg-3 col-md-4 label" style="font-weight: bolder;">Prénom</div>
+                    <div *ngIf="isCommercant()" class="col-lg-9 col-md-8">{{commercant.firstname}}</div>
+                    <div *ngIf="isSadmin()" class="col-lg-9 col-md-8" >{{sadmin.firstname}}</div>
+                    <div *ngIf="isClient()" class="col-lg-9 col-md-8" >{{client.firstname}}</div>
+                    <div *ngIf="isAdmin()" class="col-lg-9 col-md-8" >{{admin.firstname}}</div>
+
                   </div>
                   <br>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8"></div>
+                    <div class="col-lg-3 col-md-4 label" style="font-weight: bolder;">Email</div>
+                    <div *ngIf="isCommercant()" class="col-lg-9 col-md-8">{{commercant.email}}</div>
+                    <div *ngIf="isSadmin()" class="col-lg-9 col-md-8" >{{sadmin.email}}</div>
+                    <div *ngIf="isClient()" class="col-lg-9 col-md-8" >{{client.email}}</div>
+                    <div *ngIf="isAdmin()" class="col-lg-9 col-md-8" >{{admin.email}}</div>
+
+
+
                   </div>
                   <br>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Télephone</div>
-                    <div class="col-lg-9 col-md-8"></div>
+                    <div class="col-lg-3 col-md-4 label" style="font-weight: bolder;">Télephone</div>
+                    <div *ngIf="isCommercant()" class="col-lg-9 col-md-8">{{commercant.telephone}}</div>
+                    <div *ngIf="isSadmin()" class="col-lg-9 col-md-8" >{{sadmin.telephone}}</div>
+                    <div *ngIf="isClient()" class="col-lg-9 col-md-8" >{{client.telephone}}</div>
+                    <div *ngIf="isAdmin()" class="col-lg-9 col-md-8" >{{admin.telephone}}</div>
+
+
+
                   </div>
                   <br>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Address</div>
-                    <div class="col-lg-9 col-md-8"></div>
+                    <div class="col-lg-3 col-md-4 label" style="font-weight: bolder;">Adress</div>
+                    <div *ngIf="isCommercant()" class="col-lg-9 col-md-8">{{commercant.adresse}}</div>
+                    <div *ngIf="isSadmin()" class="col-lg-9 col-md-8" >{{sadmin.adresse}}</div>
+                    <div *ngIf="isClient()" class="col-lg-9 col-md-8" >{{client.adresse}}</div>
+                    <div *ngIf="isAdmin()" class="col-lg-9 col-md-8" >{{admin.adresse}}</div>
+
+
+
                   </div>
 
                   <br>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label" style="font-weight: bolder;">Ville</div>
+                    <div *ngIf="isCommercant()" class="col-lg-9 col-md-8">{{commercant.ville}}</div>
+                    <div *ngIf="isSadmin()" class="col-lg-9 col-md-8" >{{sadmin.ville}}</div>
+                    <div *ngIf="isClient()" class="col-lg-9 col-md-8" >{{client.ville}}</div>
+                    <div *ngIf="isAdmin()" class="col-lg-9 col-md-8" >{{admin.ville}}</div>
 
+
+
+                  </div>
+
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label" style="font-weight: bolder;">Pays</div>
+                    <div *ngIf="isCommercant()" class="col-lg-9 col-md-8">{{commercant.pays}}</div>
+                    <div *ngIf="isSadmin()" class="col-lg-9 col-md-8" >{{sadmin.pays}}</div>
+                    <div *ngIf="isClient()" class="col-lg-9 col-md-8" >{{client.pays}}</div>
+                    <div *ngIf="isAdmin()" class="col-lg-9 col-md-8" >{{admin.pays}}</div>
+
+                  </div>
+                  <br>
+                  <div *ngIf="isClient()||isAdmin()" class="row">
+                    <div class="col-lg-3 col-md-4 label" style="font-weight: bolder;">Société</div>
+                    <div  class="col-lg-9 col-md-8" *ngIf="isClient()" >{{client.company}}</div>
+                    <div  class="col-lg-9 col-md-8" *ngIf="isAdmin()">{{admin.company}}</div>
+                  </div>
+                  <br>
+                  <div *ngIf="isClient()||isAdmin()" class="row">
+                    <div class="col-lg-3 col-md-4 label" style="font-weight: bolder;">Domaine</div>
+                    <div  class="col-lg-9 col-md-8" *ngIf="isClient()" >{{client.domain}}</div>
+                    <div  class="col-lg-9 col-md-8" *ngIf="isAdmin()">{{admin.domain}}</div>
+                  </div>
+                  <br>
+                  <div *ngIf="isClient()||isAdmin()" class="row">
+                    <div class="col-lg-3 col-md-4 label" style="font-weight: bolder;">Nb des employées</div>
+                    <div  class="col-lg-9 col-md-8" *ngIf="isClient()" >{{client.nbEmployer}}</div>
+                    <div  class="col-lg-9 col-md-8" *ngIf="isAdmin()">{{admin.nbEmployer}}</div>
+                  </div>
+                 
                 </div>
 
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
@@ -96,103 +153,121 @@
                   <!-- Profile Edit Form -->
                   <form>
                     <div class="row mb-3">
-                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Image de Profile</label>
+                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label" style="font-weight: bolder;">Image de Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <img [src]="'http://localhost:8098/api/v1/auth/files/' +  imageUrl" height="100px" width="100px" style="margin-left: 20px; " alt="user-image" class="rounded-circle">
-
-                        <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                        </div>
+                        <img [src]="'http://localhost:8098/api/v1/auth/files/' +  imageUrl" height="120px" width="120px" style="margin-left: 20px; " alt="user-image" class="rounded-circle">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nom</label>
+                      <label for="Nom" class="col-md-4 col-lg-3 col-form-label" style="font-weight: bolder;">Nom</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin Anderson">
+                        <input type="text" name="lastname"  class="form-control" *ngIf="isCommercant()"   [(ngModel)]="commercant.lastname" pInputText placeholder="Nom"/>
+                        <input type="text" name="lastname"  class="form-control" *ngIf="isSadmin()"   [(ngModel)]="sadmin.lastname" pInputText placeholder="Nom"/>
+                        <input type="text" name="lastname"  class="form-control" *ngIf="isClient()"   [(ngModel)]="client.lastname" pInputText placeholder="Nom"/>
+                        <input type="text" name="lastname"  class="form-control" *ngIf="isAdmin()"   [(ngModel)]="admin.lastname" pInputText placeholder="Nom"/>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="about" class="col-md-4 col-lg-3 col-form-label">Prénom</label>
+                      <label for="Prénom" class="col-md-4 col-lg-3 col-form-label" style="font-weight: bolder;">Prénom</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin Anderson">
+                        <input type="text" name="firstname"  class="form-control" *ngIf="isCommercant()"   [(ngModel)]="commercant.firstname" pInputText placeholder="prenom"/>
+                        <input type="text" name="firstname"  class="form-control" *ngIf="isSadmin()"   [(ngModel)]="sadmin.firstname" pInputText placeholder="prenom"/>
+                        <input type="text" name="firstname"  class="form-control" *ngIf="isClient()"   [(ngModel)]="client.firstname" pInputText placeholder="prenom"/>
+                        <input type="text" name="firstname"  class="form-control" *ngIf="isAdmin()"   [(ngModel)]="admin.firstname" pInputText placeholder="prenom"/>
+
+
+
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                      <label for="Email" class="col-md-4 col-lg-3 col-form-label" style="font-weight: bolder;">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="company" type="text" class="form-control" id="company" value="Lueilwitz, Wisoky and Leuschke">
+                        <input type="text" name="email"  class="form-control" *ngIf="isCommercant()" [(ngModel)]="commercant.email" disabled="true" pInputText placeholder="email"/>
+                        <input type="text" name="email"  class="form-control" *ngIf="isSadmin()" [(ngModel)]="sadmin.email" disabled="true"   pInputText placeholder="email"/>
+                        <input type="text" name="email"  class="form-control" *ngIf="isClient()"   [(ngModel)]="client.email" disabled="true"   pInputText placeholder="email"/>
+                        <input type="text" name="email"  class="form-control" *ngIf="isAdmin()"   [(ngModel)]="admin.email" disabled="true"   pInputText placeholder="email"/>
+
+
+
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Job" class="col-md-4 col-lg-3 col-form-label">Télephone</label>
+                      <label for="Télephone" class="col-md-4 col-lg-3 col-form-label" style="font-weight: bolder;">Télephone</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="job" type="text" class="form-control" id="Job" value="Web Designer">
-                      </div>
-                    </div>
-<!--
-                    <div class="row mb-3">
-                      <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="country" type="text" class="form-control" id="Country" value="USA">
+                        <input type="text" name="telephone"  class="form-control" *ngIf="isCommercant()"   [(ngModel)]="commercant.telephone" pInputText placeholder="telephone"/>
+                        <input type="text" name="telephone"  class="form-control" *ngIf="isSadmin()"   [(ngModel)]="sadmin.telephone" pInputText placeholder="telephone"/>
+                        <input type="text" name="telephone"  class="form-control" *ngIf="isClient()"   [(ngModel)]="client.telephone" pInputText placeholder="telephone"/>
+                        <input type="text" name="telephone"  class="form-control" *ngIf="isAdmin()"   [(ngModel)]="admin.telephone" pInputText placeholder="telephone"/>
+
+
+
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+                      <label for="Adresse" class="col-md-4 col-lg-3 col-form-label" style="font-weight: bolder;">Adresse</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control" id="Address" value="A108 Adam Street, New York, NY 535022">
+                        <input type="text" name="adresse"  class="form-control" *ngIf="isCommercant()"   [(ngModel)]="commercant.adresse" pInputText placeholder="adresse"/>
+                        <input type="text" name="adresse"  class="form-control" *ngIf="isSadmin()"   [(ngModel)]="sadmin.adresse" pInputText placeholder="adresse"/>
+                        <input type="text" name="adresse"  class="form-control" *ngIf="isClient()"   [(ngModel)]="client.adresse" pInputText placeholder="adresse"/>
+                        <input type="text" name="adresse"  class="form-control" *ngIf="isAdmin()"   [(ngModel)]="admin.adresse" pInputText placeholder="adresse"/>
+
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                      <label for="Ville" class="col-md-4 col-lg-3 col-form-label" style="font-weight: bolder;">Ville</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="(436) 486-3538 x29071">
-                      </div>
-                    </div>
+                        <input type="text" name="ville"  class="form-control" *ngIf="isCommercant()"  [(ngModel)]="commercant.ville" pInputText placeholder="ville"/>
+                        <input type="text" name="ville"  class="form-control" *ngIf="isSadmin()"  [(ngModel)]="sadmin.ville" pInputText placeholder="ville"/>
+                        <input type="text" name="ville"  class="form-control" *ngIf="isClient()"   [(ngModel)]="client.ville" pInputText placeholder="ville"/>
+                        <input type="text" name="ville"  class="form-control" *ngIf="isAdmin()"   [(ngModel)]="admin.ville" pInputText placeholder="ville"/>
 
-                    <div class="row mb-3">
-                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
                       </div>
                     </div>
--->
                     <div class="row mb-3">
-                      <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
+                      <label for="pays" class="col-md-4 col-lg-3 col-form-label" style="font-weight: bolder;">Pays</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
-                      </div>
-                    </div>
+                        <input type="text" name="pays"  class="form-control" *ngIf="isCommercant()"  [(ngModel)]="commercant.pays" pInputText placeholder="pays"/>
+                        <input type="text" name="pays"  class="form-control" *ngIf="isSadmin()"  [(ngModel)]="sadmin.pays" pInputText placeholder="pays"/>
+                        <input type="text" name="pays"  class="form-control" *ngIf="isClient()"  [(ngModel)]="client.pays" pInputText placeholder="pays"/>
+                        <input type="text" name="pays"  class="form-control" *ngIf="isAdmin()"  [(ngModel)]="admin.pays" pInputText placeholder="pays"/>
 
-                    <div class="row mb-3">
-                      <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook </label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
                       </div>
                     </div>
-
-                    <div class="row mb-3">
-                      <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram </label>
+                    <div class="row mb-3"  *ngIf="isClient()||isAdmin()" >
+                      <label for="company" class="col-md-4 col-lg-3 col-form-label" style="font-weight: bolder;">Sociéte</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
+                        <input type="text" name="company"  class="form-control" *ngIf="isClient()"  [(ngModel)]="client.company" pInputText placeholder="company"/>
+                        <input type="text" name="company"  class="form-control" *ngIf="isAdmin()"  [(ngModel)]="admin.company" pInputText placeholder="company"/>
+
+                      </div>
+                      
+                    </div>
+                    <div class="row mb-3"  *ngIf="isClient()||isAdmin()">
+                      <label for="domain"  class="col-md-4 col-lg-3 col-form-label" style="font-weight: bolder;">Domaine</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input type="text" name="domain"  class="form-control" *ngIf="isClient()"  [(ngModel)]="client.domain" pInputText placeholder="domaine"/>
+                        <input type="text" name="domain"  class="form-control" *ngIf="isAdmin()"  [(ngModel)]="admin.domain" pInputText placeholder="domaine"/>
                       </div>
                     </div>
-
-                    <div class="row mb-3">
-                      <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin </label>
+                    <div class="row mb-3"  *ngIf="isClient()||isAdmin()">
+                      <label for="nbEmployer" class="col-md-4 col-lg-3 col-form-label" style="font-weight: bolder;">Nb des employées</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
+                        <input type="number" name="nbEmployer"  class="form-control" *ngIf="isClient()"  [(ngModel)]="client.nbEmployer" pInputText placeholder="Nombre des employées"/>
+                        <input type="number" name="nbEmployer"  class="form-control" *ngIf="isAdmin()"  [(ngModel)]="admin.nbEmployer" pInputText placeholder="Nombre des employées"/>
                       </div>
                     </div>
-
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                      <button *ngIf="isCommercant()" pButton pRipple label="Enregistrer modifications" style="color: white;"  class="p-button-warning "  (click)="updateCommercant()"></button>
+                      <button *ngIf="isSadmin()" pButton pRipple label="Enregistrer modifications" style="color: white;"  class="p-button-warning "  (click)="updateSadmin(sadmin.id)"></button>
+                      <button *ngIf="isClient()" pButton pRipple label="Enregistrer modifications" style="color: white;"  class="p-button-warning "  (click)="updateClient()"></button>
+                      <button *ngIf="isAdmin()" pButton pRipple label="Enregistrer modifications" style="color: white;"  class="p-button-warning "  (click)="updateadmin(admin.id)"></button>
+
                     </div>
                   </form><!-- End Profile Edit Form -->
 
@@ -208,28 +283,32 @@
                   <form>
 
                     <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                      <label for="passwordActuel" class="col-md-4 col-lg-3 col-form-label" style="font-weight: bolder;">Mot de passe actuel</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
+                        <p-password id="passwordActuel" name="passwordActuel" [(ngModel)]="compte.passwordActuel"  placeholder="Mot de passe actuel" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                      <label for="passwordNew" class="col-md-4 col-lg-3 col-form-label" style="font-weight: bolder;">Nouveau Mot de passe</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                        <p-password id="passwordNew" name="passwordNew" [(ngModel)]="compte.passwordNew"  placeholder="Nouveau Mot de passe" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                      <label for="passwordConfirm" class="col-md-4 col-lg-3 col-form-label" style="font-weight: bolder;">Confirmer nouveau mot de passe</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                        <p-password id="passwordConfirm" name="passwordConfirm" [(ngModel)]="compte.passwordConfirm"  placeholder="Confirmer Mot de passe" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
                       </div>
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
+                      <button pButton *ngIf="isSadmin()" pRipple label="Changer mot de passe" style="color: white;"  class="p-button-warning " (click)="ChangerMotDePasseSadmin()" ></button>
+                      <button pButton *ngIf="isCommercant()" pRipple label="Changer mot de passe" style="color: white;"  class="p-button-warning " (click)="ChangerMotDePasse()" ></button>
+                      <button pButton *ngIf="isClient()" pRipple label="Changer mot de passe" style="color: white;"  class="p-button-warning " (click)="ChangerMotDePasseClient()" ></button>
+                      <button pButton *ngIf="isAdmin()" pRipple label="Changer mot de passe" style="color: white;"  class="p-button-warning " (click)="ChangerMotDePasseAdmin()" ></button>
                     </div>
                   </form><!-- End Change Password Form -->
 

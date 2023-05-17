@@ -27,12 +27,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     imageUrl: any;
     role: any;
     tenant_id:any;
-    commercant: Commercant= new Commercant(0,"","","","","","","",0,0,0,0,0,0,false,"","");
+    commercant: Commercant= new Commercant(0,"","","","","","","","",0,0,0,0,0,0,false,"","");
     commission:any ;
     revenu:any;
     nbadmins:any;
     nbclients:any;
-    sadmin: SAdmin= new SAdmin(0,"","","","",0,0,0,0,true);
+    sadmin: SAdmin= new SAdmin(0,"","","","","","","","","",0,0,0,0,true);
     revenuSadmin:any;
     Admin:Boolean=true; 
     SAdmin:Boolean=true; 

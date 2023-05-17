@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Admin2 } from 'src/app/models/admin2';
 import { Cashout } from 'src/app/models/cashout';
 import { Commercant } from 'src/app/models/commercant';
+import { Compte } from 'src/app/models/compte';
 import { Facture } from 'src/app/models/facture';
 import { Modules } from 'src/app/models/modules';
 
@@ -98,5 +99,51 @@ export class StatistiqueService {
   public getAdminOfCommercant(tenantId :string): Observable<Admin2[]> {
     return this.http.get<Admin2[]>(`${this.apiurl}commercants/admins/${tenantId}`)
   }
-
+  //Contrat
+  public getInfoCommerçant(tenantId:string):Observable<Commercant> {
+    return this.http.get<Commercant>(`${this.apiurl}commercants/tenantId/${tenantId}`)
+  }
+  //compte
+  public updateComtpecommercant(tenantId:string,commercant:any):Observable<any> {
+    return this.http.patch<any>(`${this.apiurl}commercants/updatecompte/${tenantId}`,commercant)
+  }
+  public getInfoCommerçantCompte(tenantId:string):Observable<any> {
+    return this.http.get<any>(`${this.apiurl}commercants/tenantId/${tenantId}`)
+  }
+  public changerMotDePasse(tenant_id:string,compte:any):Observable<any> {
+    return this.http.put<any>(`${this.apiurl}commercants/password/${tenant_id}`,compte)
+  }
+  public changerImage(tenant_id:string,Image:any):Observable<any> {
+    return this.http.put<any>(`${this.apiurl}commercants/image/${tenant_id}`,Image)
+  }
+  //Sadmin
+  public getInfoSAdminCompte(tenantId:string):Observable<any> {
+    return this.http.get<any>(`${this.apiurl}sadmins/tenantId/${tenantId}`)
+  }
+  public updateComtpeAdmin(id: number,sadmin:any):Observable<any> {
+    return this.http.put<any>(`${this.apiurl}sadmins/update/${id}`,sadmin)
+  }
+  public changerMotDePasseSadmin(tenant_id:string,compte:any):Observable<any> {
+    return this.http.put<any>(`${this.apiurl}sadmins/password/${tenant_id}`,compte)
+  }
+  //client
+  public getInfoClientCompte(tenantId:string):Observable<any> {
+    return this.http.get<any>(`${this.apiurl}clients/tenantId/${tenantId}`)
+  }
+  public updateComtpeClient(tenantId:string,client:any):Observable<any> {
+    return this.http.put<any>(`${this.apiurl}clients/updatecompte/${tenantId}`,client)
+  }
+  public changerMotDePasseClient(tenant_id:string,compte:any):Observable<any> {
+    return this.http.put<any>(`${this.apiurl}clients/password/${tenant_id}`,compte)
+  }
+  //Admin
+  public getInfoAdminCompte(tenantId:string):Observable<any> {
+    return this.http.get<any>(`${this.apiurl}admins/tenantId/${tenantId}`)
+  }
+  public updateAdmin(id: number,admin:any):Observable<any> {
+    return this.http.put<any>(`${this.apiurl}admins/id/${id}`,admin)
+  }
+  public changerMotDePasseAdmin(tenant_id:string,compte:any):Observable<any> {
+    return this.http.put<any>(`${this.apiurl}admins/password/${tenant_id}`,compte)
+  }
 }

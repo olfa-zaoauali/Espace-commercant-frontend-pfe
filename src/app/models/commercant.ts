@@ -6,6 +6,7 @@ export class Commercant {
         public telephone: string,
         public adresse: string,
         public ville: string,
+        public pays:string,
         public image: string,
         public pay : number,
         public commission:number,
