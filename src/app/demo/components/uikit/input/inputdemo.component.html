@@ -62,14 +62,7 @@
 		<!--	<h5>Calendar</h5>
 			<p-calendar [showIcon]="true" inputId="icon"></p-calendar>-->
 
-			<h5>Nombre des employées</h5>
-			<p-inputNumber [(ngModel)]="client.nbEmployer" mode="decimal" [showButtons]="true" [min]="0" [max]="100">
-			</p-inputNumber>
-			<h5>Matricule fiscale</h5>
-			<span class="p-float-label">
-				<input  id="matricule" type="text"  name="matricule" [(ngModel)]="admin.matricule" pInputText>
-				<label for="float-input"></label>
-			</span>
+			
 			<!--<h5>Chips</h5>
 			<p-chips></p-chips>-->
 		</div>
@@ -79,13 +72,21 @@
 
 	<div class="col-12 md:col-6">
 		<div class="card">
-			
+			<h5>Nombre des employées</h5>
+			<p-inputNumber [(ngModel)]="client.nbEmployer" mode="decimal" [showButtons]="true" [min]="0" [max]="100">
+			</p-inputNumber>
+			<h5>Matricule fiscale</h5>
+			<span class="p-float-label">
+				<input  id="matricule" type="text"  name="matricule" [(ngModel)]="admin.matricule" pInputText>
+				<label for="float-input"></label>
+			</span>
 				<h5>Patente</h5>
 				<input type="file" class="form-control" id="formFileSm" pInputText name="batinda" [(ngModel)]="admin.batinda"   required  onchange="console.log(event.target.files)" (change)="onSelectedfile($event)" >
 
 				<h5>Logo</h5>
 				<div class="olfa">
 					<input class="form-control" id="formFileSm" pInputText name="logo" [(ngModel)]="admin.logo" type="file"  required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" >
+
 			<!--<h5>ToggleButton</h5>
 			<p-toggleButton [(ngModel)]="valToggle" onLabel="Yes" offLabel="No" [style]="{'width': '10em'}"></p-toggleButton>
 
@@ -129,6 +130,8 @@
 						<label for="ny">{{tempuser.nom}}</label>
 					</div>
 				</div>
+				
+			
 			<!--	<div class="col-12 md:col-5">
 					<div class="field-checkbox">
 						<p-checkbox name="group1" value="Gestion de stock" [(ngModel)]="valCheck" id="sf"></p-checkbox>
@@ -160,8 +163,10 @@
 					</div>
 				</div>-->
 			</div>
+			<button pButton pRipple type="button" label="Envoyer" style="color: white;" class="p-button-warning" (click)="saveAdmin()"></button>
+
 		</div>
-		<div class="card">
+	<!--<div class="card">
 			<div class="grid">
                
                 <div class="col-12 md:col-6">
@@ -174,7 +179,7 @@
 			<button pButton pRipple type="button" label="Envoyer" style="color: white;" class="p-button-warning" (click)="saveAdmin()"></button>
 
 		
-			<!--<h5>Listbox</h5>
+			<h5>Listbox</h5>
 			<p-listbox [options]="cities" [(ngModel)]="selectedList" [filter]="true"></p-listbox>
 
 			<h5>Dropdown</h5>
@@ -188,8 +193,8 @@
 						<span class="ml-2">{{country.name}}</span>
 					</div>
 				</ng-template>
-			</p-multiSelect>-->
-		</div>
+			</p-multiSelect>
+		</div>-->	
 
 		
 	</div>

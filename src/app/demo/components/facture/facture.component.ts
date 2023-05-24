@@ -17,7 +17,7 @@ export class FactureComponent implements OnInit {
   @ViewChild('facturee')
   facturee!: ElementRef;
 
-  admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","",[],0,0,0,0,"",false);
+  admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","","","",[],0,0,0,0,"",false)
   modules:Modules[]=[];
   pay:any;
   facture: Facture= new Facture(0,"",0,0,0,"","","","","","","");

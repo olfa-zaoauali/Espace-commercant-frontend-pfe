@@ -8,6 +8,8 @@ import { StatistiqueService } from '../../service/statistique.service';
 import { Commercant } from 'src/app/models/commercant';
 import { SAdmin } from 'src/app/models/s-admin';
 import { Admin2 } from 'src/app/models/admin2';
+import { Client } from 'src/app/models/client';
+import { Notification } from 'src/app/models/notification';
 
 @Component({
     templateUrl: './dashboard.component.html',
@@ -27,7 +29,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     imageUrl: any;
     role: any;
     tenant_id:any;
-    commercant: Commercant= new Commercant(0,"","","","","","","","",0,0,0,0,0,0,false,"","");
+    commercant: Commercant= new Commercant(0,"","","","","","","","","",0,0,0,0,0,0,false,"","");
     commission:any ;
     revenu:any;
     nbadmins:any;
@@ -41,11 +43,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     nbclientwind:any;
     nbadminwind:any; 
     revenuNet:any;
-    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","",[],0,0,0,0,"",false);
+    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","","","",[],0,0,0,0,"",false)
+    Client: Client= new Client(1,"","","","","","","","",0,"","","","","",false,false,"","","");
     revenuNetadmin:any;
     revenutotaladmin:any;
+    historiques: Notification[]=[];
     nbclientadmin:any;
     pay:any;
+    nbCommercant:any;
+    clientsverifie:any;
     constructor(private productService: ProductService, public layoutService: LayoutService, public statistiqueService : StatistiqueService) {
         this.subscription = this.layoutService.configUpdate$.subscribe(() => {
             this.initChart();
@@ -62,7 +68,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.revenuWind();
             this.nbClientsWind();
             this.nbAdminsWind();
-            this.revenuNetWind()
+            this.revenuNetWind();
+            this.getNotifications();
             
               }
         if(this.isCommercant()){
@@ -70,18 +77,43 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.revenuSociete();
             this.nbAdmins();
             this.nbClients();
+            this.commissionCommercant();
         }
         if(this.isAdmin()){
-            this.RevenuTotalAdmin();
-            this.RevenuNetAdmin();
+            this.nbClientverifie();
             this.nbClientadmin();
             this.PayParmois();
+            this.getNotifications();
+            this.nbCommercantsAdmin();
+
+        }
+        if(this.isClient()){
+          this.getClient();
         }
         this.items = [
             { label: 'Add New', icon: 'pi pi-fw pi-plus' },
             { label: 'Remove', icon: 'pi pi-fw pi-minus' }
         ];
     }
+    //Notification 
+    getNotifications(){
+      this.statistiqueService.getNotification(this.dataUser.tenant_id).subscribe(
+        data=> {
+          this.historiques=data;
+          console.log("historique",this.historiques);
+        }
+      )
+    }
+    //client
+    getClient(){
+      this.statistiqueService.getInfoClientCompte(this.tenant_id).subscribe(
+        data=> {
+          this.Client=data;
+          console.log("client",this.Client)
+        }
+      )
+    }
+    //commercant
     commissionCommercant(){
         this.statistiqueService.calculcommission(this.dataUser.tenant_id).subscribe(
           data=> {
@@ -169,7 +201,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
         )
       }
-
+      nbClientverifie(){
+        this.statistiqueService.nbClientverifie(this.dataUser.tenant_id).subscribe(
+          data=> {
+            this.clientsverifie=data;
+            console.log("clientsverifie",this.clientsverifie)
+          }
+        )
+      }
+//sadmin
       nbAdmins(){
         this.statistiqueService.calculNbAdmins(this.dataUser.tenant_id).subscribe(
           data=> {
@@ -185,6 +225,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.nbclients=data;
             this.commercant.clients=this.nbclients
             console.log("clients",this.commercant.clients)
+          }
+        )
+      }
+      nbCommercantsAdmin(){
+        this.statistiqueService.nbCommercantadmin(this.dataUser.tenant_id).subscribe(
+          data=> {
+            this.nbCommercant=data;
+            console.log("commercantsnb",this.nbCommercant)
           }
         )
       }
@@ -206,6 +254,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
         )
       }
+      //test
       isAdmin():any{
         if(this.dataUser.role=="ADMIN"){
           return this.Admin=true;
@@ -303,4 +352,5 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.subscription.unsubscribe();
         }
     }
+    
 }

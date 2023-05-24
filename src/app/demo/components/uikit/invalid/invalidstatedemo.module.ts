@@ -18,6 +18,8 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { DialogModule } from 'primeng/dialog';
+
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 		ConfirmPopupModule,
 		ToastModule,
 		TableModule,
-		ToggleButtonModule
+		ToggleButtonModule,
+		DialogModule
 		
 	],
 	declarations: [InvalidStateDemoComponent]

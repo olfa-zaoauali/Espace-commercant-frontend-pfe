@@ -16,11 +16,12 @@ import { environment } from 'src/environments/environment';
 })
 export class InvalidStateDemoComponent implements OnInit {
     idFrozen: boolean = false;
+    Dialog: boolean = false;
 
     countries: any[] = [];
     cashout: Cashout=new Cashout(0,"","",0,0,"");
     cashouts:Cashout[]=[];
-    commercant: Commercant= new Commercant(0,"","","","","","","","",0,0,0,0,0,0,false,"","");
+    commercant: Commercant= new Commercant(0,"","","","","","","","","",0,0,0,0,0,0,false,"","");
     commission:any ;
     pay:any;
     dataUser : any ;
@@ -28,7 +29,7 @@ export class InvalidStateDemoComponent implements OnInit {
     revenu:any;
     cashoutValid:boolean=false;
     facture: Facture= new Facture(0,"",0,0,0,"","","","","","","");
-
+    id:any;
 
     constructor(public layoutService: LayoutService,private confirmationService: ConfirmationService,private messageService: MessageService, public statistiqueService : StatistiqueService) {
    
@@ -39,7 +40,11 @@ export class InvalidStateDemoComponent implements OnInit {
         this.listCashout();
         this.getCommercant();
          }
-   
+    open(cashout : Cashout){
+          this.Dialog=true;
+          this.id=cashout.id;
+
+         }
     getCommercant(){
         this.statistiqueService.getCommercant(this.dataUser.tenant_id).subscribe(
           data=> {
@@ -58,7 +63,7 @@ export class InvalidStateDemoComponent implements OnInit {
             data=> {
               this.cashout=data;
               console.log("cashout",this.cashout);
-              //location.reload();
+              location.reload();
               this.ngOnInit();
 
             }
@@ -94,6 +99,8 @@ export class InvalidStateDemoComponent implements OnInit {
           this.facture=data;
           console.log("facture",this.facture);
           this.openPDF(Id);
+          this.Dialog=false;
+
         }
       )
     }
@@ -124,11 +131,12 @@ export class InvalidStateDemoComponent implements OnInit {
           1: {cellWidth: 65, textColor: 0, cellPadding: 0}
         },
         body: [
-          ['Facture N° :', this.facture.reference],
+          ['doc N° :', this.facture.reference],
           ['Date :',  this.facture.dateFacture[2]+'/'+this.facture.dateFacture[1]+'/'+this.facture.dateFacture[0]]],
         theme: 'plain',
         tableWidth: 'wrap'
       });
+      
       doc.addImage('assets/layout/images/windlogo.jpg', 'png', doc.internal.pageSize.width - 120, 25, 80, 80);
       doc.line(30, 85, 560, 85); // horizontal line
       autoTable(doc, {
@@ -138,9 +146,9 @@ export class InvalidStateDemoComponent implements OnInit {
         headStyles: { fillColor: [102, 102, 102], textColor : [255,255,255]},
         columnStyles: {
           0: {cellWidth: 120, textColor: 0},
-          1: {cellWidth: 110, textColor: 0}
+          1: {cellWidth: 150, textColor: 0}
         },
-        head: [[{content: 'Client', colSpan: 2, styles: {halign: 'center'}}]],
+        head: [[{content: 'Commerçant', colSpan: 4, styles: {halign: 'center'}}]],
         body: [
           ['Nom', this.commercant.firstname+' '+this.commercant.lastname],
           ['Email', this.commercant.email],
@@ -161,35 +169,22 @@ export class InvalidStateDemoComponent implements OnInit {
         },
         body: [
           ['Total HT', this.facture.ht],
-          ['Total TVA', this.facture.tva],
-          ['Total TTC', this.facture.ttc],
         ],
         theme: 'grid',
       });
-      autoTable(doc, {
-        styles: {font: 'Amiri', fontSize: 15, halign: 'left', textColor: 1},
-        //  styles: {font: 'Amiri', fontSize: 12, halign: 'right', lineColor: 1, lineWidth: 2, overflow: 'linebreak'},
-        // margin: {right: 375},
-        startY: y,
-        headStyles: { fillColor: [102, 102, 102], textColor : [255,255,255]},
-        margin: {left: 50},
-        columnStyles: {
-          0: {cellWidth: 80},
-          1: {cellWidth: 80, }
-        },
-        head: [[ 'Base TVA', 'Total TVA']],
-        body: [
-          ['19%',  this.facture.ttc-this.facture.ht+'DT'],
-        ],
-        theme: 'grid',
-      });
+      
       doc.setFontSize(15);
       const testText3 = 'ARRÊTER LA PRÉSENTE FACTURE À LA SOMME :\n' +
-      this.facture.totalLettre;
-      doc.text(testText3, 25, (doc as any).lastAutoTable.finalY + 40, {align: 'left'});
-      
-      const pages = doc.getNumberOfPages();
-      doc.setFontSize(10);
+        this.facture.totalLettre;
+        doc.text(testText3, 60, (doc as any).lastAutoTable.finalY + 40, {align: 'left'});
+        doc.setFontSize(15);
+        const testText5 = 'Signature et cachet  ';
+        doc.text(testText5, 60, (doc as any).lastAutoTable.finalY + 120, {align: 'left'});
+        const testText6 = 'Notes:\n' +
+        'Payée';
+        doc.text(testText6, doc.internal.pageSize.width / 2, (doc as any).lastAutoTable.finalY + 120, {align: 'left'});
+        const pages = doc.getNumberOfPages();
+        doc.setFontSize(10);
       for (let j = 1; j < pages + 1; j++) {
         doc.setPage(j);
         const str = '  Rue Chaanbi MAHDIA, TUNISIE - Téléphone:  73 671 986 - E-mail: administration@wind-consulting-tunisia.com ';
@@ -201,6 +196,6 @@ export class InvalidStateDemoComponent implements OnInit {
         doc.setFontSize(10);
         doc.text(stra, doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 15, {align: 'center'});
       }
-      doc.save('FacturefR_v2.pdf');
+      doc.save('Cashout.pdf');
     } 
 }

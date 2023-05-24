@@ -23,7 +23,7 @@
             <p-toolbar *ngIf="isAdmin()" styleClass="mb-4">
                 <h1 class="m-10">Liste des clients</h1>
             </p-toolbar>
-            <p-table #dt [value]="clients" [columns]="cols" responsiveLayout="scroll" [rows]="8" [globalFilterFields]="['firstname','lastname','email','company','domain',]" [rows]="4" [paginator]="true" [rowsPerPageOptions]="[4,8,12]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
+            <p-table #dt [value]="clients" [columns]="cols" responsiveLayout="scroll" [rows]="12" [globalFilterFields]="['firstname','lastname','email','company','domain',]" [rows]="6" [paginator]="true" [rowsPerPageOptions]="[6,12,24]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
@@ -35,22 +35,24 @@
                 <ng-template pTemplate="header">
                  
                     <tr>
-                        <th>Logo</th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Email</th>
-                        <th>Telephone</th>
-                        <th>Sociéte</th>
-                        <th>Domaine</th>
-                        <th >Adresse</th>
-                        <th>Ville</th>
-                        <th>Employées</th>
-                        <th *ngIf="isSadmin()">Client de </th>
-                        <th *ngIf="isAdmin()">Client de </th>
-                        <th>Vérifié</th>
+                        <th style="min-width: 6rem">Logo</th>
+                        <th style="min-width: 6rem">Nom</th>
+                        <th style="min-width: 6rem">Prénom</th>
+                        <th style="min-width: 6rem">Email</th>
+                        <th style="min-width: 6rem">Telephone</th>
+                        <th style="min-width: 6rem">Sociéte</th>
+                        <th style="min-width: 6rem">Domaine</th>
+                        <th style="min-width: 6rem">Adresse</th>
+                        <th style="min-width: 6rem">Ville</th>
+                        <th style="min-width: 6rem">Employées</th>
+                        <th style="min-width: 10rem">Date de création</th>
+                        <th style="min-width: 10rem">Date d'expiration</th>
+                        <th style="min-width: 6rem" *ngIf="isSadmin()">Client de </th>
+                        <th style="min-width: 6rem" *ngIf="isAdmin()">Client de </th>
+                        <th style="min-width: 6rem">Vérifié</th>
 
-                        <th *ngIf="isSadmin()">CompteA/D</th>
-                        <th *ngIf="isSadmin()"></th>
+                        <th style="min-width: 6rem" *ngIf="isSadmin()">CompteA/D</th>
+                        <th style="min-width: 6rem" *ngIf="isSadmin()||isAdmin()"></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -68,7 +70,8 @@
                         <td>{{ client.adresse}}</td>
                         <td>{{ client.ville}}</td>
                         <td>{{ client.nbEmployer}}</td>
-                
+                        <td>{{client.dateCreation[2]}}/{{client.dateCreation[1]}}/{{client.dateCreation[0]}}</td>
+                        <td>{{client.dateExpiration[2]}}/{{client.dateExpiration[1]}}/{{client.dateExpiration[0]}}</td>
                         <td *ngIf="isSadmin()">{{client.emailCommercant}}</td>
                         <td *ngIf="isAdmin()">{{client.emailCommercant}}</td>
                         <td class="text-center" >
@@ -90,9 +93,17 @@
                                 </ng-template>
                             </div>    
                         </td>
-                        <td><button pButton style="margin-left: -25px;" pRipple  icon="pi pi-pencil" class="p-button-rounded p-button-warning " (click)="editProduct(client)"></button>
+                        <td *ngIf="isAdmin()">
+                            <div class="example-button-container">
+                                <button  *ngIf="!client.enabled ; else disabled"  pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-success mr-2"  (click)="openDialogFacture(client)"  ></button>
+                                <ng-template #disabled>
+                                <button  pButton pRipple disabled="true" icon="pi pi-check"  class="p-button-rounded p-button-success mr-2"  ></button>
+                                </ng-template>
+                            </div>    
                         </td>
-                        <td><button pButton style="margin-left: -20px;" pRipple icon="pi pi-trash" class="p-button-rounded  p-button-danger" (click)="deleteProduct(client)"></button>
+                        <td><button pButton style="margin-left: -40px;" pRipple  icon="pi pi-pencil" class="p-button-rounded p-button-warning " (click)="editProduct(client)"></button>
+                        </td>
+                        <td><button pButton style="margin-left: -25px;" pRipple icon="pi pi-trash" class="p-button-rounded  p-button-danger" (click)="deleteProduct(client)"></button>
                         </td>
                     </tr>
                     <p-dialog [(visible)]="Dialog" header="Confirmer" [modal]="true" [style]="{width:'450px'}">
@@ -128,6 +139,60 @@
                 </ng-template>
             </p-table>
         </div>
+       <!-- addFacture-->
+       <p-dialog [(visible)]="DialogAddClient" [style]="{width: '600px'}" header="Créer Facture" [modal]="true" class="p-fluid">
+        <ng-template pTemplate="content">
+            <div class="field">
+                <label for="firstname">Nom</label>
+                <input type="text" pInputText id="firstname" name="firstname" [(ngModel)]="client.firstname" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.firstname}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.firstname">firstname is required.</small>
+            </div>
+            <div class="field">
+                <label for="lastname">Prénom</label>
+                <input type="text" pInputText id="lastname"  name="lastname" [(ngModel)]="client.lastname" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.lastname}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.lastname">lastname is required.</small>
+            </div>
+            <div class="field">
+                <label for="email">Email</label>
+                <input type="text" pInputText id="email" name="email" [(ngModel)]="client.email"  required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.email}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.email">email is required.</small>
+            </div>
+            <div class="field">
+                <label for="telephone">Télephone</label>
+                <input type="text" pInputText id="telephone" name="telephone" [(ngModel)]="client.telephone" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.telephone}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.telephone">telephone is required.</small>
+            </div> <div class="field">
+                <label for="company">Sociéte</label>
+                <input type="text" pInputText id="company" name="company" [(ngModel)]="client.company" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.company}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.company">company is adresse.</small>
+            </div> 
+            <div class="field">
+                <label for="adrees">Adresse</label>
+                <input type="text" pInputText id="adresse" name="adresse" [(ngModel)]="client.adresse" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.adresse}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.adresse">adresse is required.</small>
+            </div>
+             <div class="field">
+                <label for="ville">Ville</label>
+                <input type="text" pInputText id="ville" name="ville" [(ngModel)]="client.ville" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.ville}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.ville">domain is required.</small>
+            </div> 
+            <div class="field">
+                <label for="pays">Pays</label>
+                <input type="text" pInputText id="pays" name="pays" [(ngModel)]="client.pays" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.pays}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.domain">pays is required.</small>
+            </div> 
+            <div class="field">
+                <label for="ht">Montant payée HT</label>
+                <input type="number" pInputText id="ht" name="ht" [(ngModel)]="facture.ht" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !facture.ht}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !facture.ht">pays is required.</small>
+            </div> 
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+            <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text" (click)="validerClien(client.id)" ></button>
+        </ng-template>    
+    </p-dialog>
+
         <!-- add-->
         <p-dialog [(visible)]="DialogAdd" [style]="{width: '600px'}" header="Ajouter Client" [modal]="true" class="p-fluid">
             <ng-template pTemplate="content">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -23,7 +23,7 @@ import { Client } from 'src/app/models/client';
     }
 `]
 })
-export class ErrorComponent { 
+export class ErrorComponent implements OnInit  { 
     image:any
     selectedFiles?: FileList;
     currentFile?: File;
@@ -35,7 +35,7 @@ export class ErrorComponent {
     tenant_id:any;
     fileInfos?: Observable<any>;
     users:any ;
-    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","",[],0,0,0,0,"",false);
+    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","","","",[],0,0,0,0,"",false)
     file : any;
     logo:any;
     userFile : any;
@@ -44,15 +44,20 @@ export class ErrorComponent {
     logoURL : any;
     imageFile:any
     clients: Client[]=[];
-    client: Client= new Client(1,"","","","","","","","",0,"","","",false,false,"","","");
+    client: Client= new Client(1,"","","","","","","","",0,"","","","","",false,false,"","","");
     selectedCountryAdvanced: any[] = [];
-    
+    Sadmins: Admin2[]=[];
+    id:any;
 
     constructor(private clientservice: CountryService ,private messageService: MessageService, public layoutService: LayoutService, private builder: FormBuilder, private router: Router){}
+  ngOnInit(): void {
+    this.getSadmin();
+  }
     //client
+
     saveClient(response:any){
       this.client.emailCommercant="Wind";
-      this.client.sadminId="54c4aa42-9914-4b5a-a7fa-8f97c56d1d84";
+      this.client.sadminId=this.id;
       var Datacommercant = JSON.stringify(this.client);
       this.clientservice.addclient(Datacommercant , this.image ).subscribe(res=>{console.log(res);
         alert('Votre demande est bien reçu, Vérifier votre email');
@@ -68,6 +73,15 @@ export class ErrorComponent {
         readerimage.onload = (res=>{this.imageURL= readerimage.result})
         console.log(this.imageFile); 
        }
+       getSadmin(){
+        this.clientservice.getSAdmins().subscribe(
+          data=> {
+            this.Sadmins=data;
+            this.id=this.Sadmins[0].tenantId;
+            console.log("object",this.Sadmins)
+          }
+        );
+      }
      //Admin
       //add avec files
     

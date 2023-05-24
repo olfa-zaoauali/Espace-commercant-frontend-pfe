@@ -12,6 +12,8 @@ export class Client {
         public adresse: string,
         public ville: string,
         public pays: string,
+        public dateExpiration:string,
+        public dateCreation:string,
         public enabled: boolean,
         public verified:boolean,
         public emailCommercant: string,

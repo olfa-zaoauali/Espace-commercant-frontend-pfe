@@ -15,6 +15,8 @@ export class Admin2 {
         public matricule: string,
         public batinda: string,
         public logo: string,
+        public dateExpiration:string,
+        public dateCreation:string,
         public moduleId: number[],
         public revenuNet:number,
         public revenuTotal:number,

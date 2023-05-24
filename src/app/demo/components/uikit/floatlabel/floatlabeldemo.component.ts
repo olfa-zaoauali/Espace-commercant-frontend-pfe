@@ -35,7 +35,7 @@ export class FloatLabelDemoComponent implements OnInit {
     value11: any;
     value12: any;*/
     admins: Admin2[]=[];
-    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","",[],0,0,0,0,"",false);
+    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","","","",[],0,0,0,0,"",false)
     facture: Facture= new Facture(0,"",0,0,0,"","","","","","","");
     factures:Facture[]=[]
     dataUser : any ;
@@ -225,10 +225,15 @@ export class FloatLabelDemoComponent implements OnInit {
       doc.setFontSize(15);
       const testText3 = 'ARRÊTER LA PRÉSENTE FACTURE À LA SOMME :\n' +
         this.facture.totalLettre;
-      doc.text(testText3, 25, (doc as any).lastAutoTable.finalY + 40, {align: 'left'});
-      
-      const pages = doc.getNumberOfPages();
-      doc.setFontSize(10);
+        doc.text(testText3, 25, (doc as any).lastAutoTable.finalY + 40, {align: 'left'});
+        doc.setFontSize(15);
+        const testText5 = 'Signature et cachet  ';
+        doc.text(testText5, 25, (doc as any).lastAutoTable.finalY + 120, {align: 'left'});
+        const testText6 = 'Notes:\n' +
+        'Payée';
+        doc.text(testText6, doc.internal.pageSize.width / 2, (doc as any).lastAutoTable.finalY + 120, {align: 'left'});
+        const pages = doc.getNumberOfPages();
+        doc.setFontSize(10);
       for (let j = 1; j < pages + 1; j++) {
         doc.setPage(j);
         const str = '  Rue Chaanbi MAHDIA, TUNISIE - Téléphone:  73 671 986 - E-mail: administration@wind-consulting-tunisia.com ';
@@ -240,8 +245,8 @@ export class FloatLabelDemoComponent implements OnInit {
         doc.setFontSize(10);
         doc.text(stra, doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 15, {align: 'center'});
       }
-      doc.save('FacturefR_v2.pdf');
-      } 
+      doc.save('Facture Client.pdf');
+    }
 
   /*  searchCountry(event: any) {
         // in a real application, make a request to a remote url with the query and

@@ -12,8 +12,8 @@
         <div class="card">
             <h1 style="margin-top: 50px; text-align: center; ">CONTRAT DE TRAVAIL</h1>
             <br><br>
-                <p style="line-height: 200%;font-size:large; " ><strong> Wind Consulting</strong>, sise à Mahdia Rue Chaanbi, Rondpoint Ibn El Jazzar Immeuble Ben Nahia, Mahdia 5100, immatriculée au registre Tunis sous le numéro :
-                    <strong> B1612212017 </strong> ayant pour identifiant fiscal le <strong> n°1493899B</strong> et représentée par son gérant<strong> Mr Karim Khouja</strong>.<br>
+                <p style="line-height: 200%;font-size:large; " ><strong>{{admin.company}}</strong>, sise à {{admin.adresse}}, {{admin.ville}} 5100, immatriculée au registre Tunis sous le numéro :
+                    <strong> B1612212017 </strong> ayant pour identifiant fiscal le <strong> n°{{admin.matricule}}</strong> et représentée par son gérant<strong> Mr {{admin.firstname}} {{admin.lastname}}</strong>.<br>
                     Ci-après dénommée <strong> « Le Commerçant » </strong>, D’une part Et
                     Mr/Mme <strong> {{commercant.firstname}} {{commercant.lastname}}</strong>.
                     Demeurant à {{commercant.adresse}}. – {{commercant.ville}}.  Ci-après dénommée 
@@ -27,10 +27,10 @@
 
 <div class="card">
     <p-fieldset legend="Article 1" [toggleable]="true" class="line-height-3 m-0">
-     <p   style="font-size:large;">   Mr/Mme <strong> {{commercant.firstname}} {{commercant.lastname}}</strong> est engagé(e) par <strong> Wind Consulting</strong> pour exercer les fonctions d’un <strong>Commerçant</strong>, 
+     <p   style="font-size:large;">   Mr/Mme <strong> {{commercant.firstname}} {{commercant.lastname}}</strong> est engagé(e) par <strong>{{admin.company}}</strong> pour exercer les fonctions d’un <strong>Commerçant</strong>, 
         à ce titre, il/elle s’engage pendant toute la durée du présent contrat à :<br>
      a)	Observer en tout lieu et tout temps la plus grande discrétion tant sur ses activités que sur celles de la société. 
-    Cet engagement est valable pendant toute la durée du contrat et subsiste après cessation des activités auprès de <strong> Wind Consulting</strong>.<br>
+    Cet engagement est valable pendant toute la durée du contrat et subsiste après cessation des activités auprès de <strong> {{admin.company}}</strong>.<br>
      b)	Veiller à la bonne conservation des choses qui lui sont remises dans le 
      cadre de son travail et ne rien faire qui puisse entraîner leur détérioration. <br>
      c)	Conserver en tout lieu et temps le secret professionnel de toutes les informations ou connaissances 
@@ -40,18 +40,18 @@
     </p-fieldset>
     <p-fieldset legend="Article 2" [toggleable]="true" class="line-height-3 m-0" style="font-size: large; ">
         <p  style="font-size:large;"> Le présent contrat est conclu pour une durée indéterminée,
-             débutant le <strong> 10/05/2023 </strong> avec une période d’essai d’un seul mois..</p>
+             débutant le <strong> {{commercant.dateCreation[2]}}/{{commercant.dateCreation[1]}}/{{commercant.dateCreation[0]}} </strong> avec une période d’essai d’un seul mois..</p>
 
     </p-fieldset>
     <p-fieldset legend="Article 3" [toggleable]="true" class="line-height-3 m-0" style="font-size: large; ">
         <p   style="font-size:large;">  Mr/Mme <strong> {{commercant.firstname}} {{commercant.lastname}}</strong> recevra en contre partie de ses fonctions
              une commission sous forme de pourcentage, calculé sur le chiffre d’affaires généré par 
-             la mise en relation entre <strong> Wind Consulting</strong> et le client démarché. </p>
+             la mise en relation entre <strong>{{admin.company}}</strong> et le client démarché. </p>
 
     </p-fieldset>
     <p-fieldset legend="Article 4" [toggleable]="true" class="line-height-3 m-0" style="font-size: large; ">
         <p  style="font-size:large;"> Mr/Mme <strong> {{commercant.firstname}} {{commercant.lastname}}</strong> reste libre d'effectuer pour son propre compte ou pour le compte d'autrui des opérations commerciales si ses derniéres
-             ne concurencent pas diréctement ou indirectement les produits ou les prestations du services de notre sosciété <strong> Wind Consulting</strong>.</p>
+             ne concurencent pas diréctement ou indirectement les produits ou les prestations du services de notre sosciété <strong>{{admin.company}}</strong>.</p>
 
     </p-fieldset>
     <p-fieldset legend="Article 5" [toggleable]="true" class="line-height-3 m-0" style="font-size: large; ">
@@ -61,7 +61,10 @@
 
     </p-fieldset>
     <div style="text-align:end;">
-    <img src="assets/layout/images/windlogo.jpg" style=" width: min-content; height: min-content;  " alt="image">
+        <br>
+   <!-- <img src="assets/layout/images/windlogo.jpg" style=" width: min-content; height: min-content;  " alt="image">-->
+    <img [src]="'http://localhost:8098/api/v1/auth/files/' + admin.logo" style=" width: 150px; height: 150px;" alt="image">
+
     <br>
 </div>
 </div>

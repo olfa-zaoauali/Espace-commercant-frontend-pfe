@@ -1,5 +1,5 @@
     <div  class="grid">
-        <div  class="col-12 lg:col-6 xl:col-3">
+        <div *ngIf="isCommercant()||isSadmin()||isAdmin()" class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
                     <div *ngIf="isCommercant()" >
@@ -12,30 +12,65 @@
                     </div>
                     <div *ngIf="isAdmin()" >
                         <span class="block text-500 font-medium mb-3">Clients</span>
-                        <div class="text-900 font-medium text-xl">{{admin.nbClients}} Sociétés </div>
+                        <div class="text-900 font-medium text-xl">{{admin.nbClients}} Clients </div>
                     </div>
-                    <div class="flex align-items-center justify-content-center bg-purple-100  border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                        <i class="pi pi-users text-purple-500  text-xl"></i>
+                    <div class="flex align-items-center justify-content-center bg-orange-100  border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-users text-orange-500  text-xl"></i>
                     </div>
-                  
                 </div>
-                <span class="text-green-500 font-medium">520  </span>
-                <span class="text-500">newly registered</span>
+                <span class="text-orange-500 font-medium">En suspens</span>
+                <span class="text-500">en cours</span>
+            </div>
+        </div>
+        <div *ngIf="isSadmin()|| isAdmin()" class="col-12 lg:col-6 xl:col-3">
+            <div class="card mb-0">
+                <div class="flex justify-content-between mb-3">
+                    <div *ngIf="isSadmin()">
+                        <span  class="block text-500 font-medium mb-3">Demande d'abonnement</span>
+                        <div class="text-900 font-medium text-xl">{{sadmin.nbAdmins}} Partenaires</div>
+                    </div>
+                    <div *ngIf="isAdmin()">
+                        <span class="block text-500 font-medium mb-3">Clients Vérifiée</span>
+                        <div class="text-900 font-medium text-xl">{{clientsverifie}} Partenaires</div>
+                    </div>
+                    <div class="flex align-items-center justify-content-center bg-green-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-shopping-cart text-green-500 text-xl"></i>
+                    </div>
+                </div>
+                <span  class="text-green-500 font-medium">Validé </span>
+                <span class="text-500">partenaires</span>
+            </div>
+        </div>
+       
+        <div *ngIf="isClient()"  class="col-12 lg:col-6 xl:col-3">
+            <div class="card mb-0">
+                <div class="flex justify-content-between mb-3">
+                    <div  >
+                        <span class="block text-500 font-medium mb-3">Date d'expiration</span>
+                        <div class="text-900 font-medium text-xl">{{Client.dateExpiration[2]}}/{{Client.dateExpiration[1]}}/{{Client.dateExpiration[0]}}
+                        </div>
+                    </div>
+                    <div class="flex align-items-center justify-content-center bg-orange-100  border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-users text-orange-500  text-xl"></i>
+                    </div>
+                </div>
+                <span class="text-orange-500 font-medium">Test</span>
+                <span class="text-500">il vous reste que quelques jours</span>
             </div>
         </div>
         <div *ngIf="isCommercant()" class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
                     <div >
-                        <span class="block text-500 font-medium mb-3">Demande d'abonnement</span>
+                        <span class="block text-500 font-medium mb-3">Clients Validés</span>
                         <div class="text-900 font-medium text-xl">{{commercant.admins}} Sociétés</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
                         <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
                     </div>
                 </div>
-                <span  class="text-green-500 font-medium">24 new </span>
-                <span class="text-500">since last visit</span>
+                <span  class="text-green-500 font-medium">Validé</span>
+                <span class="text-500">partenaires</span>
             </div>
         </div>
         <div *ngIf="isAdmin()" class="col-12 lg:col-6 xl:col-3">
@@ -47,79 +82,89 @@
                         <div class="text-900 font-medium text-xl">{{admin.apayer}} DT</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                        <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
+                        <i class="pi pi-dollar text-blue-500 text-xl"></i>
                     </div>
                 </div>
-                <span  class="text-green-500 font-medium">par mois </span>
-                <span class="text-500">27/05/2023</span>
+                <span  class="text-blue-500 font-medium">par mois </span>
+                <span class="text-500">27/06/2023</span>
             </div>
         </div>
-        <div *ngIf="isSadmin()" class="col-12 lg:col-6 xl:col-3">
+        <div *ngIf="isAdmin()"  class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3">Demande d'abonnement</span>
-                        <div class="text-900 font-medium text-xl">{{sadmin.nbAdmins}} Partenaires</div>
+                    <div  >
+                        <span class="block text-500 font-medium mb-3">Commerçants</span>
+                        <div class="text-900 font-medium text-xl">{{nbCommercant}} Commerçants
+                        </div>
                     </div>
-                    <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                        <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
+                    <div class="flex align-items-center justify-content-center bg-purple-100  border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-user text-purple-500  text-xl"></i>
                     </div>
                 </div>
-                <span  class="text-green-500 font-medium">24 new </span>
-                <span class="text-500">since last visit</span>
+                <span class="text-purple-500 font-medium">Commerce</span>
+                <span class="text-500">Apporteur d'affaire</span>
             </div>
         </div>
-        <div  class="col-12 lg:col-6 xl:col-3">
+       
+        <div *ngIf="isSadmin()"  class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
+                    <!--
                     <div  *ngIf="isCommercant()" >
-                        <span class="block text-500 font-medium mb-3">Chiffre d'affaire</span>
+                        <span class="block text-500 font-medium mb-3">Chiffre d'affaire de la société  </span>
                         <div class="text-900 font-medium text-xl">{{commercant.revenu}} DT</div>
-                    </div>
-                    <div  *ngIf="isSadmin()" >
+                    </div>-->
+                    <div>
                         <span class="block text-500 font-medium mb-3">Chiffre d'affaire</span>
                         <div class="text-900 font-medium text-xl">{{sadmin.revenu}} DT</div>
                     </div>
-                    <div  *ngIf="isAdmin()" >
-                        <span class="block text-500 font-medium mb-3">Chiffre d'affaire</span>
-                        <div class="text-900 font-medium text-xl">{{admin.revenuTotal}} DT</div>
-                    </div>
-                    <div class="flex align-items-center justify-content-center bg-green-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                        <i class="pi pi-dollar text-green-500 text-xl"></i>
+                    <div class="flex align-items-center justify-content-center bg-purple-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-dollar text-purple-500 text-xl"></i>
                     </div>
                 </div>
-                <span class="text-green-500 font-medium">%52+  </span>
-                <span class="text-500">since last week</span>
+                <span class="text-purple-500 font-medium">Revenu généré</span>
+                <span class="text-500">En dinar tunisien</span>
             </div>
         </div>
-        <div  class="col-12 lg:col-6 xl:col-3">
+        <div *ngIf="isCommercant()||isSadmin()"  class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
                     <div *ngIf="isCommercant()">
-                        <span class="block text-500 font-medium mb-3">Commission</span>
-                        <div class="text-900 font-medium text-xl">{{commercant.pay}} DT</div>
+                        <span class="block text-500 font-medium mb-3">Commission totale</span>
+                        <div class="text-900 font-medium text-xl">{{commercant.commission}} DT</div>
                     </div>
                     <div *ngIf="isSadmin()">
                         <span class="block text-500 font-medium mb-3">Revenu Net</span>
                         <div class="text-900 font-medium text-xl">{{sadmin.revenuNet}} DT</div>
                     </div>
-                    <div *ngIf="isAdmin()">
-                        <span class="block text-500 font-medium mb-3">Revenu Net</span>
-                        <div class="text-900 font-medium text-xl">{{admin.revenuNet}} DT</div>
-                    </div>
-                    <div class="flex align-items-center justify-content-center bg-orange-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                        <i class="pi pi-calculator text-orange-500 text-xl"></i>
+                    <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-calculator text-blue-500 text-xl"></i>
                     </div>
                 </div>
-                <span class="text-green-500 font-medium">%52+ </span>
-                <span class="text-500">since last week</span>
+                <span class="text-blue-500 font-medium">Revenu généré </span>
+                <span class="text-500">En dinar tunisien</span>
             </div>
         </div>
-        <div class="col-8 xl:col-12">
+        <div *ngIf="isSadmin()||isAdmin()" class="card col-12 lg:col-12 xl:col-12">
+            <div class="flex align-items-center justify-content-between mb-4">
+                <h5>Notifications</h5>
+            </div>
+            <ul class="p-0 mx-0 mt-0 mb-4 list-none" *ngFor="let historique of historiques">
+                <li class="flex align-items-center py-2 border-bottom-1 surface-border">
+                    <div class="w-3rem h-3rem flex align-items-center justify-content-center bg-green-100 border-circle mr-3 flex-shrink-0">
+                        <i class="pi pi-dollar text-xl text-green-500"></i>
+                    </div>
+                    <span class="text-900 line-height-3">
+                <span class="text-700">{{historique.message}}</span>
+            </span>
+            </ul>
+        </div>
+        
+     <!--  <div class="col-8 xl:col-12">
             <div class="card">
                 <h5>Chiffre d'affaire</h5>
                 <p-chart type="line" [data]="chartData" [options]="chartOptions"></p-chart>
-            </div>
+            </div>--> 
 
          <!--   <div class="card">
                 <div class="flex align-items-center justify-content-between mb-4">
@@ -177,7 +222,7 @@
                    Get Started
                </a>
            </div>
-        </div>-->
-    </div>
+        </div>
+    </div>-->
 </div>
 

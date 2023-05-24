@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Client } from 'src/app/models/client';
+import { Facture } from 'src/app/models/facture';
 import { Modules } from 'src/app/models/modules';
 
 @Injectable()
@@ -35,6 +36,9 @@ export class CountryService {
       }
       public getModulesList(): Observable<Modules[]> {
         return this.http.get<Modules[]>(`${this.apiurl}modules`)
+      }
+      public getSAdmins(): Observable<any> {
+        return this.http.get<any>(`${this.apiurl}sadmins`)
       }
       updateenabledcomm(id : Number , enabled: boolean): Observable<Client>{
         return this.http.put<Client>(`${this.apiurl}clients/enabled/${id}`,enabled);
@@ -98,6 +102,8 @@ export class CountryService {
       validation(id : Number): Observable<void>{
         return this.http.get<void>(`${this.apiurl}clients/validation/${id}`);
       }
-      
+      ValiderClient(id : Number,facture:any): Observable<Facture>{
+        return this.http.post<Facture>(`${this.apiurl}admins/factureClient/${id}`,facture);
+      }
       
 }

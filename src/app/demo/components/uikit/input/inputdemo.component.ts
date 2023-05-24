@@ -50,7 +50,7 @@ export class InputDemoComponent implements OnInit {
     valSelect2: string = "";
     fileInfos?: Observable<any>;
     users:any ;
-    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","",[],0,0,0,0,"",false);
+    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","","","",[],0,0,0,0,"",false)
     file : any;
     logo:any;
     userFile : any;
@@ -58,7 +58,7 @@ export class InputDemoComponent implements OnInit {
     imageURL : any;
     logoURL : any;
     modules: Modules[]=[];
-    client: Client= new Client(1,"","","","","","","","",0,"","","",false,false,"","","");
+    client: Client= new Client(1,"","","","","","","","",0,"","","","","",false,false,"","","");
     dataUser : any ;
     imageUrl: any;
     role: any;

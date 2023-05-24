@@ -16,10 +16,10 @@ export class BlocksComponent implements OnInit{
     dataUser : any ;
     imageUrl: any;
     role: any;
-    commercant: Commercant= new Commercant(0,"","","","","","","","",0,0,0,0,0,0,false,"","");
+    commercant: Commercant= new Commercant(0,"","","","","","","","","",0,0,0,0,0,0,false,"","");
     sadmin:SAdmin=new SAdmin(0,"","","","","","","","","",0,0,0,0,true);   
-    client: Client= new Client(1,"","","","","","","","",0,"","","",false,false,"","","");
-    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","",[],0,0,0,0,"",false);
+    client: Client= new Client(1,"","","","","","","","",0,"","","","","",false,false,"","","");
+    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","","","",[],0,0,0,0,"",false);
 
     compte:Compte= new Compte("","","");
     Resultat:any;

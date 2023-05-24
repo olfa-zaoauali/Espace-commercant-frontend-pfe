@@ -6,12 +6,15 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { environment } from 'src/environments/environment';
 import html2canvas from 'html2canvas';
+import { Admin2 } from 'src/app/models/admin2';
 
 @Component({
     templateUrl: './emptydemo.component.html'
 })
 export class EmptyDemoComponent  implements OnInit {
-    commercant: Commercant= new Commercant(0,"","","","","","","","",0,0,0,0,0,0,false,"","");
+    commercant: Commercant= new Commercant(0,"","","","","","","","","",0,0,0,0,0,0,false,"","");
+    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","","","",[],0,0,0,0,"",false);
+
     dataUser : any ;
     tenant_id:any
     constructor(private statistiqueService:StatistiqueService,public layoutService: LayoutService ) { }
@@ -19,6 +22,7 @@ export class EmptyDemoComponent  implements OnInit {
         this.dataUser = this.layoutService.getDataFromToken();
         this.tenant_id=this.dataUser.tenant_id;
         this.getcommercant();
+        this.getAdmin();
 
     }
     getcommercant(){
@@ -26,6 +30,14 @@ export class EmptyDemoComponent  implements OnInit {
           data=> {
             this.commercant=data;
             console.log("commercant",this.commercant)
+          }
+        )
+      }
+      getAdmin(){
+        this.statistiqueService.getInfoAdmin(this.tenant_id).subscribe(
+          data=> {
+            this.admin=data;
+            console.log("admin",this.admin)
           }
         )
       }

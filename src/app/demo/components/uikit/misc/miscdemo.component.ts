@@ -9,6 +9,7 @@ import { ProductService } from 'src/app/demo/service/product.service';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Client } from 'src/app/models/client';
 import { Commercant } from 'src/app/models/commercant';
+import { Facture } from 'src/app/models/facture';
 
 @Component({
     templateUrl: './miscdemo.component.html',
@@ -27,6 +28,9 @@ export class MiscDemoComponent implements OnInit, OnDestroy {
 
     productDialog: boolean = false;
     DialogAdd:boolean=false;
+    DialogAddClient:boolean=false;
+
+
 
     deleteProductDialog: boolean = false;
 
@@ -47,7 +51,7 @@ export class MiscDemoComponent implements OnInit, OnDestroy {
 
     rowsPerPageOptions = [5, 10, 20];
     clients: Client[]=[];
-    client: Client= new Client(1,"","","","","","","","",0,"","","",false,false,"","","");
+    client: Client= new Client(1,"","","","","","","","",0,"","","","","",false,false,"","","");
     comm:any
     image:any
     imageFile:any
@@ -62,6 +66,7 @@ export class MiscDemoComponent implements OnInit, OnDestroy {
     Dialog: boolean = false;
     name:any
     id:any
+    facture: Facture= new Facture(0,"",0,0,0,"","","","","","","");
 
     constructor(public layoutService: LayoutService, private clientservice: CountryService , private productService: ProductService, private messageService: MessageService,private router: Router) { }
     ngOnDestroy(): void {
@@ -86,6 +91,20 @@ export class MiscDemoComponent implements OnInit, OnDestroy {
         
        
     }
+    //facture
+    validerClien(id:number){
+      this.clientservice.ValiderClient(id,this.facture).subscribe(
+        data=> {
+          this.facture=data;
+          console.log("object",this.facture);
+          this.ngOnInit();
+          this.DialogAddClient=false;
+          this.messageService.add({ severity: 'success', summary: 'Succée', detail: 'client validé avec succée', life: 3000 });
+        }
+      );
+
+    }
+    //
     listClients(){
         this.clientservice.getClientList().subscribe(
             data=> {
@@ -188,6 +207,12 @@ openNew() {
     // this.submitted = false;
      this.DialogAdd = true;
  }
+ openDialogFacture(client:Client) {
+  // this.product = {};
+  // this.submitted = false;
+  this.client = { ...client };
+   this.DialogAddClient = true;
+}
  openvalidation(client:Client){
   this.Dialog=true;
   this.name=client.firstname +' '+ client.lastname;

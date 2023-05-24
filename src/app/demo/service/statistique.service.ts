@@ -53,6 +53,13 @@ export class StatistiqueService {
   public nbClientadmin(tenantId: string): Observable<number> {
     return this.http.get<number>(`${this.apiurl}admins/nbClients/${tenantId}`)
   }
+  public nbCommercantadmin(tenantId: string): Observable<number> {
+    return this.http.get<number>(`${this.apiurl}admins/commercantsnb/${tenantId}`)
+  }
+  public nbClientverifie(tenantId: string): Observable<number> {
+    return this.http.get<number>(`${this.apiurl}admins/verified/${tenantId}`)
+  }
+
   //facture 
   public getAdmin(tenantId: string): Observable<Admin2> {
     return this.http.get<Admin2>(`${this.apiurl}admins/tenantId/${tenantId}`)
@@ -103,6 +110,9 @@ export class StatistiqueService {
   public getInfoCommerçant(tenantId:string):Observable<Commercant> {
     return this.http.get<Commercant>(`${this.apiurl}commercants/tenantId/${tenantId}`)
   }
+  public getInfoAdmin(tenantId:string):Observable<any> {
+    return this.http.get<any>(`${this.apiurl}commercants/infosadmins/${tenantId}`)
+  }
   //compte
   public updateComtpecommercant(tenantId:string,commercant:any):Observable<any> {
     return this.http.patch<any>(`${this.apiurl}commercants/updatecompte/${tenantId}`,commercant)
@@ -146,4 +156,9 @@ export class StatistiqueService {
   public changerMotDePasseAdmin(tenant_id:string,compte:any):Observable<any> {
     return this.http.put<any>(`${this.apiurl}admins/password/${tenant_id}`,compte)
   }
+  //Notifications
+  public getNotification(tenant_id:string):Observable<any> {
+    return this.http.get<any>(`${this.apiurl}historiques/${tenant_id}`)
+  }
+  
 }

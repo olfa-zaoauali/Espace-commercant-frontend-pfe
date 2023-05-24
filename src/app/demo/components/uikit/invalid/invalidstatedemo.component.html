@@ -40,7 +40,7 @@
 						<th style="width:200px">Date de création</th>
 						<th style="width:200px">Temp de création</th>
 						<th style="width:200px">Montant</th>
-						<th style="width:200px">Facture</th>
+						<th style="width:200px">Télécharger documenet</th>
 					</tr>
 				</ng-template>
 				<ng-template pTemplate="body" let-cashout>
@@ -50,10 +50,21 @@
 						<td>{{ cashout.temp[0]}}:{{ cashout.temp[1]}}:{{ cashout.temp[2]}}</td>
 						<td>{{ cashout.cashout}}DT</td>
 						<td>
-                            <button  pButton icon="pi pi-download" pRipple type="button" label="Facture" class="p-button-secondary" (click)="getFacture(cashout.id)"></button>
+                            <button  pButton icon="pi pi-download" pRipple type="button" label="Télécharger" class="p-button-secondary" (click)="open(cashout)"></button>
                         </td>
 						
-					</tr>				</ng-template>
+					</tr>				
+                    <p-dialog [(visible)]="Dialog" header="Confirmer" [modal]="true" [style]="{width:'450px'}">
+                        <div class="flex align-items-center justify-content-center">
+                            <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                            <span *ngIf="commercant">Etes-vous sûr que vous télécharger le document de id {{id}}?</span>
+                        </div>
+                        <ng-template pTemplate="footer">
+                            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="Non" (click)="Dialog = false"></button>
+                            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Oui" (click)="getFacture(cashout.id)"></button>
+                        </ng-template>
+                    </p-dialog>
+                </ng-template>
 			</p-table>
 		</div>
 	</div>

@@ -54,8 +54,9 @@
                         <th>Ville</th>
                         <th>Pays</th>
                         <th>Commission</th>
+                        <th>Date de Création</th>
                         <th>CompteA/D</th>
-                        <th *ngIf="isSadmin()"></th>
+                        <th></th>
                         <th></th>
                         <th></th>            
                     </tr>
@@ -110,26 +111,26 @@
                         <td>{{ commercant.ville}}</td>
                         <td>{{ commercant.pays}}</td>
                         <td>{{ commercant.pourcentage}} %</td>
+                        <td>{{commercant.dateCreation[2]}}/{{commercant.dateCreation[1]}}/{{commercant.dateCreation[0]}}</td>
                         <td>
-                            <label  style="margin-top: 10px; margin-left: 10px;" class="switch" >
+                            <label  style="margin-top: 10px; margin-left: 10px;"  class="switch" >
                                 <p-inputSwitch (click)="updateenabled(commercant.id)" *ngIf="!commercant.enabled ; else enabled" ></p-inputSwitch>
                                 <ng-template #enabled>
                                   <p-inputSwitch (click)="updatenotenabled(commercant.id)"   [(ngModel)]="checked"></p-inputSwitch>
                               </ng-template>
                           </label>
                         </td>
-                       
-                        <td *ngIf="isSadmin()">
+                        <td>
                             <div class="example-button-container">
-                                <button  *ngIf="!commercant.enabled ; else disabled"  pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-success mr-2" style="margin-left: 10px;" (click)="openvalidation(commercant)"  ></button>
+                                <button  *ngIf="!commercant.enabled ; else disabled"  pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-success mr-2" (click)="openvalidation(commercant)"  ></button>
                                 <ng-template #disabled>
-                                <button  pButton pRipple disabled="true" icon="pi pi-check"  class="p-button-rounded p-button-success mr-2" style="margin-left: 10px;" ></button>
+                                <button  pButton pRipple disabled="true" icon="pi pi-check"  class="p-button-rounded p-button-success mr-2"></button>
                                 </ng-template>
                             </div>    
                         </td>
-                        <td><button pButton style="margin-left: -38px;" pRipple  icon="pi pi-pencil" class="p-button-rounded p-button-warning " (click)="editProduct(commercant)"></button>
+                        <td><button pButton style="margin-left: -33px;" pRipple  icon="pi pi-pencil" class="p-button-rounded p-button-warning " (click)="editProduct(commercant)"></button>
                         </td>
-                        <td><button pButton style="margin-left: -20px;" pRipple icon="pi pi-trash" class="p-button-rounded  p-button-danger" (click)="deleteProduct(commercant)"></button>
+                        <td><button pButton style="margin-left: -25px;" pRipple icon="pi pi-trash" class="p-button-rounded  p-button-danger" (click)="deleteProduct(commercant)"></button>
                         </td>
                     </tr>
                     <p-dialog [(visible)]="Dialog" header="Confirmer" [modal]="true" [style]="{width:'450px'}">

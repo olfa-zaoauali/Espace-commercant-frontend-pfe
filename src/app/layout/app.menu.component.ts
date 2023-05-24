@@ -103,10 +103,8 @@ export class AppMenuComponent implements OnInit {
                        
                         { label: 'CRM', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
                         { label: 'Espace Commerçant', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
-                        { label: 'Immobilisation', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
-                        { label: 'Gestion RH', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
-                        { label: 'Espace Commerçant', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
-                        { label: 'Décisionnel / B.I', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] }
+                        { label: 'Wind BRAVO', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
+                        { label: 'Gestion de stock', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] }
 
                       
                     ]
@@ -179,7 +177,6 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['']
                     },
                    
-                    { label: 'télecharger Contrat', icon: 'pi pi-fw pi-download', routerLink: ['/dashboard/uikit/file'] },
                     {
                         label: 'Compte',
                         icon: 'pi pi-fw pi-user',
@@ -192,7 +189,6 @@ export class AppMenuComponent implements OnInit {
                             },
                         ]
                     },
-                    
                     
                 ]
             },

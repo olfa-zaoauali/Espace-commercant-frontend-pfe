@@ -36,7 +36,7 @@ export class TableDemoComponent implements OnInit {
     @ViewChild('filter') filter!: ElementRef;
     admins:Admin2[]=[];
     admin1:Admin[]=[];
-    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","",[],0,0,0,0,"",false);
+    admin: Admin2=new Admin2(0,"","","","","","","",0,"","","","","","","","",[],0,0,0,0,"",false);
     name:any;
     id:any;
     tenantId:any;
