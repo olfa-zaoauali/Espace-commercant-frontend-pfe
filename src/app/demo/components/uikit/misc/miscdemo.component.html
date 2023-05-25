@@ -23,7 +23,7 @@
             <p-toolbar *ngIf="isAdmin()" styleClass="mb-4">
                 <h1 class="m-10">Liste des clients</h1>
             </p-toolbar>
-            <p-table #dt [value]="clients" [columns]="cols" responsiveLayout="scroll" [rows]="12" [globalFilterFields]="['firstname','lastname','email','company','domain',]" [rows]="6" [paginator]="true" [rowsPerPageOptions]="[6,12,24]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
+            <p-table #dt [value]="clients" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['firstname','lastname','email','company','domain',]" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                         <span class="block mt-2 md:mt-0 p-input-icon-left">

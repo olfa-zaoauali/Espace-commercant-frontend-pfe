@@ -29,12 +29,12 @@
 				<input name="email" [(ngModel)]="client.email" id="email" type="text" pInputText>
 				<label for="float-input"></label>
 			</span>
-			<h5>Mot de passe </h5>
+		<!--	<h5>Mot de passe </h5>
 			<span class="p-float-label">
 				<p-password id="password"   name="password" [(ngModel)]="admin.password"   [toggleMask]="true" ></p-password>
 
 				<label for="float-input"></label>
-			</span>
+			</span>-->
 			<h5>Société</h5>
 			<span class="p-float-label">
 				<input name="company" [(ngModel)]="client.company" id="company" type="text" pInputText>
@@ -58,6 +58,14 @@
 			<h5>Pays</h5>
 			<p-autoComplete [(ngModel)]="client.pays" [(ngModel)]="selectedCountryAdvanced" [suggestions]="filteredCountries" (completeMethod)="filterCountry($event)" field="name" [dropdown]="true">
 			</p-autoComplete>
+			<h5>Nombre des employées</h5>
+			<p-inputNumber [(ngModel)]="client.nbEmployer" mode="decimal" [showButtons]="true" [min]="0" [max]="100">
+			</p-inputNumber>
+			<h5>Matricule fiscale</h5>
+			<span class="p-float-label">
+				<input  id="matricule" type="text"  name="matricule" [(ngModel)]="admin.matricule" pInputText>
+				<label for="float-input"></label>
+			</span>
 			
 		<!--	<h5>Calendar</h5>
 			<p-calendar [showIcon]="true" inputId="icon"></p-calendar>-->
@@ -72,14 +80,7 @@
 
 	<div class="col-12 md:col-6">
 		<div class="card">
-			<h5>Nombre des employées</h5>
-			<p-inputNumber [(ngModel)]="client.nbEmployer" mode="decimal" [showButtons]="true" [min]="0" [max]="100">
-			</p-inputNumber>
-			<h5>Matricule fiscale</h5>
-			<span class="p-float-label">
-				<input  id="matricule" type="text"  name="matricule" [(ngModel)]="admin.matricule" pInputText>
-				<label for="float-input"></label>
-			</span>
+			
 				<h5>Patente</h5>
 				<input type="file" class="form-control" id="formFileSm" pInputText name="batinda" [(ngModel)]="admin.batinda"   required  onchange="console.log(event.target.files)" (change)="onSelectedfile($event)" >
 

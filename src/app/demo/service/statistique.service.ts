@@ -92,6 +92,12 @@ export class StatistiqueService {
   public getFactureCommeracnt(Id: number): Observable<Facture> {
     return this.http.get<Facture>(`${this.apiurl}factures/commercant/${Id}`)
   }
+  public getCashoutsOfCommercants(tenantId: string): Observable<Cashout[]> {
+    return this.http.get<Cashout[]>(`${this.apiurl}sadmins/cashouts/${tenantId}`)
+  } 
+  public validerCashout(id:number,cashout:  Cashout): Observable<Cashout> {
+    return this.http.put<Cashout>(`${this.apiurl}sadmins/validCashout/${id}`,cashout)
+  } 
   //modules 
   public getModulesByAdmin(tenantId: string): Observable<Modules[]> {
     return this.http.get<Modules[]>(`${this.apiurl}admins/modules/${tenantId}`)

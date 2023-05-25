@@ -74,10 +74,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
               }
         if(this.isCommercant()){
             this.getCommercant();
-            this.revenuSociete();
             this.nbAdmins();
             this.nbClients();
-            this.commissionCommercant();
         }
         if(this.isAdmin()){
             this.nbClientverifie();
@@ -130,7 +128,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.commercant=data;
             this.pay=this.commercant.pay;
             console.log("Commercant",this.commercant);
-            console.log("object",this.commercant.pay);
 
           }
         )
@@ -214,8 +211,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.statistiqueService.calculNbAdmins(this.dataUser.tenant_id).subscribe(
           data=> {
             this.nbadmins=data;
-            this.commercant.admins=this.nbadmins
-            console.log("admins",this.commercant.admins)
+            console.log("admins",this.nbadmins)
           }
         )
       }
@@ -223,8 +219,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.statistiqueService.calculNbClients(this.dataUser.tenant_id).subscribe(
           data=> {
             this.nbclients=data;
-            this.commercant.clients=this.nbclients
-            console.log("clients",this.commercant.clients)
+            console.log("clients",this.nbclients)
           }
         )
       }

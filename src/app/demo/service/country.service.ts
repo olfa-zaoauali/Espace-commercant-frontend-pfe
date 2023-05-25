@@ -37,6 +37,9 @@ export class CountryService {
       public getModulesList(): Observable<Modules[]> {
         return this.http.get<Modules[]>(`${this.apiurl}modules`)
       }
+      public getModulesListofAdmin(tenantId:string): Observable<Modules[]> {
+        return this.http.get<Modules[]>(`${this.apiurl}modules/Admin/${tenantId}`)
+      }
       public getSAdmins(): Observable<any> {
         return this.http.get<any>(`${this.apiurl}sadmins`)
       }

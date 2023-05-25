@@ -5,7 +5,12 @@ export class Cashout {
         public temp: string,
         public cashout : number,
         public Montant : number,
+        public verified:boolean,
         public commercant:string,
+        public emailCommercant:string,
+        public firstnameCom:string,
+        public lastnameCom:string,
+        public tenantId:string
         ){
             
         }

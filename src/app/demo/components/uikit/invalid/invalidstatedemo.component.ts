@@ -19,7 +19,7 @@ export class InvalidStateDemoComponent implements OnInit {
     Dialog: boolean = false;
 
     countries: any[] = [];
-    cashout: Cashout=new Cashout(0,"","",0,0,"");
+    cashout: Cashout=new Cashout(0,"","",0,0,true,"","","","","");
     cashouts:Cashout[]=[];
     commercant: Commercant= new Commercant(0,"","","","","","","","","",0,0,0,0,0,0,false,"","");
     commission:any ;

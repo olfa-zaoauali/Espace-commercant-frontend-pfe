@@ -30,7 +30,7 @@
     
     <div class="col-12">
 		<div class="card">
-			<h5>Historique de transaction</h5>
+			<h5>Demandes des Cashouts</h5>
 
 			<p-table [value]="cashouts"  [scrollable]="true" scrollHeight="400px" styleClass="mt-3" responsiveLayout="scroll">
 				
@@ -40,6 +40,7 @@
 						<th style="width:200px">Date de création</th>
 						<th style="width:200px">Temp de création</th>
 						<th style="width:200px">Montant</th>
+                        <th style="width:200px">Etat de demande</th>
 						<th style="width:200px">Télécharger documenet</th>
 					</tr>
 				</ng-template>
@@ -49,8 +50,14 @@
 						<td>{{ cashout.dateDeCreation[2]}}/{{ cashout.dateDeCreation[1]}}/{{ cashout.dateDeCreation[0]}}</td>
 						<td>{{ cashout.temp[0]}}:{{ cashout.temp[1]}}:{{ cashout.temp[2]}}</td>
 						<td>{{ cashout.cashout}}DT</td>
+                        <td class="text-center" >
+							<i class="pi" style="margin-right: 80px;"  [ngClass]="{'true-icon pi-check-circle text-green-500': cashout.verified, 'false-icon pi-times-circle text-pink-500': !cashout.verified}"></i>
+						</td>
 						<td>
-                            <button  pButton icon="pi pi-download" pRipple type="button" label="Télécharger" class="p-button-secondary" (click)="open(cashout)"></button>
+                            <button *ngIf="cashout.verified ; else desabled"  pButton icon="pi pi-download" pRipple type="button" label="Télécharger" class="p-button-secondary" (click)="open(cashout)"></button>
+                            <ng-template #desabled>
+                                <button disabled  pButton icon="pi pi-download" pRipple type="button" label="Télécharger" class="p-button-secondary" (click)="open(cashout)"></button>
+                            </ng-template>
                         </td>
 						
 					</tr>				

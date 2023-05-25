@@ -5,6 +5,10 @@ import { TreeDemoComponent } from './treedemo.component';
 import { TreeDemoRoutingModule } from './treedemo-routing.module';
 import { TreeModule } from 'primeng/tree';
 import { TreeTableModule } from 'primeng/treetable';
+import { DialogModule } from 'primeng/dialog';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+
 
 @NgModule({
 	imports: [
@@ -12,7 +16,11 @@ import { TreeTableModule } from 'primeng/treetable';
 		TreeDemoRoutingModule,
 		FormsModule,
 		TreeModule,
-		TreeTableModule
+		TreeTableModule,
+		DialogModule,
+		TableModule,
+		ButtonModule
+
 	],
 	declarations: [TreeDemoComponent],
 })

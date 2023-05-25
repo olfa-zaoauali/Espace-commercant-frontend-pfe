@@ -1,6 +1,8 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
+import { CountryService } from '../demo/service/country.service';
+import { Modules } from '../models/modules';
 
 @Component({
     selector: 'app-menu',
@@ -16,15 +18,22 @@ export class AppMenuComponent implements OnInit {
     SAdmin:Boolean=true; 
     Commercant:Boolean=true; 
     client:Boolean=true;
+    modules: Modules[]=[];
+    modulesAdmin: Modules[]=[];
 
+    tenantId:any;
   
-    constructor(public layoutService: LayoutService) { }
+    constructor(public layoutService: LayoutService,private countryService: CountryService) { }
 
     ngOnInit() {
         this.dataUser = this.layoutService.getDataFromToken();
         this.role = this.dataUser.role;
         this.imageUrl=this.dataUser.image;
+        this.tenantId=this.dataUser.tenant_id;
+        console.log("tenantId",this.tenantId)
         console.log("role",this.role);
+        if(this.isClient()){this.listModules();}
+        if(this.isAdmin()){this.listModulesOfAdmin();}
         if(this.isCommercant()){
         this.model = [
             {   
@@ -54,7 +63,7 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['']
                     },
                     
-                    { label: 'Cashout', icon: 'pi pi-fw pi-money-bill', routerLink: ['/dashboard/uikit/invalidstate'] },
+                    { label: 'Cashouts', icon: 'pi pi-fw pi-money-bill', routerLink: ['/dashboard/uikit/invalidstate'] },
 
                     {
                         label: 'Contrat',
@@ -88,120 +97,6 @@ export class AppMenuComponent implements OnInit {
             }*/
          
         ];}
-        if(this.isClient()){
-            this.model = [
-                {   
-                    label: 'Home',
-                    items: [
-                       // { label: 'Abonnement', icon: 'pi pi-fw pi-share-alt', routerLink: ['/dashboard/uikit/tree'] }
-                       { label: 'Abonnement', icon: 'pi pi-fw pi-check-square', routerLink: ['/dashboard/uikit/input'] }
-                    ]
-                },
-                {
-                    label: 'Les Modules',
-                    items: [
-                       
-                        { label: 'CRM', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
-                        { label: 'Espace Commerçant', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
-                        { label: 'Wind BRAVO', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
-                        { label: 'Gestion de stock', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] }
-
-                      
-                    ]
-                },
-              
-                {
-                    label: 'Autre',
-                    icon: 'pi pi-fw pi-briefcase',
-                    items: [
-                        {
-                            label: 'WIND-ERP',
-                            icon: 'pi pi-fw pi-globe',
-                            routerLink: ['']
-                        },
-                        {
-                            label: 'Compte',
-                            icon: 'pi pi-fw pi-user',
-                            items: [
-                             
-                                { label: 'Profile', icon: 'pi pi-fw pi-user-edit', routerLink: ['/dashboard/blocks'], badge: 'NEW' },
-                                {
-                                    label: 'Logout',
-                                    icon: 'pi pi-fw pi-sign-out',
-                                    routerLink: ['/auth/login']
-                                },
-                           
-                            ]
-                        },
-                        
-                    ]
-                },
-             /*   {
-                    label: 'Aide',
-                    items: [
-                        { label: 'Guide utilisation', icon: 'pi pi-fw pi-info-circle', routerLink: ['/dashboard/uikit/button'] },
-    
-                        { label: 'Contact', icon: 'pi pi-fw pi-comment', routerLink: ['/dashboard/uikit/message'] },
-                    ]
-                }*/
-             
-            ];}
-        if(this.isAdmin()){
-        this.model = [
-            {   
-                label: 'Home',
-                items: [
-                    { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/dashboard'] }
-                ]
-            },
-            {
-                label: 'Gestion des utilisateurs',
-                items: [
-                    {
-                        label: 'Commercants',
-                        icon: 'pi pi-fw pi-user-plus',
-                        routerLink: ['/dashboard/pages/crud']
-                    },
-                    { label: 'Clients', icon: 'pi pi-fw pi-user-plus', routerLink: ['/dashboard/uikit/misc'] }
-
-
-                ]
-            },
-            {
-                label: 'Autre',
-                icon: 'pi pi-fw pi-briefcase',
-                items: [
-                    {
-                        label: 'WIND-ERP',
-                        icon: 'pi pi-fw pi-globe',
-                        routerLink: ['']
-                    },
-                   
-                    {
-                        label: 'Compte',
-                        icon: 'pi pi-fw pi-user',
-                        items: [
-                            { label: 'Profile', icon: 'pi pi-fw pi-user-edit', routerLink: ['/dashboard/blocks'], badge: 'NEW' },
-                            {
-                                label: 'Logout',
-                                icon: 'pi pi-fw pi-sign-out',
-                                routerLink: ['/auth/login']
-                            },
-                        ]
-                    },
-                    
-                ]
-            },
-         /*   {
-                label: 'Aide',
-                items: [
-                    { label: 'Guide utilisation', icon: 'pi pi-fw pi-info-circle', routerLink: ['/dashboard/uikit/button'] },
-
-                    { label: 'Contact', icon: 'pi pi-fw pi-comment', routerLink: ['/dashboard/uikit/message'] },
-                ]
-            }*/
-        ];}
-        
         if(this.isSadmin()){
         this.model = [
             {   
@@ -253,8 +148,9 @@ export class AppMenuComponent implements OnInit {
                 label: 'Autre',
                 icon: 'pi pi-fw pi-briefcase',
                 items: [
+                    { label: 'Demande des Cashouts', icon: 'pi pi-fw pi-money-bill', routerLink: ['/dashboard/uikit/tree'] },
                     { label: 'Modules WIND-ERP', icon: 'pi pi-fw pi-shopping-cart', routerLink: ['/dashboard/uikit/media'] },
-
+ 
                     {
                         label: 'WIND-ERP',
                         icon: 'pi pi-fw pi-globe',
@@ -400,4 +296,143 @@ export class AppMenuComponent implements OnInit {
           return this.client=false;
         }
       }
+      listModulesOfAdmin(){
+        this.countryService.getModulesListofAdmin(this.dataUser.tenant_id).subscribe(
+            data=> {
+                console.log("data")
+
+              this.modulesAdmin=data;
+              if(this.isAdmin()){
+                console.log("data1",this.model)
+                this.model.push(
+                    {
+                        label: 'Home',
+                        items: [
+                          { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/dashboard'] }
+                        ]
+                      },
+                   {
+                      label: 'Modules',
+                      items: []
+                    },
+                  );
+                  
+                  this.modulesAdmin.forEach(module => {
+                    const item: any = {
+                      label: module.nom,
+                      icon: 'pi pi-fw pi-th-large',
+                      routerLink: ['/documentation']
+                    };
+                  
+                    if (module.nom === "Espace Commerçant") {
+                      item.items = [
+                        {
+                            label: 'Gestion des utilisateurs', icon: 'pi pi-fw pi-users',
+                            items: [
+                                {
+                                    label: 'Commercants',
+                                    icon: 'pi pi-fw pi-user-plus',
+                                    routerLink: ['/dashboard/pages/crud']
+                                },
+                                { label: 'Clients', icon: 'pi pi-fw pi-user-plus', routerLink: ['/dashboard/uikit/misc'] }
+                            ]
+                        },
+                        
+                     ];
+                    }
+                  
+                    this.model[1].items.push(item);
+                  });
+                this.model.push(               {
+                    label: 'Autre',
+                    icon: 'pi pi-fw pi-briefcase',
+                    items: [
+                        {
+                            label: 'WIND-ERP',
+                            icon: 'pi pi-fw pi-globe',
+                            routerLink: ['']
+                        },
+                       
+                        {
+                            label: 'Compte',
+                            icon: 'pi pi-fw pi-user',
+                            items: [
+                                { label: 'Profile', icon: 'pi pi-fw pi-user-edit', routerLink: ['/dashboard/blocks'], badge: 'NEW' },
+                                {
+                                    label: 'Logout',
+                                    icon: 'pi pi-fw pi-sign-out',
+                                    routerLink: ['/auth/login']
+                                },
+                            ]
+                        },
+                        
+                    ]
+                },)
+        }
+              console.log("object2",this.modules)
+            }
+          );
+      }
+      listModules(){
+        this.countryService.getModulesList().subscribe(
+            data=> {
+                console.log("data")
+
+              this.modules=data;
+              if(this.isClient()){
+                console.log("data1",this.model)
+                this.model.push(
+                    {   
+                        label: 'Home',
+                        items: [
+                            { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/dashboard'] },
+
+                           // { label: 'Abonnement', icon: 'pi pi-fw pi-share-alt', routerLink: ['/dashboard/uikit/tree'] }
+                        ]
+                    },
+                   {
+                      label: 'Modules',
+                      items: []
+                    },
+                  );
+                  
+                this.modules.forEach(module =>{
+                    this.model[1].items.push(                  { label: module.nom , icon: 'pi pi-fw pi-th-large', routerLink: ['/documentation'] }
+                    )
+    
+                })
+                this.model.push(               {
+                    label: 'Autre',
+                    icon: 'pi pi-fw pi-briefcase',
+                    items: [
+                        { label: 'Abonnement', icon: 'pi pi-fw pi-check-square', routerLink: ['/dashboard/uikit/input'] },
+
+                        {
+                            label: 'WIND-ERP',
+                            icon: 'pi pi-fw pi-globe',
+                            routerLink: ['']
+                        },
+                       
+                        {
+                            label: 'Compte',
+                            icon: 'pi pi-fw pi-user',
+                            items: [
+                                { label: 'Profile', icon: 'pi pi-fw pi-user-edit', routerLink: ['/dashboard/blocks'], badge: 'NEW' },
+                                {
+                                    label: 'Logout',
+                                    icon: 'pi pi-fw pi-sign-out',
+                                    routerLink: ['/auth/login']
+                                },
+                            ]
+                        },
+                        
+                    ]
+                },)
+        }
+              console.log("object2",this.modules)
+            }
+          );
+      }
+      
+      
 }

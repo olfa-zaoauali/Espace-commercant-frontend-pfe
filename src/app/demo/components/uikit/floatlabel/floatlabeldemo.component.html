@@ -6,16 +6,15 @@
         <p-table [value]="factures" [value]="admins" responsiveLayout="scroll" [scrollable]="true" scrollHeight="400px" rowGroupMode="subheader" groupRowsBy="admin.company" sortField="representative.name" sortMode="single"  responsiveLayout="scroll" [scrollable]="true" scrollHeight="400px">
             <ng-template pTemplate="header">
                 <tr>
-                    <th>Logo</th>
-                    <th>Client</th>
-                    <th>Email de client</th>
-                    <th>Réference</th>
-                    <th>Date de création</th>
-                    <th>Montant HT</th>
-                    <th>TVA</th>
-                    <th>Montant totale</th>
-                    <th>Télecharger</th>
-                    <th>Imprimer</th>
+                    <th style="min-width: 6rem">Logo</th>
+                    <th style="min-width: 6rem">Client</th>
+                    <th style="min-width: 6rem">Email de client</th>
+                    <th style="min-width: 6rem">Réference</th>
+                    <th style="min-width: 6rem">Date de création</th>
+                    <th style="min-width: 6rem">Montant HT</th>
+                    <th style="min-width: 6rem">TVA</th>
+                    <th style="min-width: 6rem">Montant totale</th>
+                    <th style="min-width: 6rem">Télecharger Facture</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-facture>
@@ -53,9 +52,7 @@
                     <td style="min-width: 50px;">
                         <button pButton style="margin-left: 20px;"  pRipple  icon="pi pi-download" class="p-button p-button-warning" (click)="getAdminInfo(facture.numero)" (click)="getFacture(facture.numero)"></button>
                     </td>
-                    <td style="min-width: 50px;">
-                        <button pButton style="margin-left: 20px;" pRipple  icon="pi pi-print" class="p-button p-button-warning" ></button>
-                    </td>
+                    
                 </tr>
             </ng-template>
         </p-table>

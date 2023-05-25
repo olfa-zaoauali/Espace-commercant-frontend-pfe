@@ -1,4 +1,65 @@
-<div class="grid">
+<div class="col-12">
+	<div class="card">
+		<h5>Demandes des Cashouts</h5>
+
+		<p-table [value]="cashouts"  [scrollable]="true" scrollHeight="400px" styleClass="mt-3" responsiveLayout="scroll">
+			
+			<ng-template pTemplate="header">
+				<tr>
+					<th style="width:100px">Id</th>
+					<th style="width:100px">Nom Commerçant</th>
+					<th style="width:100px">Prénom Commerçant</th>
+					<th style="width:100px">Email Commerçant</th>
+					<th style="width:100px">Date de création</th>
+					<th style="width:100px">Temp de création</th>
+					<th style="width:100px">Montant</th>
+					<th style="width:100px">Etat de demande</th>
+					<th>Valider le demande</th>
+					<th style="width:100px">Télécharger documenet</th>
+				</tr>
+			</ng-template>
+			<ng-template pTemplate="body" let-cashout>
+				<tr >
+					<td>{{ cashout.id}}</td>
+					<td>{{cashout.lastnameCom}}</td>
+					<td>{{cashout.firstnameCom}}</td>
+					<td>{{cashout.emailCommercant}}</td>
+					<td>{{ cashout.dateDeCreation[2]}}/{{ cashout.dateDeCreation[1]}}/{{ cashout.dateDeCreation[0]}}</td>
+					<td>{{ cashout.temp[0]}}:{{ cashout.temp[1]}}:{{ cashout.temp[2]}}</td>
+					<td>{{ cashout.cashout}}DT</td>
+					<td class="text-center" >
+						<i class="pi" style="margin-right: 80px;"  [ngClass]="{'true-icon pi-check-circle text-green-500': cashout.verified, 'false-icon pi-times-circle text-pink-500': !cashout.verified}"></i>
+					</td>
+					<td>
+                        <div class="example-button-container">
+                                <button  *ngIf="!cashout.verified ; else disabled"  pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-success mr-2"  (click)="open(cashout)"  ></button>
+                                <ng-template #disabled>
+                                <button  pButton pRipple disabled="true" icon="pi pi-check"  class="p-button-rounded p-button-success mr-2"  ></button>
+                                </ng-template>
+                         </div>    
+					</td>
+					<td>
+						<button *ngIf="cashout.verified ; else desabled"  pButton icon="pi pi-download" pRipple type="button" label="Télécharger" style="color: white;" class="p-button-warning" (click)="getFacture(cashout.id,cashout.tenantId)"></button>
+						<ng-template #desabled>
+							<button disabled  pButton icon="pi pi-download" pRipple type="button" label="Télécharger" style="color: white;" class="p-button-warning" ></button>
+						</ng-template>
+					</td>
+					
+				</tr>				
+				<p-dialog [(visible)]="Dialog" header="Confirmer" [modal]="true" [style]="{width:'450px'}">
+					<div class="flex align-items-center justify-content-center">
+						<i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+						<span>Etes-vous sûr que vous valider ce cashout ? </span>
+					</div>
+					<ng-template pTemplate="footer">
+						<button pButton pRipple icon="pi pi-times" class="p-button-text" label="Non" (click)="Dialog = false"></button>
+						<button pButton pRipple icon="pi pi-check" class="p-button-text" label="Oui" (click)="validerCashout(id)"></button>
+					</ng-template>
+				</p-dialog>
+			</ng-template>
+		</p-table>
+	</div>
+<!--<div class="grid">
 	<div class="col-12">
 		<div class="card">
 			<h5>Tree</h5>
@@ -34,4 +95,4 @@
 			<p-tree [value]="files3" layout="horizontal" selectionMode="single" [(selection)]="selectedFiles3"></p-tree>
 		</div>
 	</div>
-</div>
+</div>-->
