@@ -291,6 +291,7 @@ public onDeletclient(id:number): void {
     var Datacommercant = JSON.stringify(this.client);
     this.clientservice.addclient(Datacommercant , this.image ).subscribe(res=>{console.log(res);
       this.ngOnInit();
+      location.reload();
       this.hideDialogadd();
       this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'client ajouté avec succé', life: 3000 });
 
@@ -305,6 +306,7 @@ public onDeletclient(id:number): void {
     var Datacommercant = JSON.stringify(this.client);
     this.clientservice.addclientcommercant(Datacommercant , this.image ).subscribe(res=>{console.log(res);
       this.ngOnInit();
+      location.reload();
       this.hideDialogadd();
       this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'client ajouté avec succé', life: 3000 });
 
@@ -319,6 +321,7 @@ public onDeletclient(id:number): void {
     this.clientservice.updateclient(Datacommercant , this.image, commerceId ).subscribe(res=>{console.log(res);
       //this.close.emit();
       this.ngOnInit();
+      location.reload();
       this.hideDialog();
       this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Commercant modifiée avec succé', life: 3000 });
      });
@@ -332,6 +335,7 @@ public onDeletclient(id:number): void {
     this.clientservice.update(Datacommercant , this.image,commerceId).subscribe(res=>{console.log(res);
       //this.close.emit();
       this.ngOnInit();
+      location.reload();
       this.hideDialog();
       this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Commercant modifiée avec succé', life: 3000 });
      });

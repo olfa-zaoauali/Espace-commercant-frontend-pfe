@@ -1,26 +1,24 @@
 <div class="col-12">
 	<div class="card">
-		<h5>Demandes des Cashouts</h5>
+		<h2>Demandes des Cashouts</h2>
 
-		<p-table [value]="cashouts"  [scrollable]="true" scrollHeight="400px" styleClass="mt-3" responsiveLayout="scroll">
+		<p-table [value]="cashouts"  [scrollable]="true" scrollHeight="400px" styleClass="mt-5" responsiveLayout="scroll">
 			
 			<ng-template pTemplate="header">
 				<tr>
-					<th style="width:100px">Id</th>
-					<th style="width:100px">Nom Commerçant</th>
-					<th style="width:100px">Prénom Commerçant</th>
-					<th style="width:100px">Email Commerçant</th>
-					<th style="width:100px">Date de création</th>
-					<th style="width:100px">Temp de création</th>
+					<th style="width:400px">Nom Commerçant</th>
+					<th style="width:400px">Prénom Commerçant</th>
+					<th style="width:400px">Email Commerçant</th>
+					<th style="width:400px">Date de création</th>
+					<th style="width:400px">Temp de création</th>
 					<th style="width:100px">Montant</th>
 					<th style="width:100px">Etat de demande</th>
 					<th>Valider le demande</th>
-					<th style="width:100px">Télécharger documenet</th>
+					<th style="width:100px">Télécharger</th>
 				</tr>
 			</ng-template>
 			<ng-template pTemplate="body" let-cashout>
 				<tr >
-					<td>{{ cashout.id}}</td>
 					<td>{{cashout.lastnameCom}}</td>
 					<td>{{cashout.firstnameCom}}</td>
 					<td>{{cashout.emailCommercant}}</td>

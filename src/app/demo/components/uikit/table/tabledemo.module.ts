@@ -17,12 +17,19 @@ import { RatingModule } from 'primeng/rating';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import { DialogModule } from 'primeng/dialog';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ImageModule } from 'primeng/image';
+import { GalleriaModule } from 'primeng/galleria';
+import { CarouselModule } from 'primeng/carousel';
+import { FileUploadModule } from 'primeng/fileupload';
+
+
 
 
 
 
 @NgModule({
 	imports: [
+		FileUploadModule,
 		CommonModule,
 		TableDemoRoutingModule,
 		FormsModule,
@@ -39,7 +46,10 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 		ToastModule,
 		InputSwitchModule,
 		DialogModule,
-		OverlayPanelModule
+		OverlayPanelModule,
+		ImageModule,
+		GalleriaModule,
+		CarouselModule
 	],
 	declarations: [TableDemoComponent]
 })

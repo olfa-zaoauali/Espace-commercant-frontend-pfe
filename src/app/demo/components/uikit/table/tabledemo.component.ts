@@ -148,13 +148,10 @@ export class TableDemoComponent implements OnInit {
           })
           this.openPDF(tenantId);
             this.customerService.validation(id).subscribe(
-              (response: void) => {
-                console.log(response);
+              data=> {
+                location.reload();
+                console.log(data);
                 this.listAdmin();
-    
-              },
-              (error: HttpErrorResponse) => {
-                alert(error.message);
               }
             );
           console.log("Our content",this.content)
@@ -168,6 +165,7 @@ export class TableDemoComponent implements OnInit {
         data=> {
           this.facture2=data;
           console.log("facturee",this.facture2)
+
         }
       )
     }
